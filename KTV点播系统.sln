@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "机器播放客户端", "机器播放客户端\机器播放客户端.vcproj", "{6225304A-E290-49CC-B757-D0D40F58EB7E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{774FBD39-9958-49CC-80FB-36B51E6D7A49} = {774FBD39-9958-49CC-80FB-36B51E6D7A49}
+		{B1CB4C9F-EF60-4FB9-B743-3C811F5520CE} = {B1CB4C9F-EF60-4FB9-B743-3C811F5520CE}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "死月视频播放库", "死月视频播放库\死月视频播放库.vcproj", "{774FBD39-9958-49CC-80FB-36B51E6D7A49}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "通用类库", "通用类库\通用类库.vcproj", "{B1CB4C9F-EF60-4FB9-B743-3C811F5520CE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "通用类库[测试项目]", "通用类库[测试项目]\通用类库[测试项目].vcproj", "{4B3D9D2D-BD98-4983-9F1E-3F3F805B00E2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B1CB4C9F-EF60-4FB9-B743-3C811F5520CE} = {B1CB4C9F-EF60-4FB9-B743-3C811F5520CE}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6225304A-E290-49CC-B757-D0D40F58EB7E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6225304A-E290-49CC-B757-D0D40F58EB7E}.Debug|Win32.Build.0 = Debug|Win32
+		{6225304A-E290-49CC-B757-D0D40F58EB7E}.Release|Win32.ActiveCfg = Release|Win32
+		{6225304A-E290-49CC-B757-D0D40F58EB7E}.Release|Win32.Build.0 = Release|Win32
+		{774FBD39-9958-49CC-80FB-36B51E6D7A49}.Debug|Win32.ActiveCfg = Debug|Win32
+		{774FBD39-9958-49CC-80FB-36B51E6D7A49}.Debug|Win32.Build.0 = Debug|Win32
+		{774FBD39-9958-49CC-80FB-36B51E6D7A49}.Release|Win32.ActiveCfg = Release|Win32
+		{774FBD39-9958-49CC-80FB-36B51E6D7A49}.Release|Win32.Build.0 = Release|Win32
+		{B1CB4C9F-EF60-4FB9-B743-3C811F5520CE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B1CB4C9F-EF60-4FB9-B743-3C811F5520CE}.Debug|Win32.Build.0 = Debug|Win32
+		{B1CB4C9F-EF60-4FB9-B743-3C811F5520CE}.Release|Win32.ActiveCfg = Release|Win32
+		{B1CB4C9F-EF60-4FB9-B743-3C811F5520CE}.Release|Win32.Build.0 = Release|Win32
+		{4B3D9D2D-BD98-4983-9F1E-3F3F805B00E2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4B3D9D2D-BD98-4983-9F1E-3F3F805B00E2}.Debug|Win32.Build.0 = Debug|Win32
+		{4B3D9D2D-BD98-4983-9F1E-3F3F805B00E2}.Release|Win32.ActiveCfg = Release|Win32
+		{4B3D9D2D-BD98-4983-9F1E-3F3F805B00E2}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
