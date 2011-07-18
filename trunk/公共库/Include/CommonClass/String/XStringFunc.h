@@ -35,6 +35,9 @@ public:
     void                        SetString(const char* szStr);
     string                      GetString();
 
+    /** ¥Û–°–¥ */
+    void                        ToUpper();
+    void                        ToLower();
 private:
     string                      m_szStr;
 };

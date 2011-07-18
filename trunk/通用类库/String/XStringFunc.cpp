@@ -124,3 +124,19 @@ void XStringFunc::ToDouble(string* szArr, double* fArr, int nCount)
         fArr[i] = atof(szArr[i].c_str());
     }
 }
+
+void XStringFunc::ToUpper()
+{
+    for(int i = 0; i < m_szStr.length(); i++)
+    {
+        m_szStr[i] = toupper(m_szStr[i]);
+    }
+}
+
+void XStringFunc::ToLower()
+{
+    for(int i = 0; i < m_szStr.length(); i++)
+    {
+        m_szStr[i] = tolower(m_szStr[i]);
+    }
+}
