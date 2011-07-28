@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="机器播放客户端"
+	Name="死月视频播放库[测试项目]"
 	ProjectGUID="{6225304A-E290-49CC-B757-D0D40F58EB7E}"
 	RootNamespace="机器播放客户端"
 	TargetFrameworkVersion="196613"
@@ -88,10 +88,10 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\程序发布\机器播放客户端"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			CharacterSet="1"
+			CharacterSet="2"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -113,6 +113,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="D:\CODES\课程设计\KTV点播系统\公共库\Include\CXadillaXVideoPlayer;D:\CODES\课程设计\KTV点播系统\公共库\Include\hge;D:\CODES\课程设计\KTV点播系统\公共库\Include\CommonClass"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -129,6 +130,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="../公共库/Lib/hge/hge.lib ../公共库/Lib/hge/hgehelp.lib ../公共库/Lib/CXadillaXVideoPlayer/CXadillaXVideoPlayer.lib ../公共库/Lib/CommonClass/CommonClass.lib"
+				OutputFile="$(OutDir)\KTVPlayer.exe"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"

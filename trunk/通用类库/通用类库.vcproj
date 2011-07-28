@@ -81,10 +81,10 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\公共库\Lib\CommonClass"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			CharacterSet="1"
+			CharacterSet="2"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -106,6 +106,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="D:\CODES\课程设计\KTV点播系统\公共库\Include\CommonClass;D:\CODES\课程设计\KTV点播系统\公共库\Include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -124,6 +125,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\CommonClass.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -198,6 +200,14 @@
 			</File>
 			<File
 				RelativePath="..\公共库\Include\CommonClass\System\XSystemFunc.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="DesignPartner"
+			>
+			<File
+				RelativePath="..\公共库\Include\CommonClass\Singleton.h"
 				>
 			</File>
 		</Filter>

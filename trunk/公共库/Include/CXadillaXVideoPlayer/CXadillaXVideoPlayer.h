@@ -48,7 +48,7 @@ private:
     bool                                m_bLoaded;
     bool                                m_bLoop;
     bool                                m_bKillThread;
-    bool                                m_bStopped;
+    bool                                m_bStopped;    
 };
 
 #endif

@@ -15,25 +15,25 @@ public:
     songrow() {};
     virtual ~songrow() {};
 
+    virtual XModelStream& operator <<       (XModelStream& s)
+    {
+        if(IsCol(0)) s >> songid;
+        if(IsCol(1)) s >> songname;
+        if(IsCol(2)) s >> abc;
+
+        return s;
+    }
+
 public:
     int songid;
     string songname;
     int abc;
 };
 
-XModelStream& operator >> (XModelStream& s, songrow& row)
-{
-    if(row.IsCol(0)) s >> row.songid;
-    if(row.IsCol(1)) s >> row.songname;
-    if(row.IsCol(2)) s >> row.abc;
-
-    return s;
-}
-
 class XSongModel : public XModelObject
 {
 public:
-    XSongModel(string a, string b, string c) : XModelObject(a.c_str(), b.c_str(), c.c_str()) {};
+    XSongModel() {};
     virtual ~XSongModel() {};
 
 public:
@@ -51,7 +51,7 @@ public:
         while(!XMS->eof())
         {
             buf[i].SetColumn(2, 0, 1);
-            (*XMS) >> buf[i++];
+            buf[i++] << (*XMS);
         }
 
         return i;
@@ -60,23 +60,23 @@ public:
 
 int main()
 {
-    XSongModel xmo("KTV", "sa", "");
-    
-    /** 连接数据库 */
-    if(!xmo.Connect())
+    /** 初始化连接对象并连接数据库 */
+    XModelConnection::Instance().Initialize("KTV", "sa", "");
+    if(!XModelConnection::Instance().Connect())
     {
-        cout << xmo.GetLastError() << endl;
+        cout << XModelConnection::Instance().GetLastError() << endl;
         return 0;
     }
-    
-    /** 结果 */
+
+    XSongModel* xmo = new XSongModel();
     songrow row[256];
-    int count;
-    count = xmo.get_song_info("", row);
+    int count = 0;
+    count = xmo->get_song_info("", row);
     for(int i = 0; i < count; i++)
     {
         cout << row[i].songid << " " << row[i].songname << endl;
     }
+    delete xmo;
 
     return 0;
 }
