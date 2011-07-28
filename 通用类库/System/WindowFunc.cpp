@@ -71,5 +71,5 @@ void WindowFunc::SetBorder(bool bBorder)
         l &= dwNewStyle;
     }
 
-    ::SetWindowLong(m_hWnd, GWL_STYLE, l);
+    SetWindowLong(m_hWnd, GWL_STYLE, l);
 }

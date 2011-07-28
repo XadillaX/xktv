@@ -22,6 +22,14 @@ using namespace std;
 typedef otl_stream                          XModelStream;
 typedef otl_long_string                     XModelText;
 
+/**
+ * @brief 模型查询对象
+ * 模型查询对象
+ *
+ * @author XadillaX
+ * @email admin@xcoder.in
+ * @date 29-07-2011
+ */
 class XModelQuery
 {
 public:

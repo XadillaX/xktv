@@ -78,10 +78,19 @@ CXadillaXVideoPlayer::~CXadillaXVideoPlayer(void)
 
 void CXadillaXVideoPlayer::__Release()
 {
+    if(m_hThreadHandle != 0 && m_bKillThread)
+    {
+        /** 中断监听线程 */
+        TerminateThread(m_hThreadHandle, 0);
+
+        CloseHandle(m_hThreadHandle);
+        m_hThreadHandle = 0;
+    }
+
     if(m_pVidWnd)
     {
         m_pVidWnd->put_Visible(OAFALSE);
-        m_pVidWnd->put_Owner(NULL);
+        //m_pVidWnd->put_Owner(NULL);
     }
 
     if(m_pGraph)
@@ -114,15 +123,6 @@ void CXadillaXVideoPlayer::__Release()
     m_bPlaying = false;
     m_bStopped = true;
     m_bLoaded = false;
-
-    if(m_hThreadHandle != 0 && m_bKillThread)
-    {
-        /** 中断监听线程 */
-        TerminateThread(m_hThreadHandle, 0);
-
-        CloseHandle(m_hThreadHandle);
-        m_hThreadHandle = 0;
-    }
 }
 
 bool CXadillaXVideoPlayer::Stop()
