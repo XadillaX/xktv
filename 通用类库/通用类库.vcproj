@@ -204,7 +204,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="DesignPartner"
+			Name="DesignPatterns"
 			>
 			<File
 				RelativePath="..\¹«¹²¿â\Include\CommonClass\Singleton.h"
