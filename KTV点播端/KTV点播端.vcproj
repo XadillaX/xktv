@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\CODES\课程设计\KTV点播系统\公共库\Include\CXadillaXVideoPlayer;D:\CODES\课程设计\KTV点播系统\公共库\Include\hge;D:\CODES\课程设计\KTV点播系统\公共库\Include\CommonClass"
+				AdditionalIncludeDirectories="..\公共库\Include\CXadillaXVideoPlayer;..\公共库\Include\hge;..\公共库\Include\CommonClass"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
