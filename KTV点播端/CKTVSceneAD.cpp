@@ -13,12 +13,19 @@ CKTVSceneAD::CKTVSceneAD(void)
 
 CKTVSceneAD::~CKTVSceneAD(void)
 {
+    for(int i = 0; i < m_Pic.size(); i++)
+    {
+        delete m_Pic[i].second;
+        m_Pic[i].second = NULL;
+        m_pHGE->Texture_Free(m_Pic[i].first);
+    }
 }
 
 bool CKTVSceneAD::Init()
 {
     CKTVSceneObject::Init();
 
+    m_pHGE->System_SetState(HGE_INIFILE, "ad/ad.ini");
     m_fDelay = m_pHGE->Ini_GetFloat("ad", "delay", 1000);
     m_nCount = m_pHGE->Ini_GetInt("ad", "count", 0);
 
@@ -73,8 +80,8 @@ bool CKTVSceneAD::Update(float fDT)
         }
     }
 
-    /** 测试转换 */
-    if(m_pHGE->Input_GetKeyState(HGEK_LBUTTON)) ENGINE.SetScene("Object");
+    /** 鼠标点击则转到功能界面 */
+    if(m_pHGE->Input_GetKeyState(HGEK_LBUTTON)) ENGINE.SetScene("Function");
 
     return false;
 }

@@ -229,6 +229,54 @@
 							>
 						</File>
 					</Filter>
+					<Filter
+						Name="PinyinSelectScene"
+						>
+						<File
+							RelativePath=".\CKTVScenePinyin.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\CKTVScenePinyin.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="FunctionScene"
+						>
+						<File
+							RelativePath=".\CKTVSceneFunction.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\CKTVSceneFunction.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="GUI"
+				>
+				<Filter
+					Name="Keyboard"
+					>
+					<File
+						RelativePath=".\CKTVGUIKeyboard.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVGUIKeyboard.h"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVGUIKeyboardItem.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVGUIKeyboardItem.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 		</Filter>

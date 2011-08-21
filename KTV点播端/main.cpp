@@ -15,6 +15,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         ENGINE.start();
         ENGINE.close();
     }
+    else
+    {
+        MessageBox(NULL, "KTV系统初始化错误。", "错误", MB_ICONERROR);
+    }
 
     return 0;
 }
