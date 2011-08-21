@@ -9,4 +9,8 @@
 #ifndef CKTVSCENEGROUP_H
 #define CKTVSCENEGROUP_H
 
+#include "CKTVSceneObject.h"
+#include "CKTVSceneAD.h"
+#include "CKTVSceneFunction.h"
+
 #endif

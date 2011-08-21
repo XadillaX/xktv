@@ -17,8 +17,6 @@
 #include <hgesprite.h>
 using namespace std;
 
-typedef pair<HTEXTURE, hgeSprite*> SpritePair;
-
 class CKTVSceneAD : public CKTVSceneObject
 {
 public:

@@ -52,6 +52,7 @@ bool CKTVSceneManager::Update(float fDT)
 
                 if(m_pCurrentScene != NULL)
                 {
+                    m_pCurrentScene->Init();
                     m_pCurrentScene->SetState(SCENE_COMING);
                     return m_pCurrentScene->ComingUpdate(fDT);
                 }

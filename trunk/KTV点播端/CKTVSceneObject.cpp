@@ -16,11 +16,13 @@ CKTVSceneObject::CKTVSceneObject(void) :
 
 CKTVSceneObject::~CKTVSceneObject(void)
 {
+    delete m_pGUI;
 }
 
 bool CKTVSceneObject::Init()
 {
     m_pHGE = hgeCreate(HGE_VERSION);
+    m_pGUI = new hgeGUI();
 
     return true;
 }

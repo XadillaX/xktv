@@ -13,10 +13,15 @@
 
 #include <assert.h>
 #include <hge.h>
+#include <hgesprite.h>
+#include <hgeanim.h>
 #include <commonclass.h>
 
 #include "singleton.h"
 #include "objectfactory.h"
+
+typedef pair<HTEXTURE, hgeSprite*> SpritePair;
+typedef pair<HTEXTURE, hgeAnimation*> AnimationPair;
 
 namespace global
 {
@@ -26,7 +31,14 @@ namespace global
 
     /** ¼ò»¯ºê */
 #define ENGINE                          (CKTVEngine::Instance())
-
+#define TexWidth(a)                     (global::g_pHGE->Texture_GetWidth(a))
+#define TexHeight(a)                    (global::g_pHGE->Texture_GetHeight(a))
+#define TexWidthP(a)                    (global::g_pHGE->Texture_GetWidth(a.first))
+#define TexHeightP(a)                   (global::g_pHGE->Texture_GetHeight(a.first))
+#define Tex(a)                          (a.first)
+#define Spr(a)                          (a.second)
+#define Ani(a)                          (a.second)
+#define TexRelease(a)                   { if(a.second != NULL) { delete a.second; a.second = NULL; } global::g_pHGE->Texture_Free(a.first); }
 
 extern HGE*                             g_pHGE;
 };

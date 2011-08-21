@@ -11,6 +11,7 @@
 #pragma once
 
 #include "global.h"
+#include <hgegui.h>
 
 enum CKTVSCENE_STATE
 {
@@ -45,6 +46,8 @@ public:
 protected:
     HGE*                                m_pHGE;
     CKTVSCENE_STATE                     m_State;
+
+    hgeGUI*                             m_pGUI;
 };
 
 #endif
