@@ -1,4 +1,5 @@
 #include "CKTVEngine.h"
+#include "commonclass.h"
 
 bool FrameFunc();
 bool RenderFunc();
@@ -44,6 +45,13 @@ bool CKTVEngine::init()
     m_pHGE->System_SetState(HGE_SHOWSPLASH, false);
 
     m_pSceneManager = new CKTVSceneManager();
+
+    /** SQL Á´½Ó */
+    strcpy(m_szDSNName, m_pHGE->Ini_GetString("database", "DSN", "ktv"));
+    strcpy(m_szUsername, m_pHGE->Ini_GetString("database", "username", "sa"));
+    strcpy(m_szPassword, m_pHGE->Ini_GetString("database", "password", ""));
+    XModelConnection::Instance().Initialize(m_szDSNName, m_szUsername, m_szPassword);
+    if(!XModelConnection::Instance().Connect()) return false;
 
     return m_pHGE->System_Initiate();
 }

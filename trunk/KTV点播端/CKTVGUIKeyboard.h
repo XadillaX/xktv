@@ -12,6 +12,7 @@
 #include "global.h"
 #include <hgegui.h>
 #include "cktvguikeyboarditem.h"
+#include "CKTVGUIKeyboardRSTBox.h"
 
 #define KEYBOARD_WIDTH                      541
 #define KEYBOARD_HEIGHT                     190
@@ -26,6 +27,8 @@ public:
     virtual void                            Render();
     virtual bool                            MouseLButton(bool bDown);
 
+    void                                    BindBox(CKTVGUIKeyboardRSTBox* box);
+
 private:
     void                                    __InitKey(const char* filename);
 
@@ -35,5 +38,7 @@ protected:
 
     SpritePair                              m_BG;
     char                                    m_cCurKey;
+
+    CKTVGUIKeyboardRSTBox*                  m_pBox;
 };
 #endif

@@ -50,6 +50,15 @@ bool CKTVSceneAD::Init()
     m_fCurAlpha = 0.0f;
     m_bChanging = false;
 
+    /** SQL ²âÊÔ */
+    //XModelConnection::Instance().Initialize("KTV", "sa", "");
+    //XModelConnection::Instance().Connect();
+    //CKTVModelArtist* CKMA = new CKTVModelArtist();
+    //CKTVRowArtist row;
+    //CKMA->get_artist_info(1, &row);
+    //cout << row.ArtistName << endl;
+    //delete CKMA;
+
     return true;
 }
 

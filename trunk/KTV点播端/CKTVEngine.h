@@ -44,6 +44,10 @@ protected:
     bool                        m_bCursor;
 
     char*                       m_szLogfile;
+
+    char                        m_szDSNName[256];
+    char                        m_szUsername[256];
+    char                        m_szPassword[256];
 };
 
 #endif
