@@ -253,6 +253,18 @@
 							>
 						</File>
 					</Filter>
+					<Filter
+						Name="SingerSelectScene"
+						>
+						<File
+							RelativePath=".\CKTVSceneSingerSelect.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\CKTVSceneSingerSelect.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter
@@ -275,6 +287,38 @@
 					</File>
 					<File
 						RelativePath=".\CKTVGUIKeyboardItem.h"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVGUIKeyboardRSTBox.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVGUIKeyboardRSTBox.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="Model"
+				>
+				<Filter
+					Name="Artist"
+					>
+					<File
+						RelativePath=".\CKTVModelArtist.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVModelArtist.h"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVRowArtist.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVRowArtist.h"
 						>
 					</File>
 				</Filter>

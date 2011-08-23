@@ -1,6 +1,7 @@
 #include "CKTVGUIKeyboard.h"
 
-CKTVGUIKeyboard::CKTVGUIKeyboard(int _x, int _y, int _id, const char* bgfilename, const char* keyfilename)
+CKTVGUIKeyboard::CKTVGUIKeyboard(int _x, int _y, int _id, const char* bgfilename, const char* keyfilename) :
+    m_pBox(NULL)
 {
     id = _id;
     bStatic = false;
@@ -29,11 +30,15 @@ char CKTVGUIKeyboard::GetKey()
 
 bool CKTVGUIKeyboard::MouseLButton(bool bDown)
 {
+    bool rst = false;
     int id = hgeGUI::Update(hgeGUIObject::hge->Timer_GetDelta());
     m_cCurKey = (char)id;
+    if(id != 0 && m_pBox != NULL)
+    {
+        rst = m_pBox->CallChange((char)id);
+    }
 
-    return (id != 0);
-    //return false;
+    return rst;
 }
 
 void CKTVGUIKeyboard::Render()
@@ -76,4 +81,9 @@ void CKTVGUIKeyboard::__InitKey(const char* filename)
         this->AddCtrl((hgeGUIObject*)pKI);
         lx += 52;
     }
+}
+
+void CKTVGUIKeyboard::BindBox(CKTVGUIKeyboardRSTBox* box)
+{
+    m_pBox = box;
 }

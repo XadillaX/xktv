@@ -13,6 +13,8 @@
 #include "cktvengine.h"
 #include "cktvsceneobject.h"
 #include "CKTVGUIKeyboard.h"
+#include "cktvguikeyboardrstbox.h"
+#include "cktvmodelartist.h"
 
 class CKTVScenePinyin : public CKTVSceneObject
 {

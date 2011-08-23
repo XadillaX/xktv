@@ -15,6 +15,7 @@
 #include "CKTVEngine.h"
 #include <vector>
 #include <hgesprite.h>
+#include "cktvmodelartist.h"
 using namespace std;
 
 class CKTVSceneAD : public CKTVSceneObject

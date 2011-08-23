@@ -134,6 +134,8 @@ public:
     XModelObject();
     virtual ~XModelObject();
 
+    string                                  GetPageSQL(string fields, string table, string condition, string order, int page, int pageSize);
+
     XModelStream*                           Select(const char* szSQL);
     bool                                    Query(const char* szSQL);
 
