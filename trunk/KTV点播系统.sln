@@ -18,7 +18,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "通用类库[测试项目]"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KTV点播端", "KTV点播端\KTV点播端.vcproj", "{0DABF8F2-B629-42F2-BEFA-DAA494E50CEA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "网络测试[SERVER]", "网络测试[SERVER]\网络测试[SERVER].vcproj", "{14B529B4-869F-45CE-88AC-75A0A0E4E6D2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "网络测试[CLIENT]", "网络测试[CLIENT]\网络测试[CLIENT].vcproj", "{8E78A5C3-5B13-46C7-8410-A8C406CF6627}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = KTV点播系统.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		Release|Win32 = Release|Win32
@@ -44,6 +51,14 @@ Global
 		{0DABF8F2-B629-42F2-BEFA-DAA494E50CEA}.Debug|Win32.Build.0 = Debug|Win32
 		{0DABF8F2-B629-42F2-BEFA-DAA494E50CEA}.Release|Win32.ActiveCfg = Release|Win32
 		{0DABF8F2-B629-42F2-BEFA-DAA494E50CEA}.Release|Win32.Build.0 = Release|Win32
+		{14B529B4-869F-45CE-88AC-75A0A0E4E6D2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{14B529B4-869F-45CE-88AC-75A0A0E4E6D2}.Debug|Win32.Build.0 = Debug|Win32
+		{14B529B4-869F-45CE-88AC-75A0A0E4E6D2}.Release|Win32.ActiveCfg = Release|Win32
+		{14B529B4-869F-45CE-88AC-75A0A0E4E6D2}.Release|Win32.Build.0 = Release|Win32
+		{8E78A5C3-5B13-46C7-8410-A8C406CF6627}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8E78A5C3-5B13-46C7-8410-A8C406CF6627}.Debug|Win32.Build.0 = Debug|Win32
+		{8E78A5C3-5B13-46C7-8410-A8C406CF6627}.Release|Win32.ActiveCfg = Release|Win32
+		{8E78A5C3-5B13-46C7-8410-A8C406CF6627}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
