@@ -46,13 +46,17 @@ bool CKTVSceneManager::Update(float fDT)
         case SCENE_LEAVING: return m_pCurrentScene->LeavingUpdate(fDT); break;
         case SCENE_LEFT:
             {
+                if(m_pNextScene != NULL)
+                {
+                    if(!m_pNextScene->Init()) break;
+                }
+
                 delete m_pCurrentScene;
                 m_pCurrentScene = m_pNextScene;
                 m_pNextScene = NULL;
 
                 if(m_pCurrentScene != NULL)
                 {
-                    m_pCurrentScene->Init();
                     m_pCurrentScene->SetState(SCENE_COMING);
                     return m_pCurrentScene->ComingUpdate(fDT);
                 }
@@ -63,12 +67,16 @@ bool CKTVSceneManager::Update(float fDT)
     /** 不存在当前场景 */
     else
     {
+        if(m_pNextScene != NULL)
+        {
+            if(!m_pNextScene->Init()) return true;
+        }
+
         m_pCurrentScene = m_pNextScene;
         m_pNextScene = NULL;
 
         if(m_pCurrentScene != NULL)
         {
-            m_pCurrentScene->Init();
             m_pCurrentScene->SetState(SCENE_COMING);
             return m_pCurrentScene->ComingUpdate(fDT);
         }

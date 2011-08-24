@@ -34,9 +34,11 @@ bool CKTVSceneFunction::Init()
     m_BG.second = new hgeSprite(m_BG.first, 0, 0, TexWidth(m_BG.first), TexHeight(m_BG.first));
 
     /** GUI */
-    hgeGUIButton* pPYDG = new hgeGUIButton(1, 114, 326, 117, 116, m_pHGE->Texture_Load("function/pydg.png"),0, 0);
+    hgeGUIButton* pPYDG = new hgeGUIButton(1, 114, 326, 117, 116, m_pHGE->Texture_Load("function/pydg.png"), 0, 0);
+    hgeGUIButton* pGSDG = new hgeGUIButton(2, 795, 326, 117, 116, m_pHGE->Texture_Load("function/gsdg.png"), 0, 0);
 
     m_pGUI->AddCtrl((hgeGUIObject*)pPYDG);
+    m_pGUI->AddCtrl((hgeGUIObject*)pGSDG);
 
     return true;
 }
@@ -66,6 +68,15 @@ bool CKTVSceneFunction::Update(float fDT)
             ENGINE.SetScene("Pinyin");
 
             break;
+        }
+
+    case 2:
+        {
+            /** 重置计时器 */
+            fNowBackTime = 0.0f;
+
+            printf("进入 歌手点歌...\n");
+            ENGINE.SetScene("Singer");
         }
 
     default: break;

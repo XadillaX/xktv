@@ -38,7 +38,7 @@ int CKTVModelArtist::get_artist_info_by_pinyin(string pinyin, CKTVRowArtist row[
 
     /** 分页SQL */
     char buf[1024];
-    strcpy(buf, this->GetPageSQL("*", "Artist", query, "ArtistNo ASC", page, pageSize).c_str());
+    strcpy(buf, this->GetPageSQL("*", "Artist", query, "ArtistName ASC", page, pageSize).c_str());
 
     /** 获取数据 */
     XModelStream* XMS = Select(buf);

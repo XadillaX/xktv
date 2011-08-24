@@ -298,6 +298,18 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="SingerPhoto"
+					>
+					<File
+						RelativePath=".\CKTVGUISingerPhoto.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVGUISingerPhoto.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Model"
