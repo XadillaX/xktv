@@ -11,6 +11,14 @@
 #include <windows.h>
 #include <wtypes.h>
 
+#include <string>
+#include <algorithm>
+#include <queue>
+#include <list>
+#include <map>
+#include <stack>
+using namespace std;
+
 #include <assert.h>
 #include <hge.h>
 #include <hgesprite.h>
@@ -38,8 +46,9 @@ namespace global
 #define Tex(a)                          (a.first)
 #define Spr(a)                          (a.second)
 #define Ani(a)                          (a.second)
-#define TexRelease(a)                   { if(a.second != NULL) { delete a.second; a.second = NULL; } global::g_pHGE->Texture_Free(a.first); }
+#define TexRelease(a)                   { if(a.second != NULL) { delete a.second; a.second = NULL; global::g_pHGE->Texture_Free(a.first); } }
 
 extern HGE*                             g_pHGE;
 };
+
 #endif

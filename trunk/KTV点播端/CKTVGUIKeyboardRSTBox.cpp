@@ -24,6 +24,9 @@ CKTVGUIKeyboardRSTBox::CKTVGUIKeyboardRSTBox(int _id, const char* filename, cons
 
     /** 矩形 */
     rect.Set(x, y, x + m_nWidth, y + m_nHeight);
+
+    /** 上一页 下一页 */
+
 }
 
 CKTVGUIKeyboardRSTBox::~CKTVGUIKeyboardRSTBox(void)
