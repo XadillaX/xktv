@@ -26,7 +26,7 @@ public:
     int                                 ArtistNo;
     string                              Lang;
     int                                 Hit;
-    XDataTime                           UpdateTime;
+    XDateTime                           UpdateTime;
     int                                 LastLong;
     string                              Download;
     string                              SongPinyin;

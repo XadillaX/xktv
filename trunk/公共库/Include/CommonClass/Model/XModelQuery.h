@@ -10,14 +10,14 @@
 using namespace std;
 
 #define OTL_ODBC_MSSQL_2005                 ///< Compile OTL 4/ODBC, MS SQL 2008
-#define OTL_STL                             // Turn on STL features
-#define OTL_ANSI_CPP                        // Turn on ANSI C++ typecasts
+#define OTL_STL                             ///< Turn on STL features
+#define OTL_ANSI_CPP                        ///< Turn on ANSI C++ typecasts
 
 #include "otlv4.h"
 #define SAFEDEL(p)                          if(p != NULL) { delete p; p = NULL; }
 
-#define ToInt                               atoi
-#define ToDouble                            atof
+#define toInt                               atoi
+#define toDouble                            atof
 
 typedef otl_stream                          XModelStream;
 typedef otl_long_string                     XModelText;

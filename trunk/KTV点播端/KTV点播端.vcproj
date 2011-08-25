@@ -354,6 +354,58 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="Machine"
+					>
+					<File
+						RelativePath=".\CKTVModelMachine.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVModelMachine.h"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVRowMachine.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVRowMachine.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="MachineType"
+					>
+					<File
+						RelativePath=".\CKTVModelMachineType.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVModelMachineType.h"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVRowMachineType.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVRowMachineType.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="System"
+				>
+				<File
+					RelativePath=".\CKTVMachineInfo.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CKTVMachineInfo.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

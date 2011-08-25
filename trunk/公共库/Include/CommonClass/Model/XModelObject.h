@@ -15,7 +15,7 @@ using namespace std;
 #define OTL_ANSI_CPP                        ///< Turn on ANSI C++ typecasts
 #include "otlv4.h"
 
-typedef otl_datetime XDataTime;
+typedef otl_datetime XDateTime;
 
 /**
  * @brief 模型数据列基类
