@@ -12,6 +12,7 @@
 #pragma once
 #include "global.h"
 #include "cktvscenemanager.h"
+#include "cktvmachineinfo.h"
 
 class CKTVEngine : public Singleton<CKTVEngine>
 {
@@ -35,6 +36,7 @@ public:
 protected:
     HGE*                        m_pHGE;
     CKTVSceneManager*           m_pSceneManager;
+    CKTVMachineInfo*            m_pMachineInfo;
 
     int                         m_nWidth;
     int                         m_nHeight;

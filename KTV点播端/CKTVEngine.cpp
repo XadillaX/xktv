@@ -6,12 +6,15 @@ bool RenderFunc();
 
 CKTVEngine::CKTVEngine(void) :
     m_pHGE(NULL),
-    m_pSceneManager(NULL)
+    m_pSceneManager(NULL),
+    m_pMachineInfo(NULL)
 {
 }
 
 CKTVEngine::~CKTVEngine(void)
 {
+    if(m_pSceneManager) delete m_pSceneManager;
+    if(m_pMachineInfo) delete m_pMachineInfo;
 }
 
 bool CKTVEngine::init()
@@ -52,6 +55,15 @@ bool CKTVEngine::init()
     strcpy(m_szPassword, m_pHGE->Ini_GetString("database", "password", ""));
     XModelConnection::Instance().Initialize(m_szDSNName, m_szUsername, m_szPassword);
     if(!XModelConnection::Instance().Connect()) return false;
+
+    /** 包厢信息 */
+    m_pMachineInfo = new CKTVMachineInfo();
+    if(!m_pMachineInfo->SetMachineNo(m_pHGE->Ini_GetString("machine", "machineid", ""))) return false;
+    else
+    {
+        m_pMachineInfo->StartListen();
+        printf("欢迎进入 %s 包厢[%s]...\n", m_pMachineInfo->GetMachineInfo().MachineNo.c_str(), m_pMachineInfo->GetMachineInfo().m_TypeInfo.TypeName.c_str());
+    }
 
     return m_pHGE->System_Initiate();
 }
