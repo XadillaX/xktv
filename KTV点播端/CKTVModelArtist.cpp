@@ -10,10 +10,7 @@ CKTVModelArtist::~CKTVModelArtist(void)
 
 bool CKTVModelArtist::get_artist_info(int ArtistNo, CKTVRowArtist* out)
 {
-    string query = "SELECT * FROM Artist WHERE ArtistNo=";
-    char buf[256];
-    itoa(ArtistNo, buf, 10);
-    query += buf;
+    string query = "SELECT * FROM Artist WHERE ArtistNo = " + XStringFunc::IntToString(ArtistNo);
 
     XModelStream* XMS = Select(query.c_str());
     if(XMS->eof())
