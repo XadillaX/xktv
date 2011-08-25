@@ -27,6 +27,8 @@ public:
     virtual bool                            MouseLButton(bool bDown);
     virtual void                            Render();
 
+    int                                     GetArtistNo() { return m_nArtistNo; }
+
 private:
     int                                     m_nArtistNo;
 
@@ -38,12 +40,12 @@ private:
 
     bool                                    m_bDown;
 
-    int x;
-    int y;
-    int w;
-    int h;
-    int rw;
-    int rh;
+    int                                     x;
+    int                                     y;
+    int                                     w;
+    int                                     h;
+    int                                     rw;
+    int                                     rh;
 };
 
 #endif

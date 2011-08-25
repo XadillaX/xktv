@@ -15,6 +15,8 @@ using namespace std;
 #define OTL_ANSI_CPP                        ///< Turn on ANSI C++ typecasts
 #include "otlv4.h"
 
+typedef otl_datetime XDataTime;
+
 /**
  * @brief 模型数据列基类
  * 继承以形成一个完整的数据列类，从数据流中获取数据或者向数据流中写入数据 

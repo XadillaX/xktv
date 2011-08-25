@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\CODES\课程设计\KTV点播系统\公共库\Include\CommonClass;D:\CODES\课程设计\KTV点播系统\公共库\Include"
+				AdditionalIncludeDirectories="..\公共库\Include\CommonClass;..\公共库\Include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
