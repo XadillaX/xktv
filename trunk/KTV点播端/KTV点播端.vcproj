@@ -334,10 +334,30 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="Song"
+					>
+					<File
+						RelativePath=".\CKTVModelSong.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVModelSong.h"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVRowSong.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVRowSong.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
-			Name="Utils"
+			Name="UTILS"
 			>
 			<Filter
 				Name="DesignPatterns"

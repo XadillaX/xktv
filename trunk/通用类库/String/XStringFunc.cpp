@@ -140,3 +140,11 @@ void XStringFunc::ToLower()
         m_szStr[i] = tolower(m_szStr[i]);
     }
 }
+
+string XStringFunc::IntToString(int a)
+{
+    char buf[20];
+    sprintf(buf, "%d", a);
+
+    return string(buf);
+}

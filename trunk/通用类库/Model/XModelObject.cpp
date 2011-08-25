@@ -41,12 +41,12 @@ XModelStream* XModelObject::Select(const char *szSQL)
     try{
         m_XMQ.Query(szSQL, m_pConnection);
     }
-    catch(otl_exception& p){ // intercept OTL exceptions
-        cerr<<p.msg<<endl; // print out error message
-        cerr<<p.code<<endl; // print out error code
-        cerr<<p.var_info<<endl; // print out the variable that caused the error
-        cerr<<p.sqlstate<<endl; // print out SQLSTATE message
-        cerr<<p.stm_text<<endl; // print out SQL that caused the error
+    catch(otl_exception& p){        // intercept OTL exceptions
+        cerr<<p.msg<<endl;          // print out error message
+        cerr<<p.code<<endl;         // print out error code
+        cerr<<p.var_info<<endl;     // print out the variable that caused the error
+        cerr<<p.sqlstate<<endl;     // print out SQLSTATE message
+        cerr<<p.stm_text<<endl;     // print out SQL that caused the error
 
         return NULL;
     }
@@ -59,12 +59,12 @@ bool XModelObject::Query(const char* szSQL)
     try{
         m_XMQ.Query(szSQL, m_pConnection);
     }
-    catch(otl_exception& p){ // intercept OTL exceptions
-        cerr<<p.msg<<endl; // print out error message
-        cerr<<p.code<<endl; // print out error code
-        cerr<<p.var_info<<endl; // print out the variable that caused the error
-        cerr<<p.sqlstate<<endl; // print out SQLSTATE message
-        cerr<<p.stm_text<<endl; // print out SQL that caused the error
+    catch(otl_exception& p){        // intercept OTL exceptions
+        cerr<<p.msg<<endl;          // print out error message
+        cerr<<p.code<<endl;         // print out error code
+        cerr<<p.var_info<<endl;     // print out the variable that caused the error
+        cerr<<p.sqlstate<<endl;     // print out SQLSTATE message
+        cerr<<p.stm_text<<endl;     // print out SQL that caused the error
 
         return false;
     }
