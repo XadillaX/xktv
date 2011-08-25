@@ -1,31 +1,22 @@
 HGE Started..
 
 HGE version: 1.80
-Date: 25.08.2011, 14:59:57
+Date: 26.08.2011, 02:11:56
 
 Application: KTVµã²¥ÏµÍ³
-OS: Windows 6.1.7600
-Memory: 2096696K total, 265912K free
+OS: Windows 6.1.7601
+Memory: 2091624K total, 397980K free
 
 D3D Driver: nvd3dum.dll
-Description: NVIDIA GeForce 7100 GS (Microsoft Corporation - WDDM)
-Version: 8.15.11.8593
+Description: NVIDIA GeForce GT 130M 
+Version: 8.17.12.6658
 Mode: 1024 x 768 x X8R8G8B8
 
-Sound Device: Realtek Digital Output (Realtek High Definition Audio)
+Sound Device: ÑïÉùÆ÷ (Realtek High Definition Audio)
 Sample rate: 44100
 
 Init done.
 
-Can't load resource: singer/TORO.JPG
-Can't load resource: singer/BINGQI.JPG
-Can't load resource: singer/CHENXIAOCHUN.JPG
-Can't load resource: singer/CHENYIXUN.JPG
-Can't load resource: singer/GUANGLIANG.JPG
-Can't load resource: singer/LINJUNJIE.JPG
-Can't load resource: singer/XUSONG.JPG
-Can't load resource: singer/YANGMI.JPG
-Can't load resource: singer/ZHOUBICHANG.JPG
 
 Finishing..
 The End.
