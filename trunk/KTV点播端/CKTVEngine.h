@@ -6,10 +6,12 @@
 //  Create Date: 2011/08/20
 //
 //////////////////////////////////////////////////////////////////////////
+#define WIN32_LEAN_AND_MEAN
 #ifndef CKTVENGINE_H
 #define CKTVENGINE_H
 
 #pragma once
+#include "../KTV²¥·Å¶Ë/cktvnetwork121.h"
 #include "global.h"
 #include "cktvscenemanager.h"
 #include "cktvmachineinfo.h"
@@ -32,7 +34,9 @@ public:
     HGE*                        GetHGE();
 
     int                         GetWidth() { return m_nWidth; }
-    int                         GetHeight() { return m_nHeight; }             
+    int                         GetHeight() { return m_nHeight; }
+
+    CKTVNetwork121*             Network() { return m_pNetwork; }
 
 protected:
     HGE*                        m_pHGE;
@@ -51,6 +55,8 @@ protected:
     char                        m_szDSNName[256];
     char                        m_szUsername[256];
     char                        m_szPassword[256];
+
+    CKTVNetwork121*             m_pNetwork;
 };
 
 #endif

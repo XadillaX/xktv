@@ -7,7 +7,8 @@ bool RenderFunc();
 CKTVEngine::CKTVEngine(void) :
     m_pHGE(NULL),
     m_pSceneManager(NULL),
-    m_pMachineInfo(NULL)
+    m_pMachineInfo(NULL),
+    m_pNetwork(NULL)
 {
 }
 
@@ -15,6 +16,7 @@ CKTVEngine::~CKTVEngine(void)
 {
     if(m_pSceneManager) delete m_pSceneManager;
     if(m_pMachineInfo) delete m_pMachineInfo;
+    if(m_pNetwork) delete m_pNetwork;
 }
 
 bool CKTVEngine::init()
@@ -64,6 +66,11 @@ bool CKTVEngine::init()
         m_pMachineInfo->StartListen();
         printf("»¶Ó­½øÈë %s °üÏá[%s]...\n", m_pMachineInfo->GetMachineInfo().MachineNo.c_str(), m_pMachineInfo->GetMachineInfo().m_TypeInfo.TypeName.c_str());
     }
+
+    /** ÍøÂç */
+    string szSrv = string("tcp://*:") + XStringFunc::IntToString(m_pHGE->Ini_GetInt("network", "localport", 5555));
+    string szClt = string("tcp://") + m_pHGE->Ini_GetString("network", "serveraddress", "localhost") + string(":") + XStringFunc::IntToString(m_pHGE->Ini_GetInt("network", "serverport", 3456));
+    m_pNetwork = new CKTVNetwork121(szSrv.c_str(), szClt.c_str(), global::ReceiveFunc);
 
     return m_pHGE->System_Initiate();
 }

@@ -15,7 +15,11 @@ bool CKTVPlayList::CheckRepeat(CKTVRowSong song)
     ::EnterCriticalSection(&m_CriticalSection);
     for(int i = 0; i < m_nCount; i++)
     {
-        if(song.SongNo == m_PlayList[i].SongNo) return true;
+        if(song.SongNo == m_PlayList[i].SongNo)
+        {
+            ::LeaveCriticalSection(&m_CriticalSection);
+            return true;
+        }
     }
     ::LeaveCriticalSection(&m_CriticalSection);
 
@@ -65,4 +69,22 @@ void CKTVPlayList::ShowList()
 
     printf("\n");
     ::LeaveCriticalSection(&m_CriticalSection);
+}
+
+CKTVRowSong CKTVPlayList::GetNextSong()
+{
+    CKTVRowSong rs;
+    if(m_nCount == 0)
+    {
+        rs.SongName = "";
+        return rs;
+    }
+
+    ::EnterCriticalSection(&m_CriticalSection);
+    rs = m_PlayList[0];
+    m_PlayList.erase(m_PlayList.begin());
+    m_nCount--;
+    ::LeaveCriticalSection(&m_CriticalSection);
+
+    return rs;
 }

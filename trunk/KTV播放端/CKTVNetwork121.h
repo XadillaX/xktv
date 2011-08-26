@@ -10,38 +10,55 @@
 #define CKTVNETWORK121_H
 
 #pragma once
+#define WIN32_LEAN_AND_MEAN
 #include <zmq.hpp>
+#include <string>
+#include <queue>
+using namespace std;
 
-#define MAGIC_NUM                   (int)("Xadi")
+#define MAGIC_NUM                   (DWORD)(0x49444158)
 typedef void                        (*ON_RECEIVE_FUNC)(int, int, char*, size_t);
 
 struct CKTVNetworkHeader
 {
-    int                             MagiNum;
+    DWORD                           MagiNum;
     int                             MainID;
     int                             SubID;
     size_t                          Size;
 };
 
+struct SendData
+{
+    CKTVNetworkHeader*              header;
+    char*                           data;
+};
+
 class CKTVNetwork121
 {
+friend DWORD WINAPI SendThread(LPVOID lpParam);
 friend DWORD WINAPI ReceiveThread(LPVOID lpParam);
 
 public:
     CKTVNetwork121(const char* szServer, const char* szClient, ON_RECEIVE_FUNC func = NULL);
     virtual ~CKTVNetwork121(void);
 
-    void                            SendMsg(int MainID, int SubID, char* pData, size_t size);
+    void                            SendMsg(int MainID, int SubID, const char* pData, size_t size);
 
 private:
     zmq::context_t                  m_CtxServer;
-    zmq::socket_t                   m_SktServer;
+    zmq::socket_t*                  m_pSktServer;
 
     zmq::context_t                  m_CtxClient;
-    zmq::socket_t                   m_SktClient;
+    zmq::socket_t*                  m_pSktClient;
 
+    HANDLE                          m_hSendThread;
     HANDLE                          m_hReceiveThread;
-    ON_RECEIVE_FUNC                 m_pReceiveFunc;
+
+    bool                            m_bConnected;
+    string                          m_szConnAddr;
+
+    queue<SendData>                 m_SendQueue;
+    CRITICAL_SECTION                m_CriticalSection;
 };
 
 #endif

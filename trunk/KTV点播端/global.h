@@ -6,9 +6,10 @@
 //  Create Date: 2011/08/20
 //
 //////////////////////////////////////////////////////////////////////////
+#define WIN32_LEAN_AND_MEAN
+
 #ifndef GLOBAL_H
 #define GLOBAL_H
-#include <windows.h>
 #include <wtypes.h>
 
 #include <string>
@@ -49,6 +50,7 @@ namespace global
 #define TexRelease(a)                   { if(a.second != NULL) { delete a.second; a.second = NULL; global::g_pHGE->Texture_Free(a.first); } }
 
 extern HGE*                             g_pHGE;
+extern void                             ReceiveFunc(int, int, char*, size_t);
 };
 
 #endif

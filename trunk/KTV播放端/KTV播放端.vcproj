@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\程序发布\机器播放客户端"
+			OutputDirectory="..\程序发布\播放"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
@@ -166,6 +166,10 @@
 			<Filter
 				Name="global"
 				>
+				<File
+					RelativePath=".\CommonCommand.h"
+					>
+				</File>
 				<File
 					RelativePath=".\global.cpp"
 					>
