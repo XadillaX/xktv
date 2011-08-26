@@ -215,6 +215,10 @@
 			Name="Network"
 			>
 			<File
+				RelativePath="..\¹«¹²¿â\Include\CommonClass\Network\XNetworkCommand.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Network\XSimpleClient.cpp"
 				>
 			</File>
