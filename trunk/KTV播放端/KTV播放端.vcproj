@@ -17,10 +17,10 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\程序发布\机器播放客户端"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			CharacterSet="1"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -40,6 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="..\公共库\Include\CXadillaXVideoPlayer;..\公共库\Include\hge;..\公共库\Include\CommonClass;../ZeroMQ/include"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -57,6 +58,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="../公共库/Lib/hge/hge.lib ../公共库/Lib/hge/hgehelp.lib ../公共库/Lib/CXadillaXVideoPlayer/CXadillaXVideoPlayerD.lib ../公共库/Lib/CommonClass/CommonClassD.lib ../ZeroMQ/lib/DEBUG/libzmq.lib"
+				OutputFile="$(OutDir)\$(ProjectName)D.exe"
+				IgnoreDefaultLibraryNames="libc.lib"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -157,23 +161,37 @@
 	</References>
 	<Files>
 		<Filter
-			Name="源文件"
-			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			Name="System"
 			>
+			<Filter
+				Name="global"
+				>
+				<File
+					RelativePath=".\global.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\global.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="1to1Network"
+				>
+				<File
+					RelativePath=".\CKTVNetwork121.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CKTVNetwork121.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
-		<Filter
-			Name="头文件"
-			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+		<File
+			RelativePath=".\main.cpp"
 			>
-		</Filter>
-		<Filter
-			Name="资源文件"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
-		</Filter>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

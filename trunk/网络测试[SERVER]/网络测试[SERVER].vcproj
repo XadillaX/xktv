@@ -40,7 +40,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../ZeroMQ/include"
+				AdditionalIncludeDirectories="../ZeroMQ/include;../公共库\Include\CommonClass\Network"
+				PreprocessorDefinitions="WIN32"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -58,7 +59,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libzmq.lib"
+				AdditionalDependencies="../zeromq/lib/debug/libzmq.lib ../公共库\Lib\CommonClass/CommonClassD.lib"
 				OutputFile="$(OutDir)\$(ProjectName)D.exe"
 				AdditionalLibraryDirectories="../ZeroMQ/lib/DEBUG/"
 				GenerateDebugInformation="true"
@@ -175,6 +176,14 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\CKTVNetwork121.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\CKTVNetwork121.h"
+				>
+			</File>
 			<File
 				RelativePath="..\ZeroMQ\include\zmq.h"
 				>
