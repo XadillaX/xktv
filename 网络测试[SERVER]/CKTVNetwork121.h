@@ -12,14 +12,15 @@
 #pragma once
 #include <zmq.hpp>
 #include <string>
+#include <queue>
 using namespace std;
 
-#define MAGIC_NUM                   (int)("Xadi")
+#define MAGIC_NUM                   (DWORD)(0x49444158)
 typedef void                        (*ON_RECEIVE_FUNC)(int, int, char*, size_t);
 
 struct CKTVNetworkHeader
 {
-    int                             MagiNum;
+    DWORD                           MagiNum;
     int                             MainID;
     int                             SubID;
     size_t                          Size;
@@ -27,6 +28,7 @@ struct CKTVNetworkHeader
 
 class CKTVNetwork121
 {
+friend DWORD WINAPI SendThread(LPVOID lpParam);
 friend DWORD WINAPI ReceiveThread(LPVOID lpParam);
 
 public:
@@ -37,13 +39,9 @@ public:
 
 private:
     zmq::context_t                  m_CtxServer;
-    zmq::socket_t                   m_SktServer;
-
-    zmq::context_t                  m_CtxClient;
-    zmq::socket_t                   m_SktClient;
+    zmq::socket_t*                  m_pSktServer;
 
     HANDLE                          m_hReceiveThread;
-    ON_RECEIVE_FUNC                 m_pReceiveFunc;
 
     bool                            m_bConnected;
     string                          m_szConnAddr;

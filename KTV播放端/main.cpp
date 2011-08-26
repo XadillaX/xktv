@@ -1,5 +1,6 @@
 #include "global.h"
 #include "commonclass.h"
+#include "commoncommand.h"
 
 void InitAfterStart()
 {
@@ -14,19 +15,30 @@ void InitAfterStart()
 
 bool FrameFunc()
 {
-
-    return false;
-}
-
-bool RenderFunc()
-{
     /** 初始化播放器 */
+    static bool bPaused = false;
     static bool bInited = false;
     if(!bInited)
     {
         bInited = true;
         InitAfterStart();
     }
+
+    if(!g_pPlayer->IsPlaying() && !bPaused && !g_bRequestingSong)
+    {
+        /** 请求歌曲 */
+        static int times = 0;
+        printf("%d. 请求歌曲...\n", times++);
+        char tmp[] = "\0";
+        g_pNetwork->SendMsg(MAINID_REQUEST_SONG, SUBID_REQUEST_NEXT_SONG, tmp, 1);
+        g_bRequestingSong = true;
+    }
+
+    return false;
+}
+
+bool RenderFunc()
+{
 
     return false;
 }
@@ -45,11 +57,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     g_pHGE->System_SetState(HGE_RENDERFUNC, RenderFunc);
     g_pHGE->System_SetState(HGE_FRAMEFUNC, FrameFunc);
     g_pHGE->System_SetState(HGE_SHOWSPLASH, false);
+    g_pHGE->System_SetState(HGE_INIFILE, "config.ini");
+    g_pHGE->System_SetState(HGE_DONTSUSPEND, true);
 
     ::InitializeCriticalSection(&g_CriticalSection);
 
     if(g_pHGE->System_Initiate())
     {
+        string szSrv = string("tcp://*:") + XStringFunc::IntToString(g_pHGE->Ini_GetInt("network", "localport", 5555));
+        string szClt = string("tcp://") + g_pHGE->Ini_GetString("network", "serveraddress", "localhost") + string(":") + XStringFunc::IntToString(g_pHGE->Ini_GetInt("network", "serverport", 3456));
+        g_pNetwork = new CKTVNetwork121(szSrv.c_str(), szClt.c_str(), NetworkReceive);
+
         g_pHGE->System_Start();
         g_pHGE->System_Shutdown();
         g_pHGE->Release();
@@ -62,6 +80,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         MessageBox(NULL, "KTV系统初始化失败。", "失败", MB_ICONERROR);
         return 0;
     }
+
+    delete g_pNetwork;
 
     return 0;
 }

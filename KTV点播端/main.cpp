@@ -1,3 +1,5 @@
+#define WIN32_LEAN_AND_MEAN
+#include "../KTV²¥·Å¶Ë/cktvnetwork121.h"
 #include "global.h"
 #include "cktvengine.h"
 

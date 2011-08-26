@@ -411,8 +411,20 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="SimpleServer"
+					Name="Network"
 					>
+					<File
+						RelativePath="..\KTV²¥·Å¶Ë\CKTVNetwork121.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\KTV²¥·Å¶Ë\CKTVNetwork121.h"
+						>
+					</File>
+					<File
+						RelativePath="..\KTV²¥·Å¶Ë\CommonCommand.h"
+						>
+					</File>
 				</Filter>
 				<Filter
 					Name="PlayList"

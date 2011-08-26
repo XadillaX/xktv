@@ -9,7 +9,7 @@ void rec(int m, int s, char* d, size_t size)
 
 int main()
 {
-    CKTVNetwork121("tcp://*:5555/", "tcp://127.0.0.1:5323/", rec);
+    CKTVNetwork121 net("tcp://*:5555", "tcp://localhost:5323", rec);
 
     while(true)
     {

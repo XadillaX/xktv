@@ -24,6 +24,7 @@ public:
     bool                                AddSongToFirst(CKTVRowSong song);
 
     bool                                CheckRepeat(CKTVRowSong song);
+    CKTVRowSong                         GetNextSong();
 
     void                                ShowList();
 
