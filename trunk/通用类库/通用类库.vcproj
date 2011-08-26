@@ -211,6 +211,26 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Network"
+			>
+			<File
+				RelativePath=".\Network\XSimpleClient.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\公共库\Include\CommonClass\Network\XSimpleClient.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Network\XSimpleServer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\公共库\Include\CommonClass\Network\XSimpleServer.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\公共库\Include\CommonClass\CommonClass.h"
 			>

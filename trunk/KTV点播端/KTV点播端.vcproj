@@ -398,14 +398,34 @@
 			<Filter
 				Name="System"
 				>
-				<File
-					RelativePath=".\CKTVMachineInfo.cpp"
+				<Filter
+					Name="MachineInfo"
 					>
-				</File>
-				<File
-					RelativePath=".\CKTVMachineInfo.h"
+					<File
+						RelativePath=".\CKTVMachineInfo.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVMachineInfo.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="SimpleServer"
 					>
-				</File>
+				</Filter>
+				<Filter
+					Name="PlayList"
+					>
+					<File
+						RelativePath=".\CKTVPlayList.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVPlayList.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

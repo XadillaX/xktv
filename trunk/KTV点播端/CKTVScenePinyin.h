@@ -19,13 +19,13 @@
 #include "fontcn/gfxfont.h"
 #include "hgefont.h"
 #include "cktvengine.h"
+#include "cktvplaylist.h"
 
 #define SSS_SONG_PAGE_SIZE                  8
 #define SSS_SONG_SEL_START_ID               300
 #define SSS_SONG_FIR_START_ID               400
 #define SSS_SONG_GUI_PREV_ID                250
 #define SSS_SONG_GUI_NEXT_ID                251
-#define SSS_SONG_GUI_BACK_ID                252
 
 enum SHOW_STATE_PINYIN_SELECT
 {
@@ -60,7 +60,7 @@ private:
     CKTVGUIKeyboard*                        m_pKeyboard;
     CKTVGUIKeyboardRSTBox*                  m_pRstBox;
 
-    SHOW_STATE_PINYIN_SELECT                  m_ShowState;
+    SHOW_STATE_PINYIN_SELECT                m_ShowState;
 
     int                                     m_nSongTotPage;
     int                                     m_nSongCurPage;

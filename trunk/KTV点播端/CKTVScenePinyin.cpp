@@ -50,11 +50,9 @@ bool CKTVScenePinyin::Init()
     /** 上一页下一页 */
     hgeGUIButton* sbtn_prev = new hgeGUIButton(SSS_SONG_GUI_PREV_ID, 120, 460, 125, 39, m_pHGE->Texture_Load("pinyinselect/pinyinprev.png"), 0, 0);
     hgeGUIButton* sbtn_next = new hgeGUIButton(SSS_SONG_GUI_NEXT_ID, 120 + 125 + 15, 460, 125, 39, m_pHGE->Texture_Load("pinyinselect/pinyinnext.png"), 0, 0);
-    hgeGUIButton* sbtn_back = new hgeGUIButton(SSS_SONG_GUI_BACK_ID, 120 + (125 + 15) * 2, 460, 50, 39, m_pHGE->Texture_Load("pinyinselect/back.png"), 0, 0);
 
     m_pGUI->AddCtrl((hgeGUIObject*)sbtn_prev);
     m_pGUI->AddCtrl((hgeGUIObject*)sbtn_next);
-    m_pGUI->AddCtrl((hgeGUIObject*)sbtn_back);
 
     /** 字体 */
     m_pShowPage = new hgeFont("efont/font1.fnt");
@@ -125,13 +123,23 @@ bool CKTVScenePinyin::_SongGUIUpdate(float fDT, int id)
             break;
         }
 
-    case SSS_SONG_GUI_BACK_ID:
-        {
-            SetShowType(SSPS_SHOW_SONG);
-            break;
-        }
-
     default: break;
+    }
+
+    /** 选歌 */
+    if(id >= SSS_SONG_SEL_START_ID && id < SSS_SONG_SEL_START_ID + SSS_SONG_PAGE_SIZE)
+    {
+        CKTVRowSong* rowsong = m_RSArray[id - SSS_SONG_SEL_START_ID];
+
+        CKTVPlayList::Instance().AddSongToLast(*rowsong);
+    }
+
+    /** 优歌 */
+    if(id >= SSS_SONG_FIR_START_ID && id < SSS_SONG_FIR_START_ID + SSS_SONG_PAGE_SIZE)
+    {
+        CKTVRowSong* rowsong = m_RSArray[id - SSS_SONG_FIR_START_ID];
+
+        CKTVPlayList::Instance().AddSongToFirst(*rowsong);
     }
 
     return false;
@@ -264,10 +272,6 @@ void CKTVScenePinyin::SetShowType(SHOW_STATE_PINYIN_SELECT type)
         btn->bEnabled = true;
 
         btn = (hgeGUIButton*)(m_pGUI->GetCtrl(SSS_SONG_GUI_NEXT_ID));
-        btn->bVisible = true;
-        btn->bEnabled = true;
-
-        btn = (hgeGUIButton*)(m_pGUI->GetCtrl(SSS_SONG_GUI_BACK_ID));
         btn->bVisible = true;
         btn->bEnabled = true;
 

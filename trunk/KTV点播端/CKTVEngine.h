@@ -13,6 +13,7 @@
 #include "global.h"
 #include "cktvscenemanager.h"
 #include "cktvmachineinfo.h"
+#include "cktvrowsong.h"
 
 class CKTVEngine : public Singleton<CKTVEngine>
 {
@@ -31,7 +32,7 @@ public:
     HGE*                        GetHGE();
 
     int                         GetWidth() { return m_nWidth; }
-    int                         GetHeight() { return m_nHeight; }
+    int                         GetHeight() { return m_nHeight; }             
 
 protected:
     HGE*                        m_pHGE;
