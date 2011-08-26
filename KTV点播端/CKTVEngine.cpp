@@ -93,6 +93,15 @@ HGE* CKTVEngine::GetHGE()
 
 bool CKTVEngine::Update(float fDeltaTime)
 {
+    /** 判断时间是否到 */
+    if(m_pMachineInfo->GetMinuteLeft() < 0)
+    {
+        /** DO STH. */
+        printf("对不起，时间到...\n");
+
+        return true;
+    }
+
     return m_pSceneManager->Update(fDeltaTime);
 }
 
