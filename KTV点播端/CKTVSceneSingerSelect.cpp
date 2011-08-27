@@ -19,7 +19,7 @@ CKTVSceneSingerSelect::~CKTVSceneSingerSelect(void)
 
 bool CKTVSceneSingerSelect::Init()
 {
-    CKTVSceneObject::Init();
+    CKTVSceneRB::Init();
 
     /** 读取配置文件 */
     m_pHGE->System_SetState(HGE_INIFILE, "singerselect/singerselect.ini");
@@ -75,6 +75,8 @@ bool CKTVSceneSingerSelect::Init()
 
 bool CKTVSceneSingerSelect::Update(float fDT)
 {
+    CKTVSceneRB::Update(fDT);
+
     int id = m_pGUI->Update(fDT);
     if(id != 0 && m_ShowState == SSSS_SHOW_SINGER)
     {
@@ -120,6 +122,22 @@ bool CKTVSceneSingerSelect::_SongGUIUpdate(float fDT, int id)
         }
 
     default: break;
+    }
+
+    /** 选歌 */
+    if(id >= SSS_SONG_SEL_START_ID && id < SSS_SONG_SEL_START_ID + SSS_SONG_PAGE_SIZE)
+    {
+        CKTVRowSong* rowsong = m_RSArray[id - SSS_SONG_SEL_START_ID];
+
+        CKTVPlayList::Instance().AddSongToLast(*rowsong);
+    }
+
+    /** 优歌 */
+    if(id >= SSS_SONG_FIR_START_ID && id < SSS_SONG_FIR_START_ID + SSS_SONG_PAGE_SIZE)
+    {
+        CKTVRowSong* rowsong = m_RSArray[id - SSS_SONG_FIR_START_ID];
+
+        CKTVPlayList::Instance().AddSongToFirst(*rowsong);
     }
 
     return false;
@@ -221,6 +239,8 @@ bool CKTVSceneSingerSelect::Render(float fDT)
         m_pShowPage->SetColor(0xffffffff);
         m_pShowPage->printf(80 + (125 + 15) * 2, 500 + 10, HGETEXT_LEFT, buf);
     }
+
+    CKTVSceneRB::Render(fDT);
 
     return false;
 }

@@ -113,7 +113,16 @@ CKTVNetwork121::CKTVNetwork121(const char* szServer, const char* szClient, ON_RE
 {
     m_pSktServer = new zmq::socket_t(m_CtxServer, ZMQ_REP);
 
-    m_pSktServer->bind(szServer);
+    try {
+        m_pSktServer->bind(szServer);
+    }
+    catch(zmq::error_t& t)
+    {
+        //THROW_KTV_ERROR(t.num(), t.what());
+        assert(0);
+        return;
+    }
+
     m_szConnAddr = szClient;
 
     /** 接受线程 */
@@ -131,9 +140,9 @@ CKTVNetwork121::~CKTVNetwork121(void)
     if(m_hSendThread != 0) ::TerminateThread(m_hSendThread, 0);
 
     m_pSktServer->close();
-    m_pSktClient->close();
+    if(m_pSktClient != NULL) m_pSktClient->close();
     delete m_pSktServer;
-    delete m_pSktClient;
+    if(m_pSktClient != NULL) delete m_pSktClient;
 }
 
 void CKTVNetwork121::SendMsg(int MainID, int SubID, const char* pData, size_t size)

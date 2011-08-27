@@ -19,7 +19,7 @@ CKTVScenePinyin::~CKTVScenePinyin(void)
 
 bool CKTVScenePinyin::Init()
 {
-    CKTVSceneObject::Init();
+    CKTVSceneRB::Init();
 
     /** ¶ÁÈ¡ÅäÖÃÎÄ¼þ */
     m_pHGE->System_SetState(HGE_INIFILE, "pinyinselect/pinyinselect.ini");
@@ -66,6 +66,8 @@ bool CKTVScenePinyin::Init()
 
 bool CKTVScenePinyin::Update(float fDT)
 {
+    CKTVSceneRB::Update(fDT);
+
     int id = m_pGUI->Update(fDT);
     if (id != 0 && m_ShowState == SSPS_SHOW_SONG)
     {
@@ -192,6 +194,8 @@ bool CKTVScenePinyin::Render(float fDT)
     m_pGUI->Render();
 
     SetShowType(SSPS_SHOW_SONG);
+
+    CKTVSceneRB::Render(fDT);
 
     return false;
 }

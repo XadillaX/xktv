@@ -265,6 +265,18 @@
 							>
 						</File>
 					</Filter>
+					<Filter
+						Name="RightBottomGUIScene"
+						>
+						<File
+							RelativePath=".\CKTVSceneRB.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\CKTVSceneRB.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter
@@ -472,6 +484,18 @@
 				</File>
 				<File
 					RelativePath=".\FontCN\gfxfont.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Error"
+				>
+				<File
+					RelativePath=".\CKTVError.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CKTVError.h"
 					>
 				</File>
 			</Filter>

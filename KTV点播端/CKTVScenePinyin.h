@@ -20,6 +20,7 @@
 #include "hgefont.h"
 #include "cktvengine.h"
 #include "cktvplaylist.h"
+#include "cktvscenerb.h"
 
 #define SSS_SONG_PAGE_SIZE                  8
 #define SSS_SONG_SEL_START_ID               300
@@ -32,7 +33,7 @@ enum SHOW_STATE_PINYIN_SELECT
     SSPS_SHOW_SONG
 };
 
-class CKTVScenePinyin : public CKTVSceneObject
+class CKTVScenePinyin : public CKTVSceneRB
 {
 public:
     CKTVScenePinyin(void);

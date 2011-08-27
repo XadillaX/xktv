@@ -14,6 +14,7 @@
 #include <zmq.hpp>
 #include <string>
 #include <queue>
+#include "../KTVµã²¥¶Ë/cktverror.h"
 using namespace std;
 
 #define MAGIC_NUM                   (DWORD)(0x49444158)

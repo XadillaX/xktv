@@ -9,17 +9,18 @@ int main(int argv, char* argc[])
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 #endif
 {
-    if(ENGINE.init())
+    try
     {
+        ENGINE.init();
         global::g_pHGE = ENGINE.GetHGE();
 
         ENGINE.SetScene("AD");
         ENGINE.start();
         ENGINE.close();
     }
-    else
+    catch(CKTVError& e)
     {
-        MessageBox(NULL, "KTV系统初始化错误。", "错误", MB_ICONERROR);
+        MessageBox(NULL, e.ToString().c_str(), "错误", MB_ICONERROR);
     }
 
     return 0;
