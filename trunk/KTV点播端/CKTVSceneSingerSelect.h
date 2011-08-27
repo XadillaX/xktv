@@ -19,6 +19,8 @@
 #include "cktvmodelsong.h"
 #include "fontcn/gfxfont.h"
 #include "hgefont.h"
+#include "cktvplaylist.h"
+#include "cktvscenerb.h"
 
 #define SINGER_GUI_PREV_ID                  220
 #define SINGER_GUI_NEXT_ID                  221
@@ -37,7 +39,7 @@ enum SHOW_STATE_SINGER_SELECT
     SSSS_SHOW_SONG
 };
 
-class CKTVSceneSingerSelect : public CKTVSceneObject
+class CKTVSceneSingerSelect : public CKTVSceneRB
 {
 public:
     CKTVSceneSingerSelect(void);

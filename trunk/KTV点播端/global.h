@@ -25,6 +25,7 @@ using namespace std;
 #include <hgesprite.h>
 #include <hgeanim.h>
 #include <commonclass.h>
+#include "cktverror.h"
 
 #include "singleton.h"
 #include "objectfactory.h"

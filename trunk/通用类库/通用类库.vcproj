@@ -212,7 +212,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Network"
+			Name="Network121"
 			>
 			<File
 				RelativePath="..\¹«¹²¿â\Include\CommonClass\Network\XNetworkCommand.h"

@@ -10,13 +10,19 @@ CKTVPlayList::~CKTVPlayList(void)
 {
 }
 
-bool CKTVPlayList::CheckRepeat(CKTVRowSong song)
+bool CKTVPlayList::CheckRepeat(CKTVRowSong song, bool del)
 {
     ::EnterCriticalSection(&m_CriticalSection);
-    for(int i = 0; i < m_nCount; i++)
+    vector<CKTVRowSong>::iterator it = m_PlayList.begin();
+    for(int i = 0; i < m_nCount; i++, it++)
     {
         if(song.SongNo == m_PlayList[i].SongNo)
         {
+            if(del)
+            {
+                m_PlayList.erase(it);
+                m_nCount--;
+            }
             ::LeaveCriticalSection(&m_CriticalSection);
             return true;
         }
@@ -44,7 +50,7 @@ bool CKTVPlayList::AddSongToLast(CKTVRowSong song)
 
 bool CKTVPlayList::AddSongToFirst(CKTVRowSong song)
 {
-    if(CheckRepeat(song)) return false;
+    CheckRepeat(song, true);
 
     ::EnterCriticalSection(&m_CriticalSection);
     m_PlayList.insert(m_PlayList.begin(), song);

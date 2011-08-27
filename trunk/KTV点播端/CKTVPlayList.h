@@ -23,7 +23,7 @@ public:
     bool                                AddSongToLast(CKTVRowSong song);
     bool                                AddSongToFirst(CKTVRowSong song);
 
-    bool                                CheckRepeat(CKTVRowSong song);
+    bool                                CheckRepeat(CKTVRowSong song, bool del = false);
     CKTVRowSong                         GetNextSong();
 
     void                                ShowList();

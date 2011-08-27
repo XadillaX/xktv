@@ -24,7 +24,7 @@ bool FrameFunc()
         InitAfterStart();
     }
 
-    if(!g_pPlayer->IsPlaying() && !bPaused && !g_bRequestingSong)
+    if((g_pPlayer == NULL || (!g_pPlayer->IsPlaying() && !bPaused)) && !g_bRequestingSong)
     {
         /** ÇëÇó¸èÇú */
         static int times = 0;
@@ -59,6 +59,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     g_pHGE->System_SetState(HGE_SHOWSPLASH, false);
     g_pHGE->System_SetState(HGE_INIFILE, "config.ini");
     g_pHGE->System_SetState(HGE_DONTSUSPEND, true);
+
+#ifdef _DEBUG
+    g_pHGE->System_SetState(HGE_SCREENWIDTH, 320);
+    g_pHGE->System_SetState(HGE_SCREENHEIGHT, 240);
+#endif
 
     ::InitializeCriticalSection(&g_CriticalSection);
 

@@ -164,7 +164,7 @@
 			Name="System"
 			>
 			<Filter
-				Name="global"
+				Name="Global"
 				>
 				<File
 					RelativePath=".\CommonCommand.h"
@@ -180,7 +180,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="1to1Network"
+				Name="Network121"
 				>
 				<File
 					RelativePath=".\CKTVNetwork121.cpp"
@@ -188,6 +188,18 @@
 				</File>
 				<File
 					RelativePath=".\CKTVNetwork121.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Error"
+				>
+				<File
+					RelativePath="..\KTVµã²¥¶Ë\CKTVError.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\KTVµã²¥¶Ë\CKTVError.h"
 					>
 				</File>
 			</Filter>

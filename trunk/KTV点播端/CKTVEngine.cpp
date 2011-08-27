@@ -23,7 +23,11 @@ bool CKTVEngine::init()
 {
     /** 创建渲染引擎HGE */
     m_pHGE = hgeCreate(HGE_VERSION);
-    if(NULL == m_pHGE) return false;
+    if(NULL == m_pHGE)
+    {
+        THROW_KTV_ERROR(0x00000000, "Failed to create the Render Engine.");
+        return false;
+    }
 
     /** 读取配置 */
     m_pHGE->System_SetState(HGE_INIFILE, CONFIG_FILE);
@@ -56,11 +60,20 @@ bool CKTVEngine::init()
     strcpy(m_szUsername, m_pHGE->Ini_GetString("database", "username", "sa"));
     strcpy(m_szPassword, m_pHGE->Ini_GetString("database", "password", ""));
     XModelConnection::Instance().Initialize(m_szDSNName, m_szUsername, m_szPassword);
-    if(!XModelConnection::Instance().Connect()) return false;
+    if(!XModelConnection::Instance().Connect())
+    {
+        THROW_KTV_ERROR(0x00000001, "Can't connect to the Database Server.");
+        return false;
+    }
 
     /** 包厢信息 */
     m_pMachineInfo = new CKTVMachineInfo();
-    if(!m_pMachineInfo->SetMachineNo(m_pHGE->Ini_GetString("machine", "machineid", ""))) return false;
+    if(!m_pMachineInfo->SetMachineNo(m_pHGE->Ini_GetString("machine", "machineid", "")))
+    {
+        THROW_KTV_ERROR(0x00000002, "No such room.");
+
+        return false;
+    }
     else
     {
         m_pMachineInfo->StartListen();
@@ -70,9 +83,23 @@ bool CKTVEngine::init()
     /** 网络 */
     string szSrv = string("tcp://*:") + XStringFunc::IntToString(m_pHGE->Ini_GetInt("network", "localport", 5555));
     string szClt = string("tcp://") + m_pHGE->Ini_GetString("network", "serveraddress", "localhost") + string(":") + XStringFunc::IntToString(m_pHGE->Ini_GetInt("network", "serverport", 3456));
-    m_pNetwork = new CKTVNetwork121(szSrv.c_str(), szClt.c_str(), global::ReceiveFunc);
+    try
+    {
+        m_pNetwork = new CKTVNetwork121(szSrv.c_str(), szClt.c_str(), global::ReceiveFunc);
+    }
+    catch(CKTVError e)
+    {
+        THROW_KTV_ERROR(e.Num(), e.What());
+        return false;
+    }
 
-    return m_pHGE->System_Initiate();
+    if(!m_pHGE->System_Initiate())
+    {
+        THROW_KTV_ERROR(0x00000003, "Failed to initiate the Render Engine.");
+        return false;
+    }
+    
+    return true;
 }
 
 bool CKTVEngine::SetScene(char* szSceneName)

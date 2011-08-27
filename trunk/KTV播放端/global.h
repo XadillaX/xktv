@@ -13,6 +13,7 @@
 #include <vector>
 #include <cstdio>
 #include <cstdlib>
+#include "../KTVµã²¥¶Ë/cktverror.h"
 using namespace std;
 
 extern HWND                         g_hWnd;
@@ -24,5 +25,6 @@ extern CKTVNetwork121*              g_pNetwork;
 extern bool                         g_bRequestingSong;
 
 extern void                         NetworkReceive(int, int, char*, size_t);
+extern void                         InitAfterStart();
 
 #endif
