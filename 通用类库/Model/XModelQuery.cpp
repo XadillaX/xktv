@@ -16,6 +16,9 @@ void XModelQuery::Query(const char* szSQL, otl_connect *db, int nBufferSize)
     /** É¾³ýÏÈÇ°STREAM */
     SAFEDEL(m_pStream);
     
-    m_pStream = new XModelStream(nBufferSize, szSQL, *db);
+    //m_pStream = new XModelStream(nBufferSize, szSQL, *db);
+    m_pStream = new XModelStream();
+    m_pStream->open(nBufferSize, szSQL, *db);
+
     m_bQueried = true;
 }

@@ -23,6 +23,7 @@ extern CRITICAL_SECTION             g_CriticalSection;
 extern CKTVNetwork121*              g_pNetwork;
 
 extern bool                         g_bRequestingSong;
+extern bool                         g_bPaused;
 
 extern void                         NetworkReceive(int, int, char*, size_t);
 extern void                         InitAfterStart();

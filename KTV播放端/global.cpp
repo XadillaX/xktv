@@ -7,6 +7,7 @@ HWND g_hWnd = 0;
 CRITICAL_SECTION g_CriticalSection;
 CKTVNetwork121* g_pNetwork = NULL;
 bool g_bRequestingSong = false;
+bool g_bPaused = false;
 
 void NetworkReceive(int MainID, int SubID, char* pData, size_t size)
 {
@@ -38,6 +39,51 @@ void NetworkReceive(int MainID, int SubID, char* pData, size_t size)
                 }
 
                 g_bRequestingSong = false;
+                break;
+            }
+
+            /** ÔÝÍ£/²¥·Å */
+        case SUBID_REQUEST_PAUSE:
+            {
+                tagRequestPause* pRP = (tagRequestPause*)pData;
+                if(pRP->paused)
+                {
+                    ::EnterCriticalSection(&g_CriticalSection);
+                    g_pPlayer->Pause();
+                    g_bPaused = true;
+                    ::LeaveCriticalSection(&g_CriticalSection);
+                }
+                else
+                if(!pRP->paused)
+                {
+                    ::EnterCriticalSection(&g_CriticalSection);
+                    g_pPlayer->Play();
+                    g_bPaused = false;
+                    ::LeaveCriticalSection(&g_CriticalSection);
+                }
+
+                /** ·´À¡×´Ì¬ */
+                g_pNetwork->SendMsg(MainID, SubID, pData, size);
+                printf("ÇëÇó %s...\n", (pRP->paused) ? ("ÔÝÍ£") : ("²¥·Å"));
+
+                break;
+            }
+
+            /** ÇÐ¸è */
+        case SUBID_REQUEST_CUTDOWN:
+            {
+                ::EnterCriticalSection(&g_CriticalSection);
+                if(!g_bRequestingSong)
+                {
+                    g_pPlayer->Stop();
+                    g_bPaused = false;
+
+                    /** ·´À¡×´Ì¬ */
+                    g_pNetwork->SendMsg(MainID, SubID, pData, size);
+                }
+                ::LeaveCriticalSection(&g_CriticalSection);
+
+                break;
             }
         }
     }

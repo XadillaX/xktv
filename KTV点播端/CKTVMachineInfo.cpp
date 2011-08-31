@@ -1,8 +1,18 @@
 #include "CKTVMachineInfo.h"
+#include "cktvmodelsong.h"
+#include "cktvplaylist.h"
 
 DWORD WINAPI MachineInfoListen(LPVOID lpvThreadParm)
 {
     CKTVMachineInfo* pInfo = (CKTVMachineInfo*)lpvThreadParm;
+    
+    /** 启动初始的时候恢复备份歌单 */
+    while(!pInfo->Update());
+    CKTVRowMachine info = pInfo->GetMachineInfo();
+    int* row = new int[info.PlayListCount];
+    for(int i = 0; i < info.PlayListCount; i++) row[i] = info.PlayListBak[i];
+    CKTVPlayList::Instance().SetList(row, info.PlayListCount);
+    delete []row;
 
     while(pInfo->IsListening())
     {

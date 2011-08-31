@@ -37,6 +37,66 @@ int CKTVModelSong::get_song_by_artistno(int artistno, CKTVRowSong row[], int pag
     return i;
 }
 
+int CKTVModelSong::get_song_group_count(int songno[], int count)
+{
+    string query = "SELECT COUNT(*) FROM Song WHERE SongNo IN(";
+    for(int i = 0; i < count - 1; i++) query += (XStringFunc::IntToString(songno[i]) + ", ");
+    query += (XStringFunc::IntToString(songno[count - 1])  + ")");
+
+    XModelStream* XMS = Select(query.c_str());
+    *XMS >> count;
+
+    return count;
+}
+
+int CKTVModelSong::get_song_group(int songno[], int count, CKTVRowSong row[])
+{
+    string query = "SELECT * FROM Song WHERE SongNo IN(";
+    for(int i = 0; i < count - 1; i++) query += (XStringFunc::IntToString(songno[i]) + ", ");
+    query += (XStringFunc::IntToString(songno[count - 1])  + ")");
+
+    XModelStream* XMS = Select(query.c_str());
+
+    /** 分发数据 */
+    int i = 0;
+    while(!XMS->eof())
+    {
+        row[i].SetColumn(9, 0, 1, 2, 3, 4, 5, 6, 7, 8);
+        row[i] << *XMS;
+        i++;
+    }
+
+    /** 恢复顺序 */
+    for(int j = 0, k = 0; j < count; j++)
+    {
+        for(int l = j; l < i; l++)
+        {
+            if(songno[j] == row[l].SongNo)
+            {
+                CKTVRowSong tmp = row[l];
+                row[l] = row[k];
+                row[k] = tmp;
+                k++;
+                break;
+            }
+        }
+    }
+    
+    XModelStream* AXMS;
+    string aquery;
+
+    for(int j = 0; j < i; j++)
+    {        
+        aquery = "SELECT ArtistName FROM Artist WHERE ArtistNo = " + XStringFunc::IntToString(row[j].ArtistNo);
+
+        /** 获取数据 */
+        AXMS = Select(aquery.c_str());
+        row[j].ArtistName = "";
+        if(!AXMS->eof()) *AXMS >> row[j].ArtistName;
+    }
+    return i;
+}
+
 int CKTVModelSong::get_song_by_pinyin(string pinyin, CKTVRowSong row[], int page, int pageSize)
 {
     /** 查询条件 */
@@ -59,7 +119,7 @@ int CKTVModelSong::get_song_by_pinyin(string pinyin, CKTVRowSong row[], int page
     XModelStream* AXMS;
     string aquery;
 
-    for (int j = 0; j < i; j++)
+    for(int j = 0; j < i; j++)
     {        
         aquery = "SELECT ArtistName FROM Artist WHERE ArtistNo = " + XStringFunc::IntToString(row[j].ArtistNo);
 

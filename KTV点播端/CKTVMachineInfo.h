@@ -14,6 +14,7 @@
 #include "cktvmodelmachine.h"
 #include <time.h>
 
+class CKTVPlayList;
 class CKTVMachineInfo
 {
 public:
@@ -28,7 +29,14 @@ public:
     bool                                IsListening() { return m_bIsListening; }
 
     /** 获取信息函数 */
-    CKTVRowMachine                      GetMachineInfo() { return m_MachineInfo; }
+    CKTVRowMachine                      GetMachineInfo()
+    {
+        ::EnterCriticalSection(&m_CriticalSection);
+        CKTVRowMachine info = m_MachineInfo;
+        ::LeaveCriticalSection(&m_CriticalSection);
+
+        return m_MachineInfo;
+    }
     int                                 GetMinuteLeft();
     string                              GetStatus() { return m_MachineInfo.Status; }
 

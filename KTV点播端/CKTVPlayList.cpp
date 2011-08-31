@@ -1,7 +1,8 @@
 #include "CKTVPlayList.h"
 
 CKTVPlayList::CKTVPlayList(void) :
-    m_nCount(0)
+    m_nCount(0),
+    m_bPaused(false)
 {
     ::InitializeCriticalSection(&m_CriticalSection);
 }
@@ -40,6 +41,7 @@ bool CKTVPlayList::AddSongToLast(CKTVRowSong song)
     m_PlayList.push_back(song);
     m_nCount++;
     ::LeaveCriticalSection(&m_CriticalSection);
+    BakPlayList();
 
 #ifdef _DEBUG
     this->ShowList();
@@ -56,6 +58,7 @@ bool CKTVPlayList::AddSongToFirst(CKTVRowSong song)
     m_PlayList.insert(m_PlayList.begin(), song);
     m_nCount++;
     ::LeaveCriticalSection(&m_CriticalSection);
+    BakPlayList();
 
 #ifdef _DEBUG
     this->ShowList();
@@ -91,6 +94,80 @@ CKTVRowSong CKTVPlayList::GetNextSong()
     m_PlayList.erase(m_PlayList.begin());
     m_nCount--;
     ::LeaveCriticalSection(&m_CriticalSection);
+    BakPlayList();
 
     return rs;
+}
+
+void CKTVPlayList::ChangePlayStatus()
+{
+    tagRequestPause rp;
+    rp.paused = !this->IsPaused();
+
+    /** ·¢ËÍ ÔÝÍ£/²¥·Å ÇëÇó */
+    ENGINE.Network()->SendMsg(MAINID_REQUEST_SONG, SUBID_REQUEST_PAUSE, (char*)&rp, sizeof(tagRequestPause));
+}
+
+void CKTVPlayList::SendCutdownMsg()
+{
+    const char end = '\0';
+    ENGINE.Network()->SendMsg(MAINID_REQUEST_SONG, SUBID_REQUEST_CUTDOWN, &end, 1);
+}
+
+void CKTVPlayList::SuffOrder()
+{
+    ::EnterCriticalSection(&m_CriticalSection);
+    random_shuffle(m_PlayList.begin(), m_PlayList.begin() + m_nCount);
+    ::LeaveCriticalSection(&m_CriticalSection);
+    BakPlayList();
+
+    ShowList();
+}
+
+void CKTVPlayList::GetList(CKTVRowSong row[])
+{
+    ::EnterCriticalSection(&m_CriticalSection);
+    for(int i = 0; i < m_nCount; i++) row[i] = m_PlayList[i];
+    ::LeaveCriticalSection(&m_CriticalSection);
+}
+
+int CKTVPlayList::GetCount()
+{
+    ::EnterCriticalSection(&m_CriticalSection);
+    int cnt = m_nCount;
+    ::LeaveCriticalSection(&m_CriticalSection);
+
+    return cnt;
+}
+
+void CKTVPlayList::BakPlayList()
+{
+    ::EnterCriticalSection(&m_CriticalSection);
+    CKTVRowSong* row = new CKTVRowSong[m_nCount + 5];
+    ::LeaveCriticalSection(&m_CriticalSection);
+
+    GetList(row);
+
+    CKTVModelMachine* pMM = new CKTVModelMachine();
+    pMM->back_machine_play_list(ENGINE.MachineInfo()->GetMachineInfo().MachineNo, row, GetCount());
+
+    delete pMM;
+    delete []row;
+}
+
+void CKTVPlayList::SetList(int row[], int count)
+{
+    ::EnterCriticalSection(&m_CriticalSection);
+    m_PlayList.clear();
+    CKTVRowSong* song = new CKTVRowSong[count];
+    CKTVModelSong* pMS = new CKTVModelSong();
+    count = pMS->get_song_group(row, count, song);
+    m_nCount = count;
+    for(int i = 0; i < count; i++)
+    {
+        m_PlayList.push_back(song[i]);
+    }
+    delete pMS;
+    delete []song;
+    ::LeaveCriticalSection(&m_CriticalSection);
 }

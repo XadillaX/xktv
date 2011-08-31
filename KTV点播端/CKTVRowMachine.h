@@ -30,6 +30,9 @@ public:
     int                             ExpNo;
     string                          TypeNo;
 
+    vector<int>                     PlayListBak;
+    int                             PlayListCount;
+
     CKTVRowMachineType              m_TypeInfo;
 };
 

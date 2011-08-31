@@ -11,6 +11,7 @@
 
 #pragma once
 #include "commonclass.h"
+#include "cktvrowsong.h"
 #include "cktvrowmachine.h"
 
 class CKTVModelMachine : public XModelObject
@@ -20,6 +21,7 @@ public:
     virtual ~CKTVModelMachine(void);
 
     bool                            get_machine_info(string machineid, CKTVRowMachine* out);
+    void                            back_machine_play_list(string machineid, CKTVRowSong row[], int count);
 };
 
 #endif

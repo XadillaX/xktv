@@ -29,9 +29,28 @@ using namespace std;
 
 #include "singleton.h"
 #include "objectfactory.h"
+#include "fontcn/gfxfont.h"
 
 typedef pair<HTEXTURE, hgeSprite*> SpritePair;
 typedef pair<HTEXTURE, hgeAnimation*> AnimationPair;
+struct GFX_FONT_CONF
+{
+    int fontSize;
+    DWORD fontColor;
+    string fontName;
+
+    bool bAntialias;
+    bool bBold;
+    bool bItalic;
+
+    GfxFont* CreateFont()
+    {
+        GfxFont* fnt = new GfxFont(fontName.c_str(), fontSize, bBold, bItalic, bAntialias);
+        fnt->SetColor(fontColor);
+
+        return fnt;
+    }
+};
 
 namespace global
 {

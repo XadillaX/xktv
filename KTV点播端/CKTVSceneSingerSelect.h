@@ -19,6 +19,7 @@
 #include "cktvmodelsong.h"
 #include "fontcn/gfxfont.h"
 #include "hgefont.h"
+#include "cktvengine.h"
 #include "cktvplaylist.h"
 #include "cktvscenerb.h"
 

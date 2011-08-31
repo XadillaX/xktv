@@ -33,6 +33,23 @@ void global::ReceiveFunc(int MainID, int SubID, char* pData, size_t size)
 
                 break;
             }
+
+        case SUBID_REQUEST_PAUSE:
+            {
+                tagRequestPause* pRP = (tagRequestPause*)pData;
+                CKTVPlayList::Instance().SetPaused(pRP->paused);
+
+                printf("当前状态: %s...\n", (pRP->paused) ? "暂停" : "播放");
+
+                break;
+            }
+
+        case SUBID_REQUEST_CUTDOWN:
+            {
+                printf("切歌成功...\n");
+
+                CKTVPlayList::Instance().SetPaused(false);
+            }
         }
     }
 }

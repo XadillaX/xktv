@@ -37,6 +37,7 @@ public:
     int                         GetHeight() { return m_nHeight; }
 
     CKTVNetwork121*             Network() { return m_pNetwork; }
+    CKTVMachineInfo*            MachineInfo() { return m_pMachineInfo; }
 
 protected:
     HGE*                        m_pHGE;
