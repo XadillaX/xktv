@@ -149,6 +149,12 @@ bool CKTVScenePinyin::_SongGUIUpdate(float fDT, int id)
             break;
         }
 
+    case RB_VOL_SLIDER_ID:                          ///< ÒôÁ¿Ìõ
+        {
+            CKTVPlayList::Instance().SetVolume(m_pVolSlider->GetValue());
+            break;
+        }
+
     default: break;
     }
 
@@ -177,6 +183,8 @@ bool CKTVScenePinyin::Render(float fDT)
     float fBGx = (ENGINE.GetWidth() - TexWidthP(m_BG)) / 2;
     float fBGy = (ENGINE.GetHeight() - TexHeightP(m_BG)) / 2;
     Spr(m_BG)->Render(fBGx, fBGy);
+
+    CKTVSceneRB::Render(fDT);
 
     if (SSPS_SHOW_SONG == m_ShowState)
     {
@@ -218,8 +226,6 @@ bool CKTVScenePinyin::Render(float fDT)
     m_pGUI->Render();
 
     SetShowType(SSPS_SHOW_SONG);
-
-    CKTVSceneRB::Render(fDT);
 
     return false;
 }

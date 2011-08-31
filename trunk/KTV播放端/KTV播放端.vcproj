@@ -167,10 +167,6 @@
 				Name="Global"
 				>
 				<File
-					RelativePath=".\CommonCommand.h"
-					>
-				</File>
-				<File
 					RelativePath=".\global.cpp"
 					>
 				</File>
@@ -188,6 +184,10 @@
 				</File>
 				<File
 					RelativePath=".\CKTVNetwork121.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CommonCommand.h"
 					>
 				</File>
 			</Filter>

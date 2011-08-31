@@ -3,4 +3,5 @@
 namespace XSystemFunc
 {
     WindowFunc Window;
+    VolumeFunc Volume;
 };

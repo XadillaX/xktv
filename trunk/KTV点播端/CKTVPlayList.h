@@ -49,6 +49,14 @@ public:
     void                                SendCutdownMsg();
     void                                SuffOrder();
     void                                BakPlayList();
+    void                                SetVolume(int volume);
+    int                                 GetVolume()
+    {
+        ::EnterCriticalSection(&m_CriticalSection);
+        int volume = m_nVolume;
+        ::LeaveCriticalSection(&m_CriticalSection);
+        return volume;
+    }
 
     CRITICAL_SECTION*                   GetCriticalSection() { return &m_CriticalSection; }
 
@@ -59,6 +67,7 @@ private:
     CRITICAL_SECTION                    m_CriticalSection;
 
     bool                                m_bPaused;
+    int                                 m_nVolume;
 };
 
 #endif

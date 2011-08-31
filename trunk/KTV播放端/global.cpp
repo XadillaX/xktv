@@ -34,7 +34,7 @@ void NetworkReceive(int MainID, int SubID, char* pData, size_t size)
 
                     //::EnterCriticalSection(&g_CriticalSection);
                     g_pPlayer->LoadFile(pRNS->path, rect, g_hWnd);
-                    g_pPlayer->Play();
+                    assert(g_pPlayer->Play());
                     //::LeaveCriticalSection(&g_CriticalSection);
                 }
 
@@ -82,6 +82,16 @@ void NetworkReceive(int MainID, int SubID, char* pData, size_t size)
                     g_pNetwork->SendMsg(MainID, SubID, pData, size);
                 }
                 ::LeaveCriticalSection(&g_CriticalSection);
+
+                break;
+            }
+
+            /** ÒôÁ¿ */
+        case SUBID_REQUEST_SET_VALUME:
+            {
+                tagRequestValume* pRV = (tagRequestValume*)pData;
+                if(NULL != g_pPlayer) g_pPlayer->SetVolume(pRV->volume);
+                printf("ÒôÁ¿: %d...\n", pRV->volume);
 
                 break;
             }

@@ -2,7 +2,8 @@
 
 CKTVPlayList::CKTVPlayList(void) :
     m_nCount(0),
-    m_bPaused(false)
+    m_bPaused(false),
+    m_nVolume(7500)
 {
     ::InitializeCriticalSection(&m_CriticalSection);
 }
@@ -170,4 +171,16 @@ void CKTVPlayList::SetList(int row[], int count)
     delete pMS;
     delete []song;
     ::LeaveCriticalSection(&m_CriticalSection);
+}
+
+void CKTVPlayList::SetVolume(int volume)
+{
+    ::EnterCriticalSection(&m_CriticalSection);
+    m_nVolume = volume;
+    ::LeaveCriticalSection(&m_CriticalSection);
+
+    /** ·¢ËÍÏûÏ¢ */
+    tagRequestValume RV;
+    RV.volume = volume;
+    ENGINE.Network()->SendMsg(MAINID_REQUEST_SONG, SUBID_REQUEST_SET_VALUME, (char*)&RV, sizeof(RV));
 }

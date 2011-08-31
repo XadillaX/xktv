@@ -14,11 +14,13 @@
 #include "cktvsceneobject.h"
 #include "cktvguitextbutton.h"
 #include "cktvplaylist.h"
+#include "fontcn/gfxfont.h"
 
 #define RB_BACK_BTN_ID                  800
 #define RB_PAUSE_BTN_ID                 801
 #define RB_CUTDOWN_BTN_ID               802
 #define RB_SUFF_BTN_ID                  803
+#define RB_VOL_SLIDER_ID                804
 
 class CKTVSceneRB : public CKTVSceneObject
 {
@@ -37,6 +39,11 @@ protected:
     CKTVGUITextButton*                  m_pPauseBtn;
     CKTVGUITextButton*                  m_pCutdownBtn;
     CKTVGUITextButton*                  m_pSuffOrderBtn;
+    hgeGUISlider*                       m_pVolSlider;
+
+    GfxFont*                            m_pPercentFont;
+    GfxFont*                            m_pFont;
+    SpritePair                          m_VolumeBG;
 };
 
 #endif
