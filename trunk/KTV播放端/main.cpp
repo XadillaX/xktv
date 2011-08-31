@@ -16,7 +16,6 @@ void InitAfterStart()
 bool FrameFunc()
 {
     /** 初始化播放器 */
-    static bool bPaused = false;
     static bool bInited = false;
     if(!bInited)
     {
@@ -24,7 +23,8 @@ bool FrameFunc()
         InitAfterStart();
     }
 
-    if((g_pPlayer == NULL || (!g_pPlayer->IsPlaying() && !bPaused)) && !g_bRequestingSong)
+    ::EnterCriticalSection(&g_CriticalSection);
+    if((g_pPlayer == NULL || (!g_pPlayer->IsPlaying() && !g_bPaused)) && !g_bRequestingSong)
     {
         /** 请求歌曲 */
         static int times = 0;
@@ -33,6 +33,7 @@ bool FrameFunc()
         g_pNetwork->SendMsg(MAINID_REQUEST_SONG, SUBID_REQUEST_NEXT_SONG, tmp, 1);
         g_bRequestingSong = true;
     }
+    ::LeaveCriticalSection(&g_CriticalSection);
 
     return false;
 }

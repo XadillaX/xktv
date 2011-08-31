@@ -25,6 +25,8 @@ public:
     int                                 get_song_count_by_pinyin(string pinyin);
     int                                 get_max_page_by_artistno(int artistno, int pageSize = 10);
     int                                 get_max_page_by_pinyin(string pinyin, int pageSize = 10);
+    int                                 get_song_group(int songno[], int count, CKTVRowSong row[]);
+    int                                 get_song_group_count(int songno[], int count);
 };
 
 #endif

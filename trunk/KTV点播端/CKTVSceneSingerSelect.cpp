@@ -121,6 +121,30 @@ bool CKTVSceneSingerSelect::_SongGUIUpdate(float fDT, int id)
             break;
         }
 
+    case RB_BACK_BTN_ID:                            ///< ·µ»Ø
+        {
+            ENGINE.SetScene("Function");
+            break;
+        }
+
+    case RB_PAUSE_BTN_ID:                           ///< ²¥·Å/ÔÝÍ£
+        {
+            CKTVPlayList::Instance().ChangePlayStatus();
+            break;
+        }
+
+    case RB_CUTDOWN_BTN_ID:
+        {
+            CKTVPlayList::Instance().SendCutdownMsg();
+            break;
+        }
+
+    case RB_SUFF_BTN_ID:
+        {
+            CKTVPlayList::Instance().SuffOrder();
+            break;
+        }
+
     default: break;
     }
 
@@ -166,6 +190,30 @@ bool CKTVSceneSingerSelect::_SingerGUIUpdate(float fDT, int id)
         {
             SetShowType(SSSS_SHOW_SINGER);
             SingerTurnPage(m_pRstBox->GetData(), m_nSingerCurPage - 1);
+            break;
+        }
+
+    case RB_BACK_BTN_ID:                            ///< ·µ»Ø
+        {
+            ENGINE.SetScene("Function");
+            break;
+        }
+
+    case RB_PAUSE_BTN_ID:                           ///< ²¥·Å/ÔÝÍ£
+        {
+            CKTVPlayList::Instance().ChangePlayStatus();
+            break;
+        }
+
+    case RB_CUTDOWN_BTN_ID:
+        {
+            CKTVPlayList::Instance().SendCutdownMsg();
+            break;
+        }
+
+    case RB_SUFF_BTN_ID:
+        {
+            CKTVPlayList::Instance().SuffOrder();
             break;
         }
 

@@ -132,8 +132,8 @@ bool CXadillaXVideoPlayer::Stop()
 
     if(m_pMediaControl)
     {
-        TerminateThread(m_hThreadHandle, 0);
-        m_hThreadHandle = 0;
+        //TerminateThread(m_hThreadHandle, 0);
+        //m_hThreadHandle = 0;
         
         __Release();
     }

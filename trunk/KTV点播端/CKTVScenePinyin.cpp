@@ -113,15 +113,39 @@ bool CKTVScenePinyin::_SongGUIUpdate(float fDT, int id)
             break;
         }
 
-    case SSS_SONG_GUI_PREV_ID:
+    case SSS_SONG_GUI_PREV_ID:                      ///< 上一页
         {
             SongTurnPage(m_pRstBox->GetData(), m_nSongCurPage + 1);
             break;
         }
 
-    case SSS_SONG_GUI_NEXT_ID:
+    case SSS_SONG_GUI_NEXT_ID:                      ///< 下一页
         {
             SongTurnPage(m_pRstBox->GetData(), m_nSongCurPage + 1);
+            break;
+        }
+
+    case RB_BACK_BTN_ID:                            ///< 返回
+        {
+            ENGINE.SetScene("Function");
+            break;
+        }
+
+    case RB_PAUSE_BTN_ID:                           ///< 播放/暂停
+        {
+            CKTVPlayList::Instance().ChangePlayStatus();
+            break;
+        }
+
+    case RB_CUTDOWN_BTN_ID:
+        {
+            CKTVPlayList::Instance().SendCutdownMsg();
+            break;
+        }
+
+    case RB_SUFF_BTN_ID:
+        {
+            CKTVPlayList::Instance().SuffOrder();
             break;
         }
 

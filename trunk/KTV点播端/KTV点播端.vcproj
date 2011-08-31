@@ -322,6 +322,18 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="TextButton"
+					>
+					<File
+						RelativePath=".\CKTVGUITextButton.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CKTVGUITextButton.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Model"

@@ -56,6 +56,18 @@ public:
 
         return i;
     }
+
+    void add_hit(const char* condition = "")
+    {
+        string query = "UPDATE Song SET Hit = Hit + 1";
+        if(strlen(condition) != 0)
+        {
+            query += " WHERE ";
+            query += condition;
+        }
+
+         Query(query.c_str());
+    }
 };
 
 int main()
@@ -76,6 +88,7 @@ int main()
     {
         cout << row[i].songid << " " << row[i].songname << endl;
     }
+    xmo->add_hit();
     delete xmo;
 
     return 0;
