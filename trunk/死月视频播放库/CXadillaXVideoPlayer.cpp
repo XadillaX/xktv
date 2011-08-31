@@ -18,15 +18,15 @@ DWORD ListenPlayStateThread(LPVOID lpParam)
     CXadillaXVideoPlayer* pXVP = (CXadillaXVideoPlayer*)lpParam;
     long evCode, param1, param2;
     HRESULT hr;
-    long vol = pXVP->m_nVolume;
+    //long vol = pXVP->m_nVolume;
 
     while(true)
     {
-        if(vol != pXVP->m_nVolume)
-        {
-            vol = pXVP->m_nVolume;
-            pXVP->m_pAudio->put_Volume(vol + VOLUME_TRUE_ZERO);
-        }
+        //if(vol != pXVP->m_nVolume)
+        //{
+        //    vol = pXVP->m_nVolume;
+        //    pXVP->m_pAudio->put_Volume(vol + VOLUME_TRUE_ZERO);
+        //}
 
         if(SUCCEEDED(pXVP->m_pEvent->GetEvent(&evCode, &param1, &param2, 0)))
         {
@@ -74,8 +74,9 @@ CXadillaXVideoPlayer::CXadillaXVideoPlayer(void) :
     m_bLoaded(false),
     m_hThreadHandle(0),
     m_bKillThread(true),
-    m_bStopped(true),
-    m_nVolume(10000)
+    m_bStopped(true)
+    //m_nVolume(10000),
+    //m_pAudio(NULL)
 {
 }
 
@@ -123,16 +124,16 @@ void CXadillaXVideoPlayer::__Release()
         m_pEvent->Release();
     }
 
-    if(m_pAudio)
-    {
-        m_pAudio->Release();
-    }
+    //if(m_pAudio)
+    //{
+    //    m_pAudio->Release();
+    //}
 
     m_pGraph = NULL;
     m_pVidWnd = NULL;
     m_pMediaControl = NULL;
     m_pEvent = NULL;
-    m_pAudio = NULL;
+    //m_pAudio = NULL;
 
     m_bPlaying = false;
     m_bStopped = true;
@@ -202,8 +203,8 @@ bool CXadillaXVideoPlayer::LoadFile(const char* filename, RECT rect, HWND hWnd, 
     m_pGraph->QueryInterface(IID_IMediaEventEx, (void**)&m_pEvent);
     m_pEvent->SetNotifyWindow((OAHWND)hWnd, WM_GRAPHNOTIFY, 0);
     m_pGraph->QueryInterface(IID_IMediaControl, (void**)&m_pMediaControl);
-    m_pGraph->QueryInterface(IID_IBasicAudio, (void**)m_pAudio);
-    m_pAudio->put_Volume(m_nVolume + VOLUME_TRUE_ZERO);
+    //m_pGraph->QueryInterface(IID_IBasicAudio, (void**)m_pAudio);
+    //m_pAudio->put_Volume(m_nVolume + VOLUME_TRUE_ZERO);
 
     /** тьхКнд╪Ч */
     m_hWnd = hWnd;

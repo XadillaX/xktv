@@ -31,7 +31,7 @@ public:
 
     bool                                IsLoaded() { return m_bLoaded; }
     bool                                IsPlaying() { return m_bPlaying; }
-    void                                SetVolume(long vol) { m_nVolume = vol; }
+    //void                                SetVolume(long vol) { m_nVolume = vol; }
 
 private:
     void                                __Release();
@@ -41,7 +41,7 @@ private:
     IVideoWindow*                       m_pVidWnd;
     IMediaControl*                      m_pMediaControl;
     IMediaEventEx*                      m_pEvent;
-    IBasicAudio*                        m_pAudio;
+    //IBasicAudio*                        m_pAudio;
 
     char                                m_szFilename[512];
     RECT                                m_tagRect;
@@ -54,7 +54,7 @@ private:
     bool                                m_bKillThread;
     bool                                m_bStopped;
 
-    long                                m_nVolume;
+    //long                                m_nVolume;
 };
 
 #endif
