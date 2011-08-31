@@ -25,7 +25,11 @@ void global::ReceiveFunc(int MainID, int SubID, char* pData, size_t size)
                     ENGINE.Network()->SendMsg(MainID, SubID, (char*)&next, sizeof(tagRequestNextSong));
                     break;
                 }
-                else strcpy(next.path, rs.Download.c_str());
+                else
+                {
+                    strcpy(next.path, rs.Download.c_str());
+                    next.vol = CKTVPlayList::Instance().GetVolume();
+                }
 
                 printf("µ±Ç°²¥·Å: %s\n", rs.SongName.c_str());
                 CKTVPlayList::Instance().ShowList();

@@ -145,6 +145,12 @@ bool CKTVSceneSingerSelect::_SongGUIUpdate(float fDT, int id)
             break;
         }
 
+    case RB_VOL_SLIDER_ID:                          ///< 音量条
+        {
+            CKTVPlayList::Instance().SetVolume(m_pVolSlider->GetValue());
+            break;
+        }
+
     default: break;
     }
 
@@ -214,6 +220,12 @@ bool CKTVSceneSingerSelect::_SingerGUIUpdate(float fDT, int id)
     case RB_SUFF_BTN_ID:
         {
             CKTVPlayList::Instance().SuffOrder();
+            break;
+        }
+
+    case RB_VOL_SLIDER_ID:                          ///< 音量条
+        {
+            CKTVPlayList::Instance().SetVolume(m_pVolSlider->GetValue());
             break;
         }
 

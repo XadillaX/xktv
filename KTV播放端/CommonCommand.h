@@ -7,6 +7,7 @@
 struct tagRequestNextSong
 {
     char                path[256];
+    int                 vol;
 };
 
 #define SUBID_REQUEST_PAUSE                         2

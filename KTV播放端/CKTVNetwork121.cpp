@@ -52,7 +52,7 @@ DWORD WINAPI SendThread(LPVOID lpParam)
 
                 /** 反馈 */
                 zmq::message_t reply;
-                socket->recv(&reply);
+                assert(socket->recv(&reply));
 
                 delete []pData;
                 delete []sd.data;
@@ -95,7 +95,7 @@ DWORD WINAPI ReceiveThread(LPVOID lpParam)
 
         /** 返还数据 */
         zmq::message_t reply(0);
-        rp->socket->send(reply);
+        assert(rp->socket->send(reply));
 
         Sleep(1);
     }

@@ -24,6 +24,13 @@ void NetworkReceive(int MainID, int SubID, char* pData, size_t size)
                     RECT rect;
                     rect.left = rect.top = 0;
 
+                    /** 音量从1~100 */
+                    DWORD vol = ((float)pRNS->vol / (float)100) * 0xFFFF;
+                    
+                    /** 音量为0~0xFFFFFFFF，其中高位为左声道，低位为右声道 */
+                    vol = (vol << 16) + vol;
+                    ::waveOutSetVolume(0, vol);
+
 #ifndef _DEBUG
                     rect.right = 800, rect.bottom = 600;
 #else
@@ -90,8 +97,14 @@ void NetworkReceive(int MainID, int SubID, char* pData, size_t size)
         case SUBID_REQUEST_SET_VALUME:
             {
                 tagRequestValume* pRV = (tagRequestValume*)pData;
-                if(NULL != g_pPlayer) g_pPlayer->SetVolume(pRV->volume);
-                printf("音量: %d...\n", pRV->volume);
+                /** 音量从1~100 */
+                DWORD vol = ((float)pRV->volume / 100) * 0xFFFF;
+                
+                /** 音量为0~0xFFFFFFFF，其中高位为左声道，低位为右声道 */
+                vol = (vol << 16) + vol;
+                ::waveOutSetVolume(0, vol);
+
+                printf("音量: 0x%.8X...\n", vol);
 
                 break;
             }

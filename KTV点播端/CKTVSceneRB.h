@@ -21,6 +21,8 @@
 #define RB_CUTDOWN_BTN_ID               802
 #define RB_SUFF_BTN_ID                  803
 #define RB_VOL_SLIDER_ID                804
+#define RB_VOL_PLUS_BTN_ID              805
+#define RB_VOL_MINUS_BTN_ID             806
 
 class CKTVSceneRB : public CKTVSceneObject
 {
@@ -40,6 +42,8 @@ protected:
     CKTVGUITextButton*                  m_pCutdownBtn;
     CKTVGUITextButton*                  m_pSuffOrderBtn;
     hgeGUISlider*                       m_pVolSlider;
+    CKTVGUITextButton*                  m_pVolPlus;
+    CKTVGUITextButton*                  m_pVolMinus;
 
     GfxFont*                            m_pPercentFont;
     GfxFont*                            m_pFont;

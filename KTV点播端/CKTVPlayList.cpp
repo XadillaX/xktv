@@ -3,7 +3,7 @@
 CKTVPlayList::CKTVPlayList(void) :
     m_nCount(0),
     m_bPaused(false),
-    m_nVolume(7500)
+    m_nVolume(75)
 {
     ::InitializeCriticalSection(&m_CriticalSection);
 }
@@ -175,7 +175,11 @@ void CKTVPlayList::SetList(int row[], int count)
 
 void CKTVPlayList::SetVolume(int volume)
 {
+    if(volume < 0) volume = 0;
+    if(volume > 100) volume = 100;
+
     ::EnterCriticalSection(&m_CriticalSection);
+    if(volume == m_nVolume) return;
     m_nVolume = volume;
     ::LeaveCriticalSection(&m_CriticalSection);
 
