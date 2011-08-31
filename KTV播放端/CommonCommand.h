@@ -16,5 +16,10 @@ struct tagRequestPause
 };
 
 #define SUBID_REQUEST_CUTDOWN                       3
+#define SUBID_REQUEST_SET_VALUME                    4
+struct tagRequestValume
+{
+    int                 volume;
+};
 
 #endif

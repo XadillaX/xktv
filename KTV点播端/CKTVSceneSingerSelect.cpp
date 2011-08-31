@@ -237,6 +237,8 @@ bool CKTVSceneSingerSelect::Render(float fDT)
 {
     Spr(m_BG)->Render(0, 0);
 
+    CKTVSceneRB::Render(fDT);
+
     if(SSSS_SHOW_SONG == m_ShowState)
     {
         /** ¸è±³¾° */
@@ -287,8 +289,6 @@ bool CKTVSceneSingerSelect::Render(float fDT)
         m_pShowPage->SetColor(0xffffffff);
         m_pShowPage->printf(80 + (125 + 15) * 2, 500 + 10, HGETEXT_LEFT, buf);
     }
-
-    CKTVSceneRB::Render(fDT);
 
     return false;
 }

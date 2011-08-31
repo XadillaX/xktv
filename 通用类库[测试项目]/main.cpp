@@ -91,5 +91,7 @@ int main()
     xmo->add_hit();
     delete xmo;
 
+    XSystemFunc::Volume.SetVolume(50);
+
     return 0;
 }

@@ -13,6 +13,8 @@
 #pragma comment(lib, "Strmiids.lib")
 #pragma comment(lib, "Quartz.lib")
 
+#define VOLUME_TRUE_ZERO                -10000
+
 #pragma once
 class CXadillaXVideoPlayer
 {
@@ -29,6 +31,7 @@ public:
 
     bool                                IsLoaded() { return m_bLoaded; }
     bool                                IsPlaying() { return m_bPlaying; }
+    void                                SetVolume(long vol) { m_nVolume = vol; }
 
 private:
     void                                __Release();
@@ -38,6 +41,7 @@ private:
     IVideoWindow*                       m_pVidWnd;
     IMediaControl*                      m_pMediaControl;
     IMediaEventEx*                      m_pEvent;
+    IBasicAudio*                        m_pAudio;
 
     char                                m_szFilename[512];
     RECT                                m_tagRect;
@@ -48,7 +52,9 @@ private:
     bool                                m_bLoaded;
     bool                                m_bLoop;
     bool                                m_bKillThread;
-    bool                                m_bStopped;    
+    bool                                m_bStopped;
+
+    long                                m_nVolume;
 };
 
 #endif
