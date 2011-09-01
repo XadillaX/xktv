@@ -1,0 +1,28 @@
+﻿body 
+{
+	background-image: url("../images/background.jpg");
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+
+#login-panel 
+{
+	width: 250px;
+	margin: auto;
+	
+	text-align: center;
+	margin-top: 100px;
+}
+
+#login-panel h1
+{
+	font-size: 18px;
+	font-family: "微软雅黑", "黑体", "宋体";
+	font-weight: bold;
+	color: #ff7800;
+}
+
+#Username, #Password
+{
+	width: 150px;
+}
