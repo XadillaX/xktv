@@ -61,9 +61,16 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\ModelConfig.cs" />
     <Compile Include="Model\ModelMachine.cs" />
     <Compile Include="Model\ModelObject.cs" />
     <Compile Include="Model\ModelUser.cs" />
+    <Compile Include="OrderMachineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderMachineForm.Designer.cs">
+      <DependentUpon>OrderMachineForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="LoginWindow.resx">
@@ -74,9 +81,17 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="OrderMachineForm.resx">
+      <DependentUpon>OrderMachineForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchFreeMachineForm.resx">
+      <DependentUpon>SearchFreeMachineForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -92,6 +107,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SearchFreeMachineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchFreeMachineForm.Designer.cs">
+      <DependentUpon>SearchFreeMachineForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
