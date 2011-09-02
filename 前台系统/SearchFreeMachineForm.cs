@@ -17,11 +17,13 @@ namespace 前台系统
         ModelMachine MM;
         Dictionary<string, string>[] TypeList;
         MainWindow MW;
+        String Username;
 
-        public SearchFreeMachineForm(SqlConnection _conn, MainWindow _MW)
+        public SearchFreeMachineForm(SqlConnection _conn, MainWindow _MW, String _Username)
         {
             InitializeComponent();
             MW = _MW;
+            Username = _Username;
 
             conn = _conn;
             MM = new ModelMachine(conn);
@@ -112,7 +114,7 @@ namespace 前台系统
                 return;
             }
 
-            OrderMachineForm OMF = new OrderMachineForm(Results.Items[Idx].ToString(), conn);
+            OrderMachineForm OMF = new OrderMachineForm(Results.Items[Idx].ToString(), conn, Username);
             OMF.ShowDialog();
         }
     }

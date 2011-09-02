@@ -18,3 +18,6 @@ C:\XKTV\前台系统\obj\Debug\前台系统.csproj.GenerateResource.Cache
 C:\XKTV\前台系统\obj\Debug\前台系统.pdb
 C:\XKTV\前台系统\obj\Debug\前台系统.SearchFreeMachineForm.resources
 C:\XKTV\前台系统\obj\Debug\前台系统.OrderMachineForm.resources
+D:\CODES\课程设计\KTV点播系统\前台系统\obj\Debug\前台系统.OrderMachineForm.resources
+D:\CODES\课程设计\KTV点播系统\前台系统\obj\Debug\前台系统.SearchFreeMachineForm.resources
+D:\CODES\课程设计\KTV点播系统\前台系统\obj\Debug\前台系统.ChkOrderMachineForm.resources

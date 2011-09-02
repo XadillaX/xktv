@@ -12,6 +12,31 @@ namespace 前台系统.Model
         {
         }
 
+        public int GetUID(String username)
+        {
+            string query = "SELECT UID FROM FrontDeskUser WHERE Username = '" + username + "'";
+
+            OpenConn();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr.Read())
+            {
+                int uid = Convert.ToInt32(dr["UID"].ToString());
+                dr.Close();
+                CloseConn();
+
+                return uid;
+            }
+            else
+            {
+                dr.Close();
+                CloseConn();
+
+                return -1;
+            }
+        }
+
         public int Login(String username, String password, int type)
         {
             // 查询语句
