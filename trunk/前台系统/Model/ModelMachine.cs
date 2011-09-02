@@ -94,6 +94,83 @@ namespace 前台系统.Model
             }
         }
 
+        public bool OpenNewMachine(OrderData od)
+        {
+            ModelUser MU = new ModelUser(conn);
+            ModelConfig MC = new ModelConfig(conn);
+            int UID = MU.GetUID(od.Username);
+            int Rate = Convert.ToInt32(MC.GetValue("CreditRate"));
+            int Exchange = Convert.ToInt32(MC.GetValue("CreditExchange"));
+
+            String query = "INSERT INTO ExpRecord(MachineNo, VIPNo, ExpTime, Price, UID) VALUES(";
+            query += ("'" + od.MachineNo + "', ");
+            query += ("'" + od.VIPNo + "', ");
+            query += ("'" + od.Time.ToString() + "', ");
+            query += (od.Money + ", ");
+            query += (UID + ");");
+            query += ("SELECT CAST(scope_identity() AS int)");
+
+            OpenConn();
+            
+            // 启动事务
+            SqlTransaction Tran = conn.BeginTransaction();
+
+            SqlCommand cmd = new SqlCommand(query, conn, Tran);
+            try
+            {
+                Int32 ExpNo = (Int32)cmd.ExecuteScalar();
+
+                query = "UPDATE Machine SET";
+                query += (" ExpNo = " + ExpNo.ToString() + ", ");
+                query += (" StartTime = '" + od.StartTime.ToString() + "', ");
+                query += (" ShutTime = '" + od.ShutTime.ToString() + "', ");
+                query += (" Status = '有客'");
+                query += (" WHERE MachineNo = '" + od.MachineNo + "';");
+
+                cmd.CommandText = query;
+                
+                int count = cmd.ExecuteNonQuery();
+                if (count == 0)
+                {
+                    Tran.Rollback();
+                    CloseConn();
+                    return false;
+                }
+
+                if (od.VIPNo != "0000000000")
+                {
+                    query = "UPDATE VIP SET";
+                    query += (" Balance = Balance - " + od.UseBalance.ToString() + ", ");
+                    query += (" TotExp = TotExp + " + (od.UseExp * Exchange) + ", ");
+                    query += (" CurExp = CurExp - " + (od.UseExp * Exchange) + " + " + (int)(od.Money / Rate));
+                    query += (" WHERE VIPNo = '" + od.VIPNo + "'");
+
+                    cmd.CommandText = query;
+                    count = cmd.ExecuteNonQuery();
+                    if (count == 0)
+                    {
+                        Tran.Rollback();
+                        CloseConn();
+                        return false;
+                    }
+                }
+
+                Tran.Commit();
+                CloseConn();
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+
+                Tran.Rollback();
+                CloseConn();
+
+                return false;
+            }
+
+            return true;
+        }
+
         // 获取包厢类型信息
         public Dictionary<String, String>[] GetMachineType(String condition)
         {

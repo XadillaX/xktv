@@ -54,13 +54,15 @@ namespace 前台系统
         // 线程函数 林莹莹 2011/9/2
         public void ThreadFunc()
         {
+            ModelMachine mm = new ModelMachine(new SqlConnection("Server=localhost;DataBase=ktv;Uid=sa;pwd=;"));
+
             while (true)
             {
                 DateTime now = DateTime.Now;
                 Monitor.Enter(CriSection);
 
                 // 获取列表
-                SqlDataReader dr = MM.GetMachineInfo_CloseByYourself("MachineNo, Status, ShutTime", "");
+                SqlDataReader dr = mm.GetMachineInfo_CloseByYourself("MachineNo, Status, ShutTime", "");
                 String[] ToUpdate = new String[256];
                 int ToUpdateCount = 0;
 
@@ -92,15 +94,15 @@ namespace 前台系统
                     }
                 }
                 dr.Close();
-                MM.CloseConn();
+                mm.CloseConn();
 
                 // 更新状态在数据库中
-                MM.SetStatus("待清理", ToUpdate, ToUpdateCount);
+                mm.SetStatus("待清理", ToUpdate, ToUpdateCount);
 
                 Monitor.Exit(CriSection);
 
-                /** 半分钟更新一次机器状态 */
-                Thread.Sleep(30000);
+                /** 一秒钟更新一次机器状态 */
+                Thread.Sleep(1000);
             }
         }
 
@@ -277,6 +279,12 @@ namespace 前台系统
                     }
                 }
             }
+            // 空闲
+            if (Status[Idx] == "空闲")
+            {
+                OrderMachineForm OMF = new OrderMachineForm(MachineButton[Idx].Text, conn, Username);
+                OMF.ShowDialog();
+            }
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -350,7 +358,7 @@ namespace 前台系统
 
         private void 空闲包厢FToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SearchFreeMachineForm SFMF = new SearchFreeMachineForm(conn, this);
+            SearchFreeMachineForm SFMF = new SearchFreeMachineForm(conn, this, Username);
             SFMF.ShowDialog();
         }
     }
