@@ -49,7 +49,7 @@ namespace 前台系统
             ErrMsg.Text = "正在登录...";
             ErrMsg.Update();
 
-            int UID = MU.Login(Username.Text, Password.Text, 1);
+            int UID = MU.Login(Username.Text, Password.Text, 0);
 
             switch (UID)
             {

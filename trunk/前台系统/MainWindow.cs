@@ -23,11 +23,13 @@ namespace 前台系统
 
         // 包厢按钮
         private Button[] MachineButton = new Button[256];
+        private String[] TypeNames = new String[256];
+        private String[] Status = new String[256];
+        
         private int BtnCount = 0;
         private const int BtnWidth = 128;
         private const int BtnHeight = 128;
         private const int BtnMinMargin = 15;
-
         public Object CriSection = new Object();
 
         // 线程数组(还不知道要用几个) 林莹莹 2011/9/2
@@ -65,6 +67,17 @@ namespace 前台系统
                 // 一一对照时间
                 while (dr.Read())
                 {
+                    // 同步状态
+                    for (int i = 0; i < BtnCount; i++)
+                    {
+                        if (dr["MachineNo"].ToString() == MachineButton[i].Text.ToString())
+                        {
+                            SetState(i, dr["Status"].ToString());
+                            break;
+                        }
+                    }
+
+                    // 设置 待清理 状态
                     if (dr["Status"].ToString() == "有客" && DateTime.Parse(dr["ShutTime"].ToString()).CompareTo(now) <= 0)
                     {
                         ToUpdate[ToUpdateCount++] = dr["MachineNo"].ToString();
@@ -72,7 +85,7 @@ namespace 前台系统
                         {
                             if (dr["MachineNo"].ToString() == MachineButton[i].Text.ToString())
                             {
-                                MachineButton[i].BackColor = Color.Red;
+                                SetState(i, "待清理");
                                 break;
                             }
                         }
@@ -91,9 +104,113 @@ namespace 前台系统
             }
         }
 
+        public String GetMachineInfo(int Idx, String Key)
+        {
+            if (Idx >= BtnCount) return "";
+
+            Monitor.Enter(CriSection);
+            switch (Key)
+            {
+            case "TypeName":
+                {
+                    Monitor.Exit(CriSection);
+                    return TypeNames[Idx];
+                    break;
+                }
+
+            case "Status":
+                {
+                    Monitor.Exit(CriSection);
+                    return Status[Idx];
+                    break;
+                }
+
+            case "MachineNo":
+                {
+                    Monitor.Exit(CriSection);
+                    return MachineButton[Idx].Text;
+                    break;
+                }
+
+            default:
+                {
+                    Monitor.Exit(CriSection);
+                    return "";
+                    break;
+                }
+            }
+        }
+
+        public int GetMachineCount() { return BtnCount; }
+
+        //
+        // 摘要：
+        //     为下标为Idx的包厢按钮设置相应的状态显示效果
+        //
+        public void SetState(int Idx, String _Status)
+        {
+            // 状态枚举
+            Button Btn;
+            try
+            {
+                Btn = MachineButton[Idx];
+            }
+            catch (Exception e)
+            {
+                // 可能下标越界
+                return;
+            }
+
+            // 图片及背景色
+            Monitor.Enter(CriSection);
+            switch (_Status)
+            {
+            case "空闲":
+                {
+                    Btn.BackgroundImage = Resources.GOM;
+                    Btn.BackColor = Color.Transparent;
+                    break;
+                }
+
+            case "待清理":
+                {
+                    Btn.BackgroundImage = Resources.Media_Player;
+                    Btn.BackColor = Color.Red;
+                    break;
+                }
+
+            case "有客":
+                {
+                    Btn.BackgroundImage = Resources.Media_Player;
+                    Btn.BackColor = Color.Transparent;
+                    break;
+                }
+
+            case "清理中":
+                {
+                    Btn.BackgroundImage = Resources.Recycle;
+                    Btn.BackColor = Color.Transparent;
+                    break;
+                }
+
+            default:
+                {
+                    Btn.BackgroundImage = Resources.Headset;
+                    Btn.BackColor = Color.Transparent;
+                    break;
+                }
+            }
+
+            Status[Idx] = _Status;
+            Monitor.Exit(CriSection);
+        }
+
         private void MachineReposition()
         {
             int EachRowCount = (Panel.Width - BtnMinMargin) / (BtnWidth + BtnMinMargin);
+            
+            // 修复BUG: 不然下面会除0
+            if (EachRowCount == 0) EachRowCount = 1;
             int RowCount = BtnCount / EachRowCount;
             if (BtnCount % EachRowCount != 0) RowCount++;
             int Margin = (Panel.Width - EachRowCount * BtnWidth) / (EachRowCount + 1);
@@ -127,16 +244,32 @@ namespace 前台系统
         private void Machine_Select(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+            int Idx = Convert.ToInt32(btn.Name.Substring(10));
 
             // 说明在待清理
-            if (btn.BackColor == Color.Red)
+            if (Status[Idx] == "待清理")
             {
                 if (MessageBox.Show("是否变为 \"清理中\" 状态？", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     if (MM.SetStatus("清理中", btn.Text.ToString()))
                     {
-                        btn.BackColor = Color.Transparent;
-                        btn.BackgroundImage = Resources.Recycle;
+                        SetState(Idx, "清理中");
+                    }
+                    else
+                    {
+                        MessageBox.Show("系统错误，请稍后再试。");
+                    }
+                }
+            }
+            else
+            // 清理中
+            if (Status[Idx] == "清理中")
+            {
+                if (MessageBox.Show("是否变为 \"空闲\" 状态？", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    if (MM.SetStatus("空闲", btn.Text.ToString()))
+                    {
+                        SetState(Idx, "空闲");
                     }
                     else
                     {
@@ -148,6 +281,9 @@ namespace 前台系统
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            // 用户名
+            ShowUsername.Text = "操作员: " + Username;
+
             // 获取数据
             SqlDataReader dr = MM.GetMachineInfo_CloseByYourself("*", "");
             if (dr == null)
@@ -171,40 +307,7 @@ namespace 前台系统
                 MachineButton[i].Click += Machine_Select;
 
                 // 状态图片
-                switch (dr["Status"].ToString())
-                {
-                case "空闲":
-                    {
-                        MachineButton[i].BackgroundImage = Resources.GOM;
-                        break;
-                    }
-
-                case "待清理":
-                    {
-                        MachineButton[i].BackColor = Color.Red;
-                        MachineButton[i].BackgroundImage = Resources.Media_Player;
-
-                        break;
-                    }
-
-                case "有客":
-                    {
-                        MachineButton[i].BackgroundImage = Resources.Media_Player;
-                        break;
-                    }
-
-                case "清理中":
-                    {
-                        MachineButton[i].BackgroundImage = Resources.Recycle;
-                        break;
-                    }
-
-                default:
-                    {
-                        MachineButton[i].BackgroundImage = Resources.Headset;
-                        break;
-                    }
-                }
+                SetState(i, dr["Status"].ToString());
 
                 // 创建Tooltip
                 ToolTip tt = new ToolTip();
@@ -213,7 +316,9 @@ namespace 前台系统
                 tt.ReshowDelay = 500;
                 tt.ShowAlways = true;
                 tt.SetToolTip(MachineButton[i], dr["TypeName"].ToString());
+                TypeNames[i] = dr["TypeName"].ToString();
 
+                MachineButton[i].Name = "MachineIdx" + i.ToString();
                 MachineButton[i].Text = dr["MachineNo"].ToString();
                 MachineButton[i].Show();
                 Panel.Controls.Add(MachineButton[i]);
@@ -241,6 +346,12 @@ namespace 前台系统
         private void 退出QToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void 空闲包厢FToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SearchFreeMachineForm SFMF = new SearchFreeMachineForm(conn, this);
+            SFMF.ShowDialog();
         }
     }
 }
