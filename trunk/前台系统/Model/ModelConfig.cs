@@ -28,7 +28,28 @@ namespace 前台系统.Model
 
                 return rst;
             }
-            else return "";
+            else
+            {
+                dr.Close();
+                CloseConn();
+                return "";
+            }
+        }
+
+        public int GetValueInt(String Key)
+        {
+            String rst = GetValue(Key);
+
+            if (rst == "") return 0;
+            else return Convert.ToInt32(rst);
+        }
+
+        public Double GetValueDouble(String Key)
+        {
+            String rst = GetValue(Key);
+
+            if (rst == "") return 0;
+            else return Convert.ToDouble(rst);
         }
     }
 }

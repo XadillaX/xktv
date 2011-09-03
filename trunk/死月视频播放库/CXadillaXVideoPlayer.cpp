@@ -1,62 +1,113 @@
-//////////////////////////////////////////////////////////////////////////
-//
-//	视频播放类
-//
-//	Program by 死月(XadillaX) (admin@xcoder.in)
-//
-//////////////////////////////////////////////////////////////////////////
 #include "../公共库/Include/CXadillaXVideoPlayer/CXadillaXVideoPlayer.h"
 #include <windows.h>
 #include <wtypes.h>
 #include <atlbase.h>
+#include <vector>
 
-#define WM_GRAPHNOTIFY  (WM_APP + 1)
-#define SAFEDEL(p) { if(p != NULL) { delete p; p = NULL; } }
+#define WM_GRAPHNOTIFY              (WM_APP + 1)
+#define SAFEDEL(p)                  { if(p != NULL) { delete p; p = NULL; } }
+
+std::vector<CXadillaXVideoPlayer*>  _pPlayer;
+CRITICAL_SECTION                    _cs;
+bool                                _csinited = false;
+
+struct _thread_param
+{
+    int PlayerID;
+    int PlayID;
+};
 
 DWORD ListenPlayStateThread(LPVOID lpParam)
 {
-    CXadillaXVideoPlayer* pXVP = (CXadillaXVideoPlayer*)lpParam;
+    _thread_param* tp = (_thread_param*)lpParam;
+    int PlayerID = tp->PlayerID;
+    int PlayID = tp->PlayID;
+    delete tp;
+
     long evCode, param1, param2;
     HRESULT hr;
-    //long vol = pXVP->m_nVolume;
+
+    /** 进入全局临界区 */
+    ::EnterCriticalSection(&_cs);
+
+    /** 若自己监听的播放器对象不存在 */
+    if(_pPlayer[PlayerID] == NULL)
+    {
+        ::LeaveCriticalSection(&_cs);
+        return 0;
+    }
+
+    //::EnterCriticalSection(&_pPlayer[PlayerID]->m_CS);
+    HRESULT hRes = _pPlayer[PlayerID]->m_pMediaControl->Run();
+    //::LeaveCriticalSection(&_pPlayer[PlayerID]->m_CS);
+
+    //if(S_FALSE == hRes)
+    //{
+    //    _pPlayer[PlayerID]->__Release();
+
+    //    ::LeaveCriticalSection(&_cs);
+    //    return 0;
+    //}
+
+    ::LeaveCriticalSection(&_cs);
 
     while(true)
     {
-        //if(vol != pXVP->m_nVolume)
-        //{
-        //    vol = pXVP->m_nVolume;
-        //    pXVP->m_pAudio->put_Volume(vol + VOLUME_TRUE_ZERO);
-        //}
+        /** 进入全局临界区 */
+        ::EnterCriticalSection(&_cs);
 
-        if(SUCCEEDED(pXVP->m_pEvent->GetEvent(&evCode, &param1, &param2, 0)))
+        /** 若自己监听的播放器对象不存在 */
+        if(_pPlayer[PlayerID] == NULL)
         {
-            hr = pXVP->m_pEvent->FreeEventParams(evCode, param1, param2);
-            if((EC_COMPLETE == evCode)/** || (EC_USERABORT == evCode)*/)
-            {
-                pXVP->m_bStopped = true;
-                if(!pXVP->m_bLoop)
-                {
-                    pXVP->m_bPlaying = false;
+            ::LeaveCriticalSection(&_cs);
+            return 0;
+        }
 
-                    /** 关闭线程句柄 */
-                    pXVP->__Release();
-                
-                    /** 退出线程 */
+        CXadillaXVideoPlayer* player = _pPlayer[PlayerID];
+        ::EnterCriticalSection(&(player->m_CS));
+
+        /** 若已经不再播放当前视频 */
+        if(PlayID != player->m_nCurPlayID)
+        {
+            ::LeaveCriticalSection(&(player->m_CS));
+            ::LeaveCriticalSection(&_cs);
+
+            return 0;
+        }
+
+        /** 监听 */
+        if(SUCCEEDED(player->m_pEvent->GetEvent(&evCode, &param1, &param2, 0)))
+        {
+            hr = player->m_pEvent->FreeEventParams(evCode, param1, param2);
+
+            if(EC_COMPLETE == evCode)
+            {
+                player->m_bStopped = true;
+
+                if(!player->m_bLoop)
+                {
+                    ::LeaveCriticalSection(&(player->m_CS));
+                    player->__Release();
+                    ::LeaveCriticalSection(&_cs);
+
                     return 0;
                 }
                 else
                 {
-                    pXVP->m_bKillThread = false;
-
-                    /** 重新载入 -> 重播 */
-                    if(pXVP->LoadFile(pXVP->m_szFilename, pXVP->m_tagRect, pXVP->m_hWnd, pXVP->m_bLoop))
+                    ::LeaveCriticalSection(&(player->m_CS));
+                    if(player->LoadFile(player->m_szFilename, player->m_tagRect, player->m_hWnd, player->m_bLoop))
                     {
-                        pXVP->m_pMediaControl->Run();
+                        player->Play();
                     }
-                    pXVP->m_bKillThread = true;
+                    ::LeaveCriticalSection(&_cs);
+
+                    return 0;
                 }
             }
         }
+
+        ::LeaveCriticalSection(&(player->m_CS));
+        ::LeaveCriticalSection(&_cs);
 
         Sleep(1);
     }
@@ -64,52 +115,67 @@ DWORD ListenPlayStateThread(LPVOID lpParam)
     return 0;
 }
 
-CXadillaXVideoPlayer::CXadillaXVideoPlayer(void) :
+CXadillaXVideoPlayer::CXadillaXVideoPlayer() :
     m_bPlaying(false),
-    m_pGraph(NULL),
-    m_pMediaControl(NULL),
-    m_pEvent(NULL),
-    m_pVidWnd(NULL),
+    m_bStopped(false),
     m_bLoop(false),
     m_bLoaded(false),
+    m_nPlayID(0),
+    m_nCurPlayID(-1),
     m_hThreadHandle(0),
-    m_bKillThread(true),
-    m_bStopped(true)
-    //m_nVolume(10000),
-    //m_pAudio(NULL)
+    m_hWnd(0),
+    m_pGraph(NULL),
+    m_pVidWnd(NULL),
+    m_pMediaControl(NULL),
+    m_pEvent(NULL)
 {
+    ::InitializeCriticalSection(&m_CS);
+
+    /** 播放器全局临界区 */
+    if(!_csinited)
+    {
+        _csinited = true;
+        ::InitializeCriticalSection(&_cs);
+    }
+
+    /** 播放器加入播放器列表 */
+    ::EnterCriticalSection(&_cs);
+    _pPlayer.push_back(this);
+    m_nPlayerID = _pPlayer.size() - 1;
+    ::LeaveCriticalSection(&_cs);
 }
 
-CXadillaXVideoPlayer::~CXadillaXVideoPlayer(void)
+CXadillaXVideoPlayer::~CXadillaXVideoPlayer()
 {
+    /** 进入全局临界区 */
+    ::EnterCriticalSection(&_cs);
+
+    /** 从播放器列表中删除自己（线程中会用到） */
+    _pPlayer[m_nPlayerID] = NULL;
+
+    /** 释放资源 */
     __Release();
+
+    /** 退出全局临界区 */
+    ::LeaveCriticalSection(&_cs);
 }
 
 void CXadillaXVideoPlayer::__Release()
 {
-    if(m_hThreadHandle != 0 && m_bKillThread)
-    {
-        /** 中断监听线程 */
-        TerminateThread(m_hThreadHandle, 0);
+    ::EnterCriticalSection(&m_CS);
 
-        CloseHandle(m_hThreadHandle);
-        m_hThreadHandle = 0;
-    }
-
-    if(m_pVidWnd)
+    if(m_pVidWnd != NULL)
     {
         m_pVidWnd->put_Visible(OAFALSE);
-        //m_pVidWnd->put_Owner(NULL);
     }
 
-    if(m_pGraph)
+    if(m_pGraph != NULL)
     {
         m_pGraph->Release();
     }
 
-    if(m_pMediaControl)
+    if(m_pMediaControl != NULL)
     {
-        if(m_bPlaying) m_pMediaControl->Stop();
         m_pMediaControl->Release();
         m_bPlaying = false;
     }
@@ -124,67 +190,115 @@ void CXadillaXVideoPlayer::__Release()
         m_pEvent->Release();
     }
 
-    //if(m_pAudio)
-    //{
-    //    m_pAudio->Release();
-    //}
-
     m_pGraph = NULL;
     m_pVidWnd = NULL;
     m_pMediaControl = NULL;
     m_pEvent = NULL;
-    //m_pAudio = NULL;
 
     m_bPlaying = false;
     m_bStopped = true;
     m_bLoaded = false;
+    m_nCurPlayID = -1;
+
+    //::CloseHandle(m_hThreadHandle);
+
+    ::LeaveCriticalSection(&m_CS);
 }
 
 bool CXadillaXVideoPlayer::Stop()
 {
-    if(!m_bLoaded) return false;
-    if(m_bStopped) return true;
+    ::EnterCriticalSection(&m_CS);
 
-    if(m_pMediaControl)
+    /** 若未载入 */
+    if(!m_bLoaded)
     {
-        //TerminateThread(m_hThreadHandle, 0);
-        //m_hThreadHandle = 0;
-        
-        __Release();
+        ::LeaveCriticalSection(&m_CS);
+        return false;
     }
+
+    /** 若已暂停 */
+    if(m_bStopped)
+    {
+        ::LeaveCriticalSection(&m_CS);
+        return true;
+    }
+
+    if(m_pMediaControl != NULL)
+    {
+        m_nCurPlayID = -1;
+        ::LeaveCriticalSection(&m_CS);
+
+        __Release();
+        return true;
+    }
+
+    ::LeaveCriticalSection(&m_CS);
+    return true;
 }
 
 bool CXadillaXVideoPlayer::Pause()
 {
-    if(!m_bLoaded) return false;
+    ::EnterCriticalSection(&m_CS);
 
-    if(m_pMediaControl)
+    /** 若未载入 */
+    if(!m_bLoaded)
+    {
+        ::LeaveCriticalSection(&m_CS);
+        return false;
+    }
+
+    if(m_pMediaControl != NULL)
     {
         m_bPlaying = false;
         m_pMediaControl->Pause();
     }
+    ::LeaveCriticalSection(&m_CS);
+
     return true;
 }
 
 bool CXadillaXVideoPlayer::Play()
 {
-    if(!m_bLoaded) return false;
+    ::EnterCriticalSection(&m_CS);
 
-    if(m_pMediaControl)
+    /** 若未载入 */
+    if(!m_bLoaded)
+    {
+        ::LeaveCriticalSection(&m_CS);
+        return false;
+    }
+
+    if(m_pMediaControl != NULL)
     {
         m_bPlaying = true;
-        HRESULT hRes = m_pMediaControl->Run();
-        if(!hRes) return false;
+        //if(S_FALSE == hRes)
+        //{
+        //    ::LeaveCriticalSection(&m_CS);
+        //    return false;
+        //}
 
         /** 创建监听线程 */
-        if(!m_hThreadHandle)
-        {
-            DWORD dwThreadID;
-            m_hThreadHandle = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ListenPlayStateThread,
-                (LPVOID)this, 0, &dwThreadID);
-        }
+        m_nPlayID++;
+        m_nCurPlayID = m_nPlayID;
+
+        _thread_param* tp = new _thread_param();
+        tp->PlayerID = m_nPlayerID;
+        tp->PlayID = m_nPlayID;
+
+        DWORD dwThreadID;
+        m_hThreadHandle = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ListenPlayStateThread,
+            (LPVOID)tp, 0, &dwThreadID);
+
+        ::LeaveCriticalSection(&m_CS);
+        return true;
     }
-    else return false;
+    else
+    {
+        ::LeaveCriticalSection(&m_CS);
+        return false;
+    }
+
+    ::LeaveCriticalSection(&m_CS);
 
     return true;
 }
@@ -194,7 +308,9 @@ bool CXadillaXVideoPlayer::LoadFile(const char* filename, RECT rect, HWND hWnd, 
     /** 释放上一次资源 */
     __Release();
 
-    /** 创建m_pGraph */
+    ::EnterCriticalSection(&m_CS);
+
+    /** 创建Graph */
     CoCreateInstance(CLSID_FilterGraph, NULL, CLSCTX_INPROC,
         IID_IGraphBuilder, (void**)&m_pGraph);
 
@@ -203,14 +319,33 @@ bool CXadillaXVideoPlayer::LoadFile(const char* filename, RECT rect, HWND hWnd, 
     m_pGraph->QueryInterface(IID_IMediaEventEx, (void**)&m_pEvent);
     m_pEvent->SetNotifyWindow((OAHWND)hWnd, WM_GRAPHNOTIFY, 0);
     m_pGraph->QueryInterface(IID_IMediaControl, (void**)&m_pMediaControl);
-    //m_pGraph->QueryInterface(IID_IBasicAudio, (void**)m_pAudio);
-    //m_pAudio->put_Volume(m_nVolume + VOLUME_TRUE_ZERO);
 
     /** 载入文件 */
     m_hWnd = hWnd;
     WCHAR szFilename[1024];
     memcpy(szFilename, CA2WEX<1024>(filename), sizeof(szFilename));
-    m_pGraph->RenderFile(szFilename, NULL);
+    HRESULT hRes = m_pGraph->RenderFile(szFilename, NULL);
+
+    /** 载入失败 */
+    if(hRes != S_OK && hRes != VFW_S_AUDIO_NOT_RENDERED && hRes != VFW_S_DUPLICATE_NAME &&
+        hRes != VFW_S_PARTIAL_RENDER && hRes != VFW_S_VIDEO_NOT_RENDERED)
+    {
+        m_bLoaded = false;
+        
+        m_pVidWnd->put_Visible(OAFALSE);
+        m_pGraph->Release();
+        m_pMediaControl->Release();
+        m_pVidWnd->Release();
+        m_pEvent->Release();
+
+        m_pVidWnd = NULL;
+        m_pGraph = NULL;
+        m_pMediaControl = NULL;
+        m_pEvent = NULL;
+
+        ::LeaveCriticalSection(&m_CS);
+        return false;
+    }
 
     /** 播放窗口位置 */
     m_pVidWnd->SetWindowPosition(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
@@ -223,5 +358,27 @@ bool CXadillaXVideoPlayer::LoadFile(const char* filename, RECT rect, HWND hWnd, 
     m_tagRect = rect;
     strcpy(m_szFilename, filename);
     m_bLoaded = true;
+    m_nCurPlayID = -1;
+
+    ::LeaveCriticalSection(&m_CS);
+
     return true;
+}
+
+bool CXadillaXVideoPlayer::IsLoaded()
+{
+    ::EnterCriticalSection(&m_CS);
+    bool rst = m_bLoaded;
+    ::LeaveCriticalSection(&m_CS);
+
+    return rst;
+}
+
+bool CXadillaXVideoPlayer::IsPlaying()
+{
+    ::EnterCriticalSection(&m_CS);
+    bool rst = m_bPlaying;
+    ::LeaveCriticalSection(&m_CS);
+
+    return rst;
 }

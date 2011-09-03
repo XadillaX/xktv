@@ -179,7 +179,12 @@ void CKTVPlayList::SetVolume(int volume)
     if(volume > 100) volume = 100;
 
     ::EnterCriticalSection(&m_CriticalSection);
-    if(volume == m_nVolume) return;
+    if(volume == m_nVolume)
+    {
+        /** 2011-9-4 这个临界区忘了退出，结果导致一个BUG怎么也找不到！！！！！ */
+        ::LeaveCriticalSection(&m_CriticalSection);
+        return;
+    }
     m_nVolume = volume;
     ::LeaveCriticalSection(&m_CriticalSection);
 

@@ -422,6 +422,10 @@
 			<Filter
 				Name="System"
 				>
+				<File
+					RelativePath="..\KTV²¥·Å¶Ë\CommonCommand.h"
+					>
+				</File>
 				<Filter
 					Name="MachineInfo"
 					>
@@ -431,22 +435,6 @@
 					</File>
 					<File
 						RelativePath=".\CKTVMachineInfo.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Network"
-					>
-					<File
-						RelativePath="..\KTV²¥·Å¶Ë\CKTVNetwork121.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\KTV²¥·Å¶Ë\CKTVNetwork121.h"
-						>
-					</File>
-					<File
-						RelativePath="..\KTV²¥·Å¶Ë\CommonCommand.h"
 						>
 					</File>
 				</Filter>
@@ -508,6 +496,18 @@
 				</File>
 				<File
 					RelativePath=".\CKTVError.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Network"
+				>
+				<File
+					RelativePath="..\KTV²¥·Å¶Ë\CKTVNetwork121.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\KTV²¥·Å¶Ë\CKTVNetwork121.h"
 					>
 				</File>
 			</Filter>

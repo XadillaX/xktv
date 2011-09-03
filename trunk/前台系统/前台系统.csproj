@@ -49,22 +49,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChkOrderMachineForm.cs">
+    <Compile Include="Class\RecordInfo.cs" />
+    <Compile Include="Windows\MachineStateView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChkOrderMachineForm.Designer.cs">
+    <Compile Include="Windows\MachineStateView.Designer.cs">
+      <DependentUpon>MachineStateView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModelExpRecord.cs" />
+    <Compile Include="Windows\ChkOrderMachineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\ChkOrderMachineForm.Designer.cs">
       <DependentUpon>ChkOrderMachineForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginWindow.cs">
+    <Compile Include="Windows\ContinueMachineForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginWindow.Designer.cs">
+    <Compile Include="Windows\ContinueMachineForm.designer.cs">
+      <DependentUpon>ContinueMachineForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LoginWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\LoginWindow.Designer.cs">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.cs">
+    <Compile Include="Windows\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow.Designer.cs">
+    <Compile Include="Windows\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ModelConfig.cs" />
@@ -72,28 +86,36 @@
     <Compile Include="Model\ModelObject.cs" />
     <Compile Include="Model\ModelUser.cs" />
     <Compile Include="Model\ModelVIP.cs" />
-    <Compile Include="OrderData.cs" />
-    <Compile Include="OrderMachineForm.cs">
+    <Compile Include="Class\OrderData.cs" />
+    <Compile Include="Windows\OrderMachineForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OrderMachineForm.Designer.cs">
+    <Compile Include="Windows\OrderMachineForm.Designer.cs">
       <DependentUpon>OrderMachineForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Class\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ChkOrderMachineForm.resx">
+    <EmbeddedResource Include="Windows\ChkOrderMachineForm.resx">
       <DependentUpon>ChkOrderMachineForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginWindow.resx">
+    <EmbeddedResource Include="Windows\ContinueMachineForm.resx">
+      <DependentUpon>ContinueMachineForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow.resx">
+    <EmbeddedResource Include="Windows\MachineStateView.resx">
+      <DependentUpon>MachineStateView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrderMachineForm.resx">
+    <EmbeddedResource Include="Windows\OrderMachineForm.resx">
       <DependentUpon>OrderMachineForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -102,7 +124,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchFreeMachineForm.resx">
+    <EmbeddedResource Include="Windows\SearchFreeMachineForm.resx">
       <DependentUpon>SearchFreeMachineForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -120,10 +142,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SearchFreeMachineForm.cs">
+    <Compile Include="Windows\SearchFreeMachineForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchFreeMachineForm.Designer.cs">
+    <Compile Include="Windows\SearchFreeMachineForm.Designer.cs">
       <DependentUpon>SearchFreeMachineForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -132,6 +154,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="res\Wrench.png" />
+    <None Include="res\小圆脸.jpg" />
     <None Include="res\Recycle.png" />
     <None Include="res\Media-Player.png" />
     <None Include="res\GOM.png" />
