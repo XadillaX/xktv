@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////
 //
-//	视频播放类 Rewrite version
+//	视频播放类
 //
 //	Program by 死月(XadillaX) (admin@xcoder.in)
 //
@@ -9,9 +9,9 @@
 #define CXADILLAXVIDEOPLAYER_H
 
 #include <tchar.h>
-#include <dshow.h>
-#pragma comment(lib, "strmiids.lib")
-#pragma comment(lib, "quartz.lib")
+#include <DShow.h>
+#pragma comment(lib, "Strmiids.lib")
+#pragma comment(lib, "Quartz.lib")
 
 #pragma once
 class CXadillaXVideoPlayer
@@ -27,34 +27,34 @@ public:
     bool                                Pause();
     bool                                Stop();
 
-    bool                                IsLoaded();
-    bool                                IsPlaying();
+    bool                                IsLoaded() { return m_bLoaded; }
+    bool                                IsPlaying() { return m_bPlaying; }
+    //void                                SetVolume(long vol) { m_nVolume = vol; }
 
 private:
     void                                __Release();
 
 private:
-    int                                 m_nCurPlayID;
-    int                                 m_nPlayID;
-    int                                 m_nPlayerID;
-
-    bool                                m_bPlaying;
-    bool                                m_bStopped;
-    bool                                m_bLoop;
-    bool                                m_bLoaded;
-
-    HANDLE                              m_hThreadHandle;
-    HWND                                m_hWnd;
-
     IGraphBuilder*                      m_pGraph;
     IVideoWindow*                       m_pVidWnd;
     IMediaControl*                      m_pMediaControl;
     IMediaEventEx*                      m_pEvent;
+    //IBasicAudio*                        m_pAudio;
 
     char                                m_szFilename[512];
     RECT                                m_tagRect;
 
+    HANDLE                              m_hThreadHandle;
+    HWND                                m_hWnd;
+    bool                                m_bPlaying;
+    bool                                m_bLoaded;
+    bool                                m_bLoop;
+    bool                                m_bKillThread;
+    bool                                m_bStopped;
+
     CRITICAL_SECTION                    m_CS;
+
+    //long                                m_nVolume;
 };
 
 #endif

@@ -128,13 +128,25 @@ HGE* CKTVEngine::GetHGE()
 bool CKTVEngine::Update(float fDeltaTime)
 {
     /** 判断时间是否到 */
-    if(m_pMachineInfo->GetMinuteLeft() < 0)
+    if(m_pMachineInfo->GetStatus() != "故障")
     {
-        /** DO STH. */
-        printf("对不起，时间到...\n");
+        if(m_pMachineInfo->GetMinuteLeft() < 0)
+        {
+            /** DO STH. */
+            printf("对不起，时间到...\n");
 
-        return true;
+            return true;
+        }
+        else
+        if(m_pMachineInfo->GetStatus() != "有客")
+        {
+            /** DO STH. */
+            printf("对不起，机器状态不对！\n");
+
+            return true;
+        }
     }
+    /** ↑ 因为故障的时候为了调试机器，所以不管怎么样都可以使用 */
 
     return m_pSceneManager->Update(fDeltaTime);
 }

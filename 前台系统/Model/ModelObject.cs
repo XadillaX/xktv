@@ -13,7 +13,8 @@ namespace 前台系统.Model
 
         public ModelObject(SqlConnection _conn)
         {
-            conn = _conn;
+            //conn = _conn;
+            conn = new SqlConnection(_conn.ConnectionString);
         }
 
         public void OpenConn()

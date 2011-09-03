@@ -94,5 +94,12 @@ namespace 前台系统.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap Wrench {
+            get {
+                object obj = ResourceManager.GetObject("Wrench", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

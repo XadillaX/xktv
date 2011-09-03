@@ -32,6 +32,8 @@ namespace 前台系统
         private const int BtnMinMargin = 15;
         public Object CriSection = new Object();
 
+        private ContextMenuStrip[] Menus = new ContextMenuStrip[256];
+
         // 线程数组(还不知道要用几个) 林莹莹 2011/9/2
         private Thread[] th = new Thread[16];
 
@@ -170,7 +172,14 @@ namespace 前台系统
             case "空闲":
                 {
                     Btn.BackgroundImage = Resources.GOM;
-                    Btn.BackColor = Color.Transparent;
+                    Btn.BackColor = Color.White;
+
+                    Menus[Idx].Items.Clear();
+                    ToolStripMenuItem Item = new ToolStripMenuItem("设置为故障机(&B)");
+                    Item.Name = "BugMenu" + Idx.ToString();
+                    Item.Click += ToBug;
+                    Menus[Idx].Items.Add(Item);
+
                     break;
                 }
 
@@ -178,20 +187,55 @@ namespace 前台系统
                 {
                     Btn.BackgroundImage = Resources.Media_Player;
                     Btn.BackColor = Color.Red;
+
+                    Menus[Idx].Items.Clear();
+                    ToolStripMenuItem Item = new ToolStripMenuItem("设置为故障机(&B)");
+                    Item.Name = "BugMenu" + Idx.ToString();
+                    Item.Click += ToBug;
+                    Menus[Idx].Items.Add(Item);
+
                     break;
                 }
 
             case "有客":
                 {
                     Btn.BackgroundImage = Resources.Media_Player;
-                    Btn.BackColor = Color.Transparent;
+                    Btn.BackColor = Color.Yellow;
+
+                    Menus[Idx].Items.Clear();
+                    ToolStripMenuItem Item = new ToolStripMenuItem("设置为故障机(&B)");
+                    Item.Name = "BugMenu" + Idx.ToString();
+                    Item.Click += ToBug;
+                    Menus[Idx].Items.Add(Item);
+
                     break;
                 }
 
             case "清理中":
                 {
                     Btn.BackgroundImage = Resources.Recycle;
-                    Btn.BackColor = Color.Transparent;
+                    Btn.BackColor = Color.Green;
+
+                    Menus[Idx].Items.Clear();
+                    ToolStripMenuItem Item = new ToolStripMenuItem("设置为故障机(&B)");
+                    Item.Name = "BugMenu" + Idx.ToString();
+                    Item.Click += ToBug;
+                    Menus[Idx].Items.Add(Item);
+
+                    break;
+                }
+
+            case "故障":
+                {
+                    Btn.BackgroundImage = Resources.Wrench;
+                    Btn.BackColor = Color.Gray;
+
+                    Menus[Idx].Items.Clear();
+                    ToolStripMenuItem Item = new ToolStripMenuItem("故障已修复(&B)");
+                    Item.Name = "CancelBugMenu" + Idx.ToString();
+                    Item.Click += CancelBug;
+                    Menus[Idx].Items.Add(Item);
+
                     break;
                 }
 
@@ -279,11 +323,19 @@ namespace 前台系统
                     }
                 }
             }
+            else
             // 空闲
             if (Status[Idx] == "空闲")
             {
                 OrderMachineForm OMF = new OrderMachineForm(MachineButton[Idx].Text, conn, Username);
                 OMF.ShowDialog();
+            }
+            else
+            // 有客
+            if (Status[Idx] == "有客")
+            {
+                ContinueMachineForm CMF = new ContinueMachineForm(conn, btn.Text.ToString());
+                CMF.ShowDialog();
             }
         }
 
@@ -313,6 +365,9 @@ namespace 前台系统
                 MachineButton[i].FlatStyle = FlatStyle.Popup;
                 MachineButton[i].BackgroundImageLayout = ImageLayout.Zoom;
                 MachineButton[i].Click += Machine_Select;
+                Menus[i] = new ContextMenuStrip();
+                Menus[i].Name = "MenuName" + i.ToString();
+                MachineButton[i].ContextMenuStrip = Menus[i];
 
                 // 状态图片
                 SetState(i, dr["Status"].ToString());
@@ -360,6 +415,50 @@ namespace 前台系统
         {
             SearchFreeMachineForm SFMF = new SearchFreeMachineForm(conn, this, Username);
             SFMF.ShowDialog();
+        }
+
+        private void 包厢一览VToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MachineStateView MSV = new MachineStateView(conn, Username);
+            MSV.ShowDialog();
+        }
+
+        private void ToBug(object sender, EventArgs e)
+        {
+            // BugMenu
+            // MessageBox.Show(((ToolStripMenuItem)sender).GetCurrentParent().ToString());
+            int Idx = Convert.ToInt32(((ToolStripItem)sender).Name.Substring(7));
+
+            if (MessageBox.Show("是否变为 \"故障\" 状态？", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                if (MM.SetStatus("故障", MachineButton[Idx].Text.ToString()))
+                {
+                    SetState(Idx, "故障");
+                }
+                else
+                {
+                    MessageBox.Show("系统错误，请稍后再试。");
+                }
+            }
+        }
+
+        private void CancelBug(object sender, EventArgs e)
+        {
+            // CancelBugMenu
+            // MessageBox.Show(((ToolStripMenuItem)sender).GetCurrentParent().ToString());
+            int Idx = Convert.ToInt32(((ToolStripItem)sender).Name.Substring(13));
+
+            if (MessageBox.Show("是否变为 \"空闲\" 状态？", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                if (MM.SetStatus("空闲", MachineButton[Idx].Text.ToString()))
+                {
+                    SetState(Idx, "空闲");
+                }
+                else
+                {
+                    MessageBox.Show("系统错误，请稍后再试。");
+                }
+            }
         }
     }
 }
