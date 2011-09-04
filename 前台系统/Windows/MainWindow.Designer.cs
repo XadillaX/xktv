@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.系统SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.本人营业一览EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出QToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.包厢MToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.空闲包厢FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,12 +39,12 @@
             this.会员VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新VIP用户NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vIP用户充值充值ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.本人营业一览EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Panel = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ShowUsername = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Panel = new System.Windows.Forms.Panel();
+            this.MachineCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
-            this.Panel.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +68,12 @@
             this.系统SToolStripMenuItem.Name = "系统SToolStripMenuItem";
             this.系统SToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
             this.系统SToolStripMenuItem.Text = "系统(&S)";
+            // 
+            // 本人营业一览EToolStripMenuItem
+            // 
+            this.本人营业一览EToolStripMenuItem.Name = "本人营业一览EToolStripMenuItem";
+            this.本人营业一览EToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.本人营业一览EToolStripMenuItem.Text = "营业一览(&E)";
             // 
             // 退出QToolStripMenuItem
             // 
@@ -121,34 +128,16 @@
             this.vIP用户充值充值ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.vIP用户充值充值ToolStripMenuItem.Text = "VIP用户充值(&P)";
             // 
-            // 本人营业一览EToolStripMenuItem
-            // 
-            this.本人营业一览EToolStripMenuItem.Name = "本人营业一览EToolStripMenuItem";
-            this.本人营业一览EToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.本人营业一览EToolStripMenuItem.Text = "营业一览(&E)";
-            // 
-            // Panel
-            // 
-            this.Panel.AutoScroll = true;
-            this.Panel.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.Panel.Controls.Add(this.statusStrip1);
-            this.Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel.Location = new System.Drawing.Point(0, 25);
-            this.Panel.Margin = new System.Windows.Forms.Padding(0);
-            this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(619, 402);
-            this.Panel.TabIndex = 0;
-            this.Panel.Tag = "";
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ShowUsername});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 380);
+            this.ShowUsername,
+            this.toolStripStatusLabel1,
+            this.MachineCount});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 467);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(619, 22);
-            this.statusStrip1.TabIndex = 0;
+            this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // ShowUsername
@@ -157,12 +146,38 @@
             this.ShowUsername.Size = new System.Drawing.Size(47, 17);
             this.ShowUsername.Text = "用户名:";
             // 
+            // Panel
+            // 
+            this.Panel.AutoScroll = true;
+            this.Panel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Panel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel.Location = new System.Drawing.Point(0, 25);
+            this.Panel.Margin = new System.Windows.Forms.Padding(0);
+            this.Panel.Name = "Panel";
+            this.Panel.Size = new System.Drawing.Size(619, 442);
+            this.Panel.TabIndex = 3;
+            this.Panel.Tag = "";
+            // 
+            // MachineCount
+            // 
+            this.MachineCount.Name = "MachineCount";
+            this.MachineCount.Size = new System.Drawing.Size(63, 17);
+            this.MachineCount.Text = "包厢数量: ";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(11, 17);
+            this.toolStripStatusLabel1.Text = "|";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 427);
+            this.ClientSize = new System.Drawing.Size(619, 489);
             this.Controls.Add(this.Panel);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
@@ -174,8 +189,6 @@
             this.Resize += new System.EventHandler(this.MainWindow_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.Panel.ResumeLayout(false);
-            this.Panel.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -185,18 +198,20 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel Panel;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 系统SToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 退出QToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 包厢MToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 空闲包厢FToolStripMenuItem;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel ShowUsername;
         private System.Windows.Forms.ToolStripMenuItem 包厢一览VToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 会员VToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 新VIP用户NToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vIP用户充值充值ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 本人营业一览EToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel ShowUsername;
+        private System.Windows.Forms.Panel Panel;
+        private System.Windows.Forms.ToolStripStatusLabel MachineCount;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
