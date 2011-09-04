@@ -391,6 +391,7 @@ namespace 前台系统
             BtnCount = i;
             dr.Close();
             MM.CloseConn();
+            MachineCount.Text = "包厢数量: " + BtnCount.ToString();
 
             // 重定位
             MachineReposition();
