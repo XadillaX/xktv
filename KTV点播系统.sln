@@ -26,6 +26,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KTV播放端", "KTV播放�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "前台系统", "前台系统\前台系统.csproj", "{F0F5BB38-8C9C-43A4-8A26-FF22915C974C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "综合管理系统（声色版）", "综合管理系统\综合管理系统（声色版）.csproj", "{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -146,6 +148,18 @@ Global
 		{F0F5BB38-8C9C-43A4-8A26-FF22915C974C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F0F5BB38-8C9C-43A4-8A26-FF22915C974C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F0F5BB38-8C9C-43A4-8A26-FF22915C974C}.Release|Win32.ActiveCfg = Release|Any CPU
+		{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}.Release|.NET.ActiveCfg = Release|Any CPU
+		{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{81ABDC47-9B78-460C-B7AF-3FC2C8DFA387}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
