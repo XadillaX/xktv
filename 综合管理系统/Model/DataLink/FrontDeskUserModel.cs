@@ -18,7 +18,7 @@ namespace KTV.Model.DataLink
         private IList<FrontDeskUserInfo> FillFrontDeskUserInfo(SqlDataReader dr)
         {
             List<FrontDeskUserInfo> list = new List<FrontDeskUserInfo>();
-            if (dr.Read())
+            while (dr.Read())
             {
                 FrontDeskUserInfo FDUI = new FrontDeskUserInfo();
 
@@ -88,6 +88,76 @@ namespace KTV.Model.DataLink
             }
 
             return list;
+        }
+        #endregion
+
+        #region 公共的方法（根据条件获取用户资料）
+        public IList<FrontDeskUserInfo> GetUserInfo(String condition, bool bCondition)
+        {
+            if (!bCondition) return GetUserInfo(condition);
+
+            IList<FrontDeskUserInfo> list = null;
+            try
+            {
+                SqlString = "SELECT * FROM FrontDeskUser";
+                if (condition != "") SqlString += (" WHERE " + condition);
+
+                Cmd.CommandText = SqlString;
+                Conn.Open();
+
+                SqlDataReader dr = Cmd.ExecuteReader();
+                list = FillFrontDeskUserInfo(dr);
+
+                dr.Close();
+                Conn.Close();
+            }
+            catch (SqlException e)
+            {
+                /** 设置错误 */
+                LastError = e.Message;
+                return null;
+            }
+
+            return list;
+        }
+        #endregion
+
+        #region 公共的方法（修改用户资料）
+        public String SetUserInfo(int UID, Dictionary<String, String> info)
+        {
+            SqlString = "UPDATE FrontDeskUser SET ";
+
+            int cnt = 0;
+            foreach (KeyValuePair<String, String> i in info)
+            {
+                if (cnt != 0) SqlString += "AND ";
+                SqlString += (i.Key + " = '" + i.Value + "' ");
+                cnt++;
+            }
+            SqlString += "WHERE UID = " + UID;
+
+            try
+            {
+                Cmd.CommandText = SqlString;
+                Conn.Open();
+
+                int count = Cmd.ExecuteNonQuery();
+                Conn.Close();
+
+                if (count == 0)
+                {
+                    return "数据没有任何改变。";
+                }
+            }
+            catch (SqlException e)
+            {
+                Conn.Close();
+
+                LastError = e.Message;
+                return LastError;
+            }
+
+            return "";
         }
         #endregion
     }

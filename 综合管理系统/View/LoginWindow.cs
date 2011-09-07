@@ -20,8 +20,8 @@ namespace KTV
             InitializeComponent();
 
             /** 载入声音文件 */
-            sp = new SoundPlayer("Sound/Login.wav");
-            sp.PlayLooping();
+            //sp = new SoundPlayer("Sound/Login.wav");
+            //sp.PlayLooping();
         }
 
         private void LoginBtn_Click(object sender, EventArgs e)
@@ -34,9 +34,10 @@ namespace KTV
             }
             else
             {
-                //MessageBox.Show("登录成功！");
                 LoginPanel.Visible = false;
                 Functions.Visible = true;
+
+                MainMenu.Visible = true;
             }
         }
 
@@ -61,6 +62,24 @@ namespace KTV
             {
                 LoginBtn_Click(sender, e);
             }
+        }
+
+        private void ChangePwd_Click(object sender, EventArgs e)
+        {
+            View.ChangePwdWindow CPW = new KTV.View.ChangePwdWindow();
+            CPW.ShowDialog();
+        }
+
+        private void 修改密码PToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            View.ChangePwdWindow CPW = new KTV.View.ChangePwdWindow();
+            CPW.ShowDialog();
+        }
+
+        private void 用户ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            View.ViewUserWindow VUW = new KTV.View.ViewUserWindow();
+            VUW.ShowDialog();
         }
     }
 }
