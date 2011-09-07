@@ -461,5 +461,11 @@ namespace 前台系统
                 }
             }
         }
+
+        private void vIP用户充值充值ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChargeForm CF = new ChargeForm(conn);
+            CF.ShowDialog();
+        }
     }
 }
