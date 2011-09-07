@@ -8,3 +8,4 @@ D:\CODES\课程设计\KTV点播系统\综合管理系统\obj\Debug\KTVMgrSystem.
 D:\CODES\课程设计\KTV点播系统\综合管理系统\obj\Debug\KTVMgrSystem.pdb
 D:\CODES\课程设计\KTV点播系统\综合管理系统\obj\Debug\KTV.View.ChangePwdWindow.resources
 D:\CODES\课程设计\KTV点播系统\综合管理系统\obj\Debug\KTV.View.ViewUserWindow.resources
+C:\XKTV\综合管理系统\obj\Debug\KTVMgrSystem.exe

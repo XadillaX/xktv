@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Windows\ChargeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\ChargeForm.Designer.cs">
+      <DependentUpon>ChargeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class\RecordInfo.cs" />
     <Compile Include="Windows\MachineStateView.cs">
       <SubType>Form</SubType>
@@ -95,6 +101,10 @@
     </Compile>
     <Compile Include="Class\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Windows\ChargeForm.resx">
+      <DependentUpon>ChargeForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\ChkOrderMachineForm.resx">
       <DependentUpon>ChkOrderMachineForm.cs</DependentUpon>
       <SubType>Designer</SubType>

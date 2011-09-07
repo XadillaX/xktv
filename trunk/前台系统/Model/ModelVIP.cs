@@ -12,6 +12,17 @@ namespace 前台系统.Model
         {
         }
 
+        public bool ChangeBalance(String VIPNo, Double Money)
+        {
+            String query = "UPDATE VIP SET Balance = Balance + " + Money.ToString() + " WHERE VIPNo = '" + VIPNo + "'";
+            OpenConn();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            int count = cmd.ExecuteNonQuery();
+            CloseConn();
+
+            return true;
+        }
+
         // 获取单个VIP用户信息
         public Dictionary<String, String> GetVIPInfo(String VIPNo)
         {

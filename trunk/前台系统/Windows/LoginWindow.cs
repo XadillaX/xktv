@@ -40,18 +40,25 @@ namespace 前台系统
         {
             if (e.KeyValue == 13)
             {
-                Login();
+                ShowLogin();
             }
         }
 
-        private void Login()
+        private int Login(String username, String password)
+        {
+            int UID = MU.Login(Username.Text, Password.Text, 0);
+
+            return UID;
+        }
+
+        private void ShowLogin()
         {
             ErrMsg.Text = "正在登录...";
             ErrMsg.Update();
 
-            int UID = MU.Login(Username.Text, Password.Text, 0);
+            int rst = Login(Username.Text, Password.Text);
 
-            switch (UID)
+            switch (rst)
             {
             case -1:
                 {
@@ -68,29 +75,27 @@ namespace 前台系统
             default:
                 {
                     ErrMsg.Text = "登录成功...";
-                    MW = new MainWindow(UID, Username.Text, conn);
-                    
+                    MW = new MainWindow(rst, Username.Text, conn);
+
                     MW.Show();
                     Hide();
 
                     break;
                 }
             }
-
-            return;
         }
 
         private void Password_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == 13)
             {
-                Login();
+                ShowLogin();
             }
         }
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            Login();
+            ShowLogin();
         }
     }
 }

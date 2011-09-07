@@ -33,18 +33,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewUserWindow));
             this.Type = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Username = new System.Windows.Forms.TextBox();
-            this.Password = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.isAdmin = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.uIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.loginTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.frontDeskUserInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.Username = new System.Windows.Forms.TextBox();
+            this.Password = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.isAdmin = new System.Windows.Forms.CheckBox();
+            this.Modify = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frontDeskUserInfoBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -78,6 +78,39 @@
             this.dataGridView1.Size = new System.Drawing.Size(495, 319);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // uIDDataGridViewTextBoxColumn
+            // 
+            this.uIDDataGridViewTextBoxColumn.DataPropertyName = "UID";
+            this.uIDDataGridViewTextBoxColumn.HeaderText = "用户编号";
+            this.uIDDataGridViewTextBoxColumn.Name = "uIDDataGridViewTextBoxColumn";
+            this.uIDDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // usernameDataGridViewTextBoxColumn
+            // 
+            this.usernameDataGridViewTextBoxColumn.DataPropertyName = "Username";
+            this.usernameDataGridViewTextBoxColumn.HeaderText = "用户名";
+            this.usernameDataGridViewTextBoxColumn.Name = "usernameDataGridViewTextBoxColumn";
+            this.usernameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // passwordDataGridViewTextBoxColumn
+            // 
+            this.passwordDataGridViewTextBoxColumn.DataPropertyName = "Password";
+            this.passwordDataGridViewTextBoxColumn.HeaderText = "Password";
+            this.passwordDataGridViewTextBoxColumn.Name = "passwordDataGridViewTextBoxColumn";
+            this.passwordDataGridViewTextBoxColumn.ReadOnly = true;
+            this.passwordDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // loginTimeDataGridViewTextBoxColumn
+            // 
+            this.loginTimeDataGridViewTextBoxColumn.DataPropertyName = "LoginTime";
+            this.loginTimeDataGridViewTextBoxColumn.HeaderText = "最后登录时间";
+            this.loginTimeDataGridViewTextBoxColumn.Name = "loginTimeDataGridViewTextBoxColumn";
+            this.loginTimeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // frontDeskUserInfoBindingSource
+            // 
+            this.frontDeskUserInfoBindingSource.DataSource = typeof(KTV.Model.DataRow.FrontDeskUserInfo);
             // 
             // label1
             // 
@@ -123,14 +156,14 @@
             this.isAdmin.Text = "是否管理员";
             this.isAdmin.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // Modify
             // 
-            this.button1.Location = new System.Drawing.Point(432, 345);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "修改(&O)";
-            this.button1.UseVisualStyleBackColor = true;
+            this.Modify.Location = new System.Drawing.Point(432, 345);
+            this.Modify.Name = "Modify";
+            this.Modify.Size = new System.Drawing.Size(75, 23);
+            this.Modify.TabIndex = 7;
+            this.Modify.Text = "修改(&O)";
+            this.Modify.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -141,39 +174,6 @@
             this.button2.Text = "关闭(&C)";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // uIDDataGridViewTextBoxColumn
-            // 
-            this.uIDDataGridViewTextBoxColumn.DataPropertyName = "UID";
-            this.uIDDataGridViewTextBoxColumn.HeaderText = "用户编号";
-            this.uIDDataGridViewTextBoxColumn.Name = "uIDDataGridViewTextBoxColumn";
-            this.uIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // usernameDataGridViewTextBoxColumn
-            // 
-            this.usernameDataGridViewTextBoxColumn.DataPropertyName = "Username";
-            this.usernameDataGridViewTextBoxColumn.HeaderText = "用户名";
-            this.usernameDataGridViewTextBoxColumn.Name = "usernameDataGridViewTextBoxColumn";
-            this.usernameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // passwordDataGridViewTextBoxColumn
-            // 
-            this.passwordDataGridViewTextBoxColumn.DataPropertyName = "Password";
-            this.passwordDataGridViewTextBoxColumn.HeaderText = "Password";
-            this.passwordDataGridViewTextBoxColumn.Name = "passwordDataGridViewTextBoxColumn";
-            this.passwordDataGridViewTextBoxColumn.ReadOnly = true;
-            this.passwordDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // loginTimeDataGridViewTextBoxColumn
-            // 
-            this.loginTimeDataGridViewTextBoxColumn.DataPropertyName = "LoginTime";
-            this.loginTimeDataGridViewTextBoxColumn.HeaderText = "最后登录时间";
-            this.loginTimeDataGridViewTextBoxColumn.Name = "loginTimeDataGridViewTextBoxColumn";
-            this.loginTimeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // frontDeskUserInfoBindingSource
-            // 
-            this.frontDeskUserInfoBindingSource.DataSource = typeof(KTV.Model.DataRow.FrontDeskUserInfo);
-            // 
             // ViewUserWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -181,7 +181,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(519, 409);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Modify);
             this.Controls.Add(this.isAdmin);
             this.Controls.Add(this.Password);
             this.Controls.Add(this.label2);
@@ -217,7 +217,7 @@
         private System.Windows.Forms.TextBox Password;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox isAdmin;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Modify;
         private System.Windows.Forms.Button button2;
 
 
