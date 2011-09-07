@@ -49,7 +49,50 @@ namespace KTV.Controller
                 return "权限不足！";
             }
 
+            /** 登录 */
+            Dictionary<String, String> info = new Dictionary<String, String>();
+            info["LoginTime"] = DateTime.Now.ToString();
+            FDUM.SetUserInfo(list[0].UID, info);
+
             return "";
+        }
+        #endregion
+
+        #region 公共的方法（修改密码）
+        static public String ChangePwd(String Username, String Password, String NewPassword, String RePassword)
+        {
+            if (Username == "" || Password == "" || NewPassword == "" || RePassword == "")
+            {
+                return "用户名或者密码不能为空！";
+            }
+
+            if (Username.Length > 16 || Password.Length > 16 || NewPassword.Length > 16 || RePassword.Length > 16)
+            {
+                return "用户名长度不能超过16，密码长度不能超过32！";
+            }
+
+            if (NewPassword != RePassword)
+            {
+                return "两次新密码输入不一致！";
+            }
+
+            FrontDeskUserModel FDUM = new FrontDeskUserModel();
+            IList<FrontDeskUserInfo> list = FDUM.GetUserInfo(Username);
+
+            if (null == list)
+            {
+                return "系统错误: " + FDUM.LastErr;
+            }
+
+            if (list.Count == 0 || list[0]["Password"].ToString() != Password)
+            {
+                return "用户名或者密码错误。";
+            }
+
+            Dictionary<String, String> info = new Dictionary<String, String>();
+            info["Password"] = NewPassword;
+
+            return FDUM.SetUserInfo(list[0].UID, info);
         }
         #endregion
     }

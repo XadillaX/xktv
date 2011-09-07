@@ -8,11 +8,11 @@ namespace KTV.Model.DataRow
     #region 登录用户信息类
     class FrontDeskUserInfo : DataRow.ObjectInfo
     {
-        public int UID = 0;
-        public String Username = "";
-        public String Password = "";
-        public DateTime LoginTime = DateTime.Now;
-        public int Type = 0;
+        public int UID { get; set; }
+        public String Username { get; set; }
+        public String Password { get; set; }
+        public DateTime LoginTime { get; set; }
+        public int Type { get; set; }
 
         public FrontDeskUserInfo()
         {
