@@ -24,7 +24,7 @@ namespace KTV.View
 
         private void Modify_Click(object sender, EventArgs e)
         {
-            String result = LoginCtrl.ChangePwd(Username.Text, Password.Text, NewPassword.Text, RePassword.Text);
+            String result = UserCtrl.ChangePwd(Username.Text, Password.Text, NewPassword.Text, RePassword.Text);
             if (result != "")
             {
                 MessageBox.Show(result, "错误", MessageBoxButtons.OK, MessageBoxIcon.Information);

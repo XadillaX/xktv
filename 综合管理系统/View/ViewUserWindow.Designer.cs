@@ -33,11 +33,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewUserWindow));
             this.Type = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.uIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.loginTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.frontDeskUserInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.Username = new System.Windows.Forms.TextBox();
             this.Password = new System.Windows.Forms.TextBox();
@@ -45,6 +40,12 @@
             this.isAdmin = new System.Windows.Forms.CheckBox();
             this.Modify = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.uIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loginTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.frontDeskUserInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Delete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frontDeskUserInfoBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -79,6 +80,73 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 348);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 12);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "用户名:";
+            // 
+            // Username
+            // 
+            this.Username.Enabled = false;
+            this.Username.Location = new System.Drawing.Point(65, 345);
+            this.Username.Name = "Username";
+            this.Username.Size = new System.Drawing.Size(115, 21);
+            this.Username.TabIndex = 2;
+            this.Username.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Username_KeyDown);
+            // 
+            // Password
+            // 
+            this.Password.Location = new System.Drawing.Point(65, 372);
+            this.Password.Name = "Password";
+            this.Password.PasswordChar = '*';
+            this.Password.Size = new System.Drawing.Size(115, 21);
+            this.Password.TabIndex = 4;
+            this.Password.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Username_KeyDown);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 375);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "密  码:";
+            // 
+            // isAdmin
+            // 
+            this.isAdmin.AutoSize = true;
+            this.isAdmin.Location = new System.Drawing.Point(196, 347);
+            this.isAdmin.Name = "isAdmin";
+            this.isAdmin.Size = new System.Drawing.Size(84, 16);
+            this.isAdmin.TabIndex = 6;
+            this.isAdmin.Text = "是否管理员";
+            this.isAdmin.UseVisualStyleBackColor = true;
+            this.isAdmin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Username_KeyDown);
+            // 
+            // Modify
+            // 
+            this.Modify.Location = new System.Drawing.Point(432, 345);
+            this.Modify.Name = "Modify";
+            this.Modify.Size = new System.Drawing.Size(75, 23);
+            this.Modify.TabIndex = 7;
+            this.Modify.Text = "修改(&O)";
+            this.Modify.UseVisualStyleBackColor = true;
+            this.Modify.Click += new System.EventHandler(this.Modify_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(432, 370);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "关闭(&C)";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // uIDDataGridViewTextBoxColumn
             // 
             this.uIDDataGridViewTextBoxColumn.DataPropertyName = "UID";
@@ -112,67 +180,15 @@
             // 
             this.frontDeskUserInfoBindingSource.DataSource = typeof(KTV.Model.DataRow.FrontDeskUserInfo);
             // 
-            // label1
+            // Delete
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 348);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 12);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "用户名:";
-            // 
-            // Username
-            // 
-            this.Username.Enabled = false;
-            this.Username.Location = new System.Drawing.Point(65, 345);
-            this.Username.Name = "Username";
-            this.Username.Size = new System.Drawing.Size(115, 21);
-            this.Username.TabIndex = 2;
-            // 
-            // Password
-            // 
-            this.Password.Location = new System.Drawing.Point(65, 372);
-            this.Password.Name = "Password";
-            this.Password.PasswordChar = '*';
-            this.Password.Size = new System.Drawing.Size(115, 21);
-            this.Password.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 375);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "密  码:";
-            // 
-            // isAdmin
-            // 
-            this.isAdmin.AutoSize = true;
-            this.isAdmin.Location = new System.Drawing.Point(196, 347);
-            this.isAdmin.Name = "isAdmin";
-            this.isAdmin.Size = new System.Drawing.Size(84, 16);
-            this.isAdmin.TabIndex = 6;
-            this.isAdmin.Text = "是否管理员";
-            this.isAdmin.UseVisualStyleBackColor = true;
-            // 
-            // Modify
-            // 
-            this.Modify.Location = new System.Drawing.Point(432, 345);
-            this.Modify.Name = "Modify";
-            this.Modify.Size = new System.Drawing.Size(75, 23);
-            this.Modify.TabIndex = 7;
-            this.Modify.Text = "修改(&O)";
-            this.Modify.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(432, 370);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "关闭(&C)";
-            this.button2.UseVisualStyleBackColor = true;
+            this.Delete.Location = new System.Drawing.Point(351, 370);
+            this.Delete.Name = "Delete";
+            this.Delete.Size = new System.Drawing.Size(75, 23);
+            this.Delete.TabIndex = 9;
+            this.Delete.Text = "删除(&D)";
+            this.Delete.UseVisualStyleBackColor = true;
+            this.Delete.Click += new System.EventHandler(this.Delete_Click);
             // 
             // ViewUserWindow
             // 
@@ -180,6 +196,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(519, 409);
+            this.Controls.Add(this.Delete);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.Modify);
             this.Controls.Add(this.isAdmin);
@@ -219,6 +236,7 @@
         private System.Windows.Forms.CheckBox isAdmin;
         private System.Windows.Forms.Button Modify;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button Delete;
 
 
     }

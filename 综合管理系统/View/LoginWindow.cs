@@ -26,7 +26,7 @@ namespace KTV
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            String result = LoginCtrl.Login(Username.Text, Password.Text, 1);
+            String result = UserCtrl.Login(Username.Text, Password.Text, 1);
 
             if (result != "")
             {
@@ -78,8 +78,20 @@ namespace KTV
 
         private void 用户ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            View.ViewUserWindow VUW = new KTV.View.ViewUserWindow();
+            View.ViewUserWindow VUW = new KTV.View.ViewUserWindow(false);
             VUW.ShowDialog();
+        }
+
+        private void 新用户NToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            View.ViewUserWindow VUW = new KTV.View.ViewUserWindow(true);
+            VUW.ShowDialog();
+        }
+
+        private void 包厢类型TToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            View.MachineTypeWindow MTW = new KTV.View.MachineTypeWindow();
+            MTW.ShowDialog();
         }
     }
 }
