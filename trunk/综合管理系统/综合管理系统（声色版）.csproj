@@ -50,11 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\LoginCtrl.cs" />
+    <Compile Include="Controller\UserCtrl.cs" />
     <Compile Include="Controller\ObjectCtrl.cs" />
     <Compile Include="Model\DataLink\FrontDeskUserModel.cs" />
+    <Compile Include="Model\DataLink\MachineTypeModel.cs" />
     <Compile Include="Model\DataLink\ObjectModel.cs" />
     <Compile Include="Model\DataRow\FrontDeskUserInfo.cs" />
+    <Compile Include="Model\DataRow\MachineTypeInfo.cs" />
     <Compile Include="Model\DataRow\ObjectInfo.cs" />
     <Compile Include="Model\GetConn.cs" />
     <Compile Include="View\ChangePwdWindow.cs">
@@ -84,6 +86,10 @@
       <DependentUpon>LoginWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\MachineTypeWindow.resx">
+      <DependentUpon>MachineTypeWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\ViewUserWindow.resx">
       <DependentUpon>ViewUserWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -102,6 +108,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="View\MachineTypeWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MachineTypeWindow.Designer.cs">
+      <DependentUpon>MachineTypeWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ViewUserWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +124,7 @@
   <ItemGroup>
     <Content Include="icon.ico" />
     <None Include="Properties\DataSources\KTV.Model.DataRow.FrontDeskUserInfo.datasource" />
+    <None Include="Properties\DataSources\KTV.Model.DataRow.MachineTypeInfo.datasource" />
     <None Include="Res\ListBox.png" />
     <None Include="Res\blank.png" />
     <None Include="Res\InitBackground.bmp" />

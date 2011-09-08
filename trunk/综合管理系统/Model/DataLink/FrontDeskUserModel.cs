@@ -130,7 +130,7 @@ namespace KTV.Model.DataLink
             int cnt = 0;
             foreach (KeyValuePair<String, String> i in info)
             {
-                if (cnt != 0) SqlString += "AND ";
+                if (cnt != 0) SqlString += ", ";
                 SqlString += (i.Key + " = '" + i.Value + "' ");
                 cnt++;
             }
@@ -158,6 +158,58 @@ namespace KTV.Model.DataLink
             }
 
             return "";
+        }
+        #endregion
+
+        #region 公共的方法（新建用户）
+        public String CreateUser(String Username, String Password, int Type)
+        {
+            if (GetUserInfo(Username).Count() != 0)
+            {
+                return "已存在的用户名";
+            }
+
+            SqlString = "INSERT INTO FrontDeskUser(Username, Password, LoginTime, Type) VALUES(";
+            SqlString += ("'" + Username + "', '" + Password + "', '" + DateTime.Now.ToString() + "', " + Type + ")");
+
+            try
+            {
+                Cmd.CommandText = SqlString;
+                Conn.Open();
+
+                Cmd.ExecuteNonQuery();
+                Conn.Close();
+            }
+            catch (SqlException e)
+            {
+                LastError = e.Message;
+                return e.Message;
+            }
+
+            return "";
+        }
+        #endregion
+
+        #region 公共的方法（删除用户）
+        public bool DeleteUser(int UID)
+        {
+            SqlString = "DELETE FROM FrontDeskUser WHERE UID = " + UID.ToString();
+
+            try
+            {
+                Cmd.CommandText = SqlString;
+                Conn.Open();
+
+                Cmd.ExecuteNonQuery();
+                Conn.Close();
+            }
+            catch(SqlException e)
+            {
+                LastError = e.Message;
+                return false;
+            }
+
+            return true;
         }
         #endregion
     }
