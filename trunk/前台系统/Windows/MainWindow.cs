@@ -467,5 +467,11 @@ namespace 前台系统
             ChargeForm CF = new ChargeForm(conn);
             CF.ShowDialog();
         }
+
+        private void 新VIP用户NToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Windows.RegForm RF = new 前台系统.Windows.RegForm(conn);
+            RF.ShowDialog();
+        }
     }
 }

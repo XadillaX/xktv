@@ -23,6 +23,35 @@ namespace 前台系统.Model
             return true;
         }
 
+        public String RegVIP(String VIPNo, String VIPName, String VIPID, String VIPMobile, Double Balance)
+        {
+            if (VIPNo.Length != 10) return "会员卡号需10位。";
+            Dictionary<String, String> tmp = GetVIPInfo(VIPNo);
+            if (null != tmp) return "此卡号已存在！";
+
+            String query = "INSERT INTO VIP(VIPNo, VIPName, VIPID, VIPMobile, Balance) VALUES(";
+            query += ("'" + VIPNo + "', ");
+            query += ("'" + VIPName + "', ");
+            query += ("'" + VIPID + "', ");
+            query += ("'" + VIPMobile + "', ");
+            query += (Balance.ToString() + ")");
+
+            try
+            {
+                OpenConn();
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.ExecuteNonQuery();
+                CloseConn();
+            }
+            catch (SqlException e)
+            {
+                CloseConn();
+                return e.Message;
+            }
+
+            return "";
+        }
+
         // 获取单个VIP用户信息
         public Dictionary<String, String> GetVIPInfo(String VIPNo)
         {

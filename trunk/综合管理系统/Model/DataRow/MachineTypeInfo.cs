@@ -87,11 +87,11 @@ namespace KTV.Model.DataRow
                 String[] p = value.Split('|');
 
                 SetPrice(Convert.ToDouble(p[0]), TYPE_PRICE_ENUM.TPE_WEEKDAY_DAY);
-                SetPrice(Convert.ToDouble(p[0]), TYPE_PRICE_ENUM.TPE_WEEKDAY_DAY);
-                SetPrice(Convert.ToDouble(p[0]), TYPE_PRICE_ENUM.TPE_WEEKDAY_DAY);
-                SetPrice(Convert.ToDouble(p[0]), TYPE_PRICE_ENUM.TPE_WEEKDAY_DAY);
-                SetPrice(Convert.ToDouble(p[0]), TYPE_PRICE_ENUM.TPE_WEEKDAY_DAY);
-                SetPrice(Convert.ToDouble(p[0]), TYPE_PRICE_ENUM.TPE_WEEKDAY_DAY);
+                SetPrice(Convert.ToDouble(p[1]), TYPE_PRICE_ENUM.TPE_WEEKDAY_GOLD);
+                SetPrice(Convert.ToDouble(p[2]), TYPE_PRICE_ENUM.TPE_WEEKDAY_NIGHT);
+                SetPrice(Convert.ToDouble(p[3]), TYPE_PRICE_ENUM.TPE_WEEKEND_DAY);
+                SetPrice(Convert.ToDouble(p[4]), TYPE_PRICE_ENUM.TPE_WEEKEND_GOLD);
+                SetPrice(Convert.ToDouble(p[5]), TYPE_PRICE_ENUM.TPE_WEEKEND_NIGHT);
             }
 
             get
