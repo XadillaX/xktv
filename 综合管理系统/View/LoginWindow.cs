@@ -90,7 +90,13 @@ namespace KTV
 
         private void 包厢类型TToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            View.MachineTypeWindow MTW = new KTV.View.MachineTypeWindow();
+            View.MachineTypeWindow MTW = new KTV.View.MachineTypeWindow(false);
+            MTW.ShowDialog();
+        }
+
+        private void 新建类型NToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            View.MachineTypeWindow MTW = new KTV.View.MachineTypeWindow(true);
             MTW.ShowDialog();
         }
     }

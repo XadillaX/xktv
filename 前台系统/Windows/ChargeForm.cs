@@ -35,6 +35,16 @@ namespace 前台系统
             }
 
             bool result = MV.ChangeBalance(VIPNo.Text, Convert.ToDouble(Money.Value));
+            if (result)
+            {
+                MessageBox.Show("充值成功！");
+            }
+            else MessageBox.Show("充值失败！");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

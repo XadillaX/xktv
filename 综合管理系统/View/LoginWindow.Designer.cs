@@ -46,6 +46,7 @@
             this.修改密码PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.包厢管理MToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.包厢类型TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.新建类型NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoginPanel.SuspendLayout();
             this.Functions.SuspendLayout();
             this.MainMenu.SuspendLayout();
@@ -223,7 +224,8 @@
             // 包厢管理MToolStripMenuItem
             // 
             this.包厢管理MToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.包厢类型TToolStripMenuItem});
+            this.包厢类型TToolStripMenuItem,
+            this.新建类型NToolStripMenuItem});
             this.包厢管理MToolStripMenuItem.Name = "包厢管理MToolStripMenuItem";
             this.包厢管理MToolStripMenuItem.Size = new System.Drawing.Size(88, 21);
             this.包厢管理MToolStripMenuItem.Text = "包厢管理(&M)";
@@ -234,6 +236,13 @@
             this.包厢类型TToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.包厢类型TToolStripMenuItem.Text = "包厢类型(&T)";
             this.包厢类型TToolStripMenuItem.Click += new System.EventHandler(this.包厢类型TToolStripMenuItem_Click);
+            // 
+            // 新建类型NToolStripMenuItem
+            // 
+            this.新建类型NToolStripMenuItem.Name = "新建类型NToolStripMenuItem";
+            this.新建类型NToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.新建类型NToolStripMenuItem.Text = "新建类型(&N)";
+            this.新建类型NToolStripMenuItem.Click += new System.EventHandler(this.新建类型NToolStripMenuItem_Click);
             // 
             // LoginWindow
             // 
@@ -283,6 +292,7 @@
         private System.Windows.Forms.ToolStripMenuItem 修改密码PToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 包厢管理MToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 包厢类型TToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 新建类型NToolStripMenuItem;
     }
 }
 
