@@ -1,28 +1,21 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "死月视频播放库[测试项目]", "机器播放客户端\机器播放客户端.vcproj", "{6225304A-E290-49CC-B757-D0D40F58EB7E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{774FBD39-9958-49CC-80FB-36B51E6D7A49} = {774FBD39-9958-49CC-80FB-36B51E6D7A49}
-		{B1CB4C9F-EF60-4FB9-B743-3C811F5520CE} = {B1CB4C9F-EF60-4FB9-B743-3C811F5520CE}
-	EndProjectSection
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "死月视频播放库[测试项目]", "机器播放客户端\机器播放客户端.vcxproj", "{6225304A-E290-49CC-B757-D0D40F58EB7E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "死月视频播放库", "死月视频播放库\死月视频播放库.vcproj", "{774FBD39-9958-49CC-80FB-36B51E6D7A49}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "死月视频播放库", "死月视频播放库\死月视频播放库.vcxproj", "{774FBD39-9958-49CC-80FB-36B51E6D7A49}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "通用类库", "通用类库\通用类库.vcproj", "{B1CB4C9F-EF60-4FB9-B743-3C811F5520CE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "通用类库", "通用类库\通用类库.vcxproj", "{B1CB4C9F-EF60-4FB9-B743-3C811F5520CE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "通用类库[测试项目]", "通用类库[测试项目]\通用类库[测试项目].vcproj", "{4B3D9D2D-BD98-4983-9F1E-3F3F805B00E2}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B1CB4C9F-EF60-4FB9-B743-3C811F5520CE} = {B1CB4C9F-EF60-4FB9-B743-3C811F5520CE}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "通用类库[测试项目]", "通用类库[测试项目]\通用类库[测试项目].vcxproj", "{4B3D9D2D-BD98-4983-9F1E-3F3F805B00E2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KTV点播端", "KTV点播端\KTV点播端.vcproj", "{0DABF8F2-B629-42F2-BEFA-DAA494E50CEA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KTV点播端", "KTV点播端\KTV点播端.vcxproj", "{0DABF8F2-B629-42F2-BEFA-DAA494E50CEA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "网络测试[SERVER]", "网络测试[SERVER]\网络测试[SERVER].vcproj", "{14B529B4-869F-45CE-88AC-75A0A0E4E6D2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "网络测试[SERVER]", "网络测试[SERVER]\网络测试[SERVER].vcxproj", "{14B529B4-869F-45CE-88AC-75A0A0E4E6D2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "网络测试[CLIENT]", "网络测试[CLIENT]\网络测试[CLIENT].vcproj", "{8E78A5C3-5B13-46C7-8410-A8C406CF6627}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "网络测试[CLIENT]", "网络测试[CLIENT]\网络测试[CLIENT].vcxproj", "{8E78A5C3-5B13-46C7-8410-A8C406CF6627}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KTV播放端", "KTV播放端\KTV播放端.vcproj", "{773F8C6A-5EF6-4A51-B02B-A331FA9313AA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KTV播放端", "KTV播放端\KTV播放端.vcxproj", "{773F8C6A-5EF6-4A51-B02B-A331FA9313AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "前台系统", "前台系统\前台系统.csproj", "{F0F5BB38-8C9C-43A4-8A26-FF22915C974C}"
 EndProject
