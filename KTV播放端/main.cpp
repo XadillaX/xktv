@@ -52,7 +52,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
     g_pHGE = hgeCreate(HGE_VERSION);
 
-    g_pHGE->System_SetState(HGE_TITLE, "KTVµã²¥¶Ë");
+    g_pHGE->System_SetState(HGE_TITLE, "KTV²¥·Å¶Ë");
     g_pHGE->System_SetState(HGE_FPS, 100);
     g_pHGE->System_SetState(HGE_WINDOWED, true);
     g_pHGE->System_SetState(HGE_RENDERFUNC, RenderFunc);
@@ -61,7 +61,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     g_pHGE->System_SetState(HGE_INIFILE, "config.ini");
     g_pHGE->System_SetState(HGE_DONTSUSPEND, true);
 
-#ifdef _DEBUG
+#ifndef _DEBUG
     g_pHGE->System_SetState(HGE_SCREENWIDTH, 320);
     g_pHGE->System_SetState(HGE_SCREENHEIGHT, 240);
 #endif
@@ -73,7 +73,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         string szSrv = string("tcp://*:") + XStringFunc::IntToString(g_pHGE->Ini_GetInt("network", "localport", 5555));
         string szClt = string("tcp://") + g_pHGE->Ini_GetString("network", "serveraddress", "localhost") + string(":") + XStringFunc::IntToString(g_pHGE->Ini_GetInt("network", "serverport", 3456));
         g_pNetwork = new CKTVNetwork121(szSrv.c_str(), szClt.c_str(), NetworkReceive);
-
+        printf("%s\n", szSrv.c_str());
+        printf("%s\n", szClt.c_str());
         g_pHGE->System_Start();
         g_pHGE->System_Shutdown();
         g_pHGE->Release();

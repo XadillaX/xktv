@@ -47,6 +47,12 @@
             this.包厢管理MToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.包厢类型TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新建类型NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.歌手管理AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.歌手查看ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.歌手添加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.歌曲管理SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.歌曲查询JToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.歌曲添加KToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoginPanel.SuspendLayout();
             this.Functions.SuspendLayout();
             this.MainMenu.SuspendLayout();
@@ -177,7 +183,9 @@
             // 
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.用户管理UToolStripMenuItem,
-            this.包厢管理MToolStripMenuItem});
+            this.包厢管理MToolStripMenuItem,
+            this.歌手管理AToolStripMenuItem,
+            this.歌曲管理SToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(800, 25);
@@ -233,16 +241,62 @@
             // 包厢类型TToolStripMenuItem
             // 
             this.包厢类型TToolStripMenuItem.Name = "包厢类型TToolStripMenuItem";
-            this.包厢类型TToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.包厢类型TToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.包厢类型TToolStripMenuItem.Text = "包厢类型(&T)";
             this.包厢类型TToolStripMenuItem.Click += new System.EventHandler(this.包厢类型TToolStripMenuItem_Click);
             // 
             // 新建类型NToolStripMenuItem
             // 
             this.新建类型NToolStripMenuItem.Name = "新建类型NToolStripMenuItem";
-            this.新建类型NToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.新建类型NToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.新建类型NToolStripMenuItem.Text = "新建类型(&N)";
             this.新建类型NToolStripMenuItem.Click += new System.EventHandler(this.新建类型NToolStripMenuItem_Click);
+            // 
+            // 歌手管理AToolStripMenuItem
+            // 
+            this.歌手管理AToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.歌手查看ToolStripMenuItem,
+            this.歌手添加ToolStripMenuItem});
+            this.歌手管理AToolStripMenuItem.Name = "歌手管理AToolStripMenuItem";
+            this.歌手管理AToolStripMenuItem.Size = new System.Drawing.Size(84, 21);
+            this.歌手管理AToolStripMenuItem.Text = "歌手管理(&A)";
+            // 
+            // 歌手查看ToolStripMenuItem
+            // 
+            this.歌手查看ToolStripMenuItem.Name = "歌手查看ToolStripMenuItem";
+            this.歌手查看ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.歌手查看ToolStripMenuItem.Text = "歌手查询(&V)";
+            this.歌手查看ToolStripMenuItem.Click += new System.EventHandler(this.歌手查询ToolStripMenuItem_Click);
+            // 
+            // 歌手添加ToolStripMenuItem
+            // 
+            this.歌手添加ToolStripMenuItem.Name = "歌手添加ToolStripMenuItem";
+            this.歌手添加ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.歌手添加ToolStripMenuItem.Text = "歌手添加(&U)";
+            this.歌手添加ToolStripMenuItem.Click += new System.EventHandler(this.歌手添加ToolStripMenuItem_Click);
+            // 
+            // 歌曲管理SToolStripMenuItem
+            // 
+            this.歌曲管理SToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.歌曲查询JToolStripMenuItem,
+            this.歌曲添加KToolStripMenuItem});
+            this.歌曲管理SToolStripMenuItem.Name = "歌曲管理SToolStripMenuItem";
+            this.歌曲管理SToolStripMenuItem.Size = new System.Drawing.Size(83, 21);
+            this.歌曲管理SToolStripMenuItem.Text = "歌曲管理(&S)";
+            // 
+            // 歌曲查询JToolStripMenuItem
+            // 
+            this.歌曲查询JToolStripMenuItem.Name = "歌曲查询JToolStripMenuItem";
+            this.歌曲查询JToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.歌曲查询JToolStripMenuItem.Text = "歌曲查询(&J)";
+            this.歌曲查询JToolStripMenuItem.Click += new System.EventHandler(this.歌曲查询JToolStripMenuItem_Click);
+            // 
+            // 歌曲添加KToolStripMenuItem
+            // 
+            this.歌曲添加KToolStripMenuItem.Name = "歌曲添加KToolStripMenuItem";
+            this.歌曲添加KToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.歌曲添加KToolStripMenuItem.Text = "歌曲添加(&K)";
+            this.歌曲添加KToolStripMenuItem.Click += new System.EventHandler(this.歌曲添加KToolStripMenuItem_Click);
             // 
             // LoginWindow
             // 
@@ -293,6 +347,12 @@
         private System.Windows.Forms.ToolStripMenuItem 包厢管理MToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 包厢类型TToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 新建类型NToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 歌手管理AToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 歌手查看ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 歌手添加ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 歌曲管理SToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 歌曲查询JToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 歌曲添加KToolStripMenuItem;
     }
 }
 

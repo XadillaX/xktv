@@ -68,11 +68,11 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.label3.Location = new System.Drawing.Point(53, 7);
+            this.label3.Location = new System.Drawing.Point(83, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(212, 27);
+            this.label3.Size = new System.Drawing.Size(149, 27);
             this.label3.TabIndex = 2;
-            this.label3.Text = "计科091KTV系统 订单";
+            this.label3.Text = "XKTV系统 订单";
             // 
             // LVIPNo
             // 

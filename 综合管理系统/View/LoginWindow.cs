@@ -99,5 +99,29 @@ namespace KTV
             View.MachineTypeWindow MTW = new KTV.View.MachineTypeWindow(true);
             MTW.ShowDialog();
         }
+
+        private void 歌手查询ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            View.ViewArtistWindow AW = new KTV.View.ViewArtistWindow(false);
+            AW.ShowDialog();
+        }
+
+        private void 歌手添加ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            View.ViewArtistWindow AW = new KTV.View.ViewArtistWindow(true);
+            AW.ShowDialog();
+        }
+
+        private void 歌曲查询JToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            View.ViewSongWindow SW = new KTV.View.ViewSongWindow(false);
+            SW.ShowDialog();
+        }
+
+        private void 歌曲添加KToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            View.ViewSongWindow SW = new KTV.View.ViewSongWindow(true);
+            SW.ShowDialog();
+        }
     }
 }

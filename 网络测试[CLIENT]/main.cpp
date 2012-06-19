@@ -29,7 +29,8 @@ int main()
     //    std::cout << "Received <" << (char*)reply.data() << ">" << std::endl;
     //}
 
-    CKTVNetwork121 net("tcp://*:5323", "tcp://localhost:5555");
+    //CKTVNetwork121 net("tcp://*:5323", "tcp://localhost:5555");
+    CKTVNetwork121 net("tcp://*:5323", "tcp://192.168.137.1:5555");
 
     while(true)
     {

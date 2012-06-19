@@ -31,7 +31,7 @@ void NetworkReceive(int MainID, int SubID, char* pData, size_t size)
                     vol = (vol << 16) + vol;
                     ::waveOutSetVolume(0, vol);
 
-#ifndef _DEBUG
+#ifdef _DEBUG
                     rect.right = 800, rect.bottom = 600;
 #else
                     rect.right = 320, rect.bottom = 240;
